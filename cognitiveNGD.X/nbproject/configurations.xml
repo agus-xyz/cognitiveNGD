@@ -175,7 +175,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="/home/agus/pfc/code/cognitiveNGD/cognitiveNGD.X/CWSN LSI Node/Include;/home/agus/pfc/code/Microchip/Include"/>
+                  value="/home/agus/pfc/code/cognitiveNGD/cognitiveNGD.X/CWSN LSI Node/Include;/home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
