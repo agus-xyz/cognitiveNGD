@@ -1,0 +1,3 @@
+Datos a almacenar en el repositorio:
+
+*Array de structs con la información de los active scan. En el struct podremos añadir algún campo si lo consideramos oportuno.
