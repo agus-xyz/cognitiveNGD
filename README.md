@@ -1,0 +1,4 @@
+cognitiveNGD
+============
+
+CognitiveNewGenerationDevice
