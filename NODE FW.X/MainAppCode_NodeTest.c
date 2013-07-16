@@ -144,8 +144,8 @@ INIT_STAGE:
     //goto TX_RX_MAXRATE;
     //goto SAVE_RESTORE;
     //goto POWER_DISSIPATION_TEST;
- goto DEMO_PFC;
-   //goto STAGE05;
+    goto DEMO_PFC;
+    //goto STAGE05;
 
 STAGE01:        //COMPROBACION DEL ESTADO INICIAL.
 
@@ -843,6 +843,7 @@ SAVE_RESTORE:
 
         Printf("\rGuardando la tabla de conexiones.\r");
         i = SaveConnTable(memStoreTest);
+        ConsolePut('\r');
         i = 0;
         while(i < MIWI_CONN_ENTRY_SIZE){
             PrintChar(memStoreTest[i]);
@@ -851,13 +852,15 @@ SAVE_RESTORE:
         }
         ConsolePut('\r');
 
+        //Restaurar la tabla con una única conexión con todos los campos a 0xFF.
         for (i=0;i<MIWI_CONN_ENTRY_SIZE; i++){
-            memStoreTest[i] = 99;
+            memStoreTest[i] = 0xFF;
         }
         Printf("\rRestaurando la tabla de conexiones.\r");
         RestoreConnTable(memStoreTest, 1);
         DumpConnTable();
 
+        Printf("\rGuardando la tabla de rutado.\r");
         SaveRoutingTable(ALL_MIWI,memStoreTest);
         i = 0;
         while(i < 34){
@@ -865,11 +868,14 @@ SAVE_RESTORE:
             ConsolePut(' ');
             i++;
         }
+
+        //Restaurar la tabla con una única todos los campos a 0x04.
         i = 0;
         while(i < 34){
-            memStoreTest[i]= 4;
+            memStoreTest[i]= 0x04;
             i++;
         }
+        Printf("\rRestaurando la tabla de conexiones.\r");
         RestoreRoutingTable(ALL_MIWI,memStoreTest);
         DumpConnTable();
         while (1);
@@ -877,19 +883,19 @@ SAVE_RESTORE:
 
 POWER_DISSIPATION_TEST:
         while(1){
-            DelayMs(5000);
+            DelayMs(3000);
             Printf("\rDurmiendo 868\r");
             SleepRadioInterface(MIWI_0868);
-            DelayMs(10000);
-            Printf("\rDurmiendo 2,4\r");
+            DelayMs(8000);
+            Printf("\rDurmiendo 2,4\r");    
             SleepRadioInterface(MIWI_2400);
-            DelayMs(10000);
+            DelayMs(8000);
             Printf("\rDurmiendo nodo\r");
-            SleepNode(NONE, 12500);
+            SleepNode(NONE, 10000);
             Printf("\rDespertando\r");
-            WakeUpRadioInterface(ALL);
+            //WakeUpRadioInterface(ALL);
             SetTXPower(ri,0);
-            DelayMs(10000);
+            DelayMs(8000);
             Printf("\rTransmitiendo\r");
             i=20;
             while(i>0){
@@ -897,8 +903,8 @@ POWER_DISSIPATION_TEST:
                 while(SendPckt(ri, BROADCAST_ADDRMODE, NULL));
                 i--;
             }
-            DelayMs(5000);
-            Printf("\rResposo\r");
+            DelayMs(3000);
+            Printf("\rReposo\r");
         }
 
 DEMO_PFC:
