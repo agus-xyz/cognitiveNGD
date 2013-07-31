@@ -51,7 +51,7 @@
 #if !defined __CONFIG_TRANSCEIVERS_H
     #define __CONFIG_TRANSCEIVERS_H
 
-#include "HW_BConfig.h"
+#include "HW_BasicConfig.h"
 #include "WirelessProtocols/ConfigApp.h"
 #include "Transceivers/Security.h"
 

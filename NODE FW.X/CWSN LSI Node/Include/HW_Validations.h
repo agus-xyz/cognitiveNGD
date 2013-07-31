@@ -8,7 +8,7 @@
 #ifndef HW_VALIDATIONS_H
 #define	HW_VALIDATIONS_H
 
-#include "AutoConfByPlatformSelect.h"
+#include "HW_BasicConfig.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /* VALIDATIONS ****************************************************************/

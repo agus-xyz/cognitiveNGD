@@ -27,7 +27,7 @@
 #define __CONFIG_APP_H_
 
 
-#include "HW_BConfig.h"
+#include "HW_BasicConfig.h"
 ////////////////////////////////////////////////////////////////////////////////
 /*LSI-CWSN - IMPORTANT:
 * The following code defines the platform as well as the hardware configuration.

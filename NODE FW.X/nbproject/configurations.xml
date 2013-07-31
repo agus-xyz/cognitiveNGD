@@ -1,92 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="62">
   <logicalFolder name="root" displayName="root" projectFiles="true">
-    <logicalFolder name="HeaderFiles"
-                   displayName="Header Files"
+    <logicalFolder name="CWSN LSI Node"
+                   displayName="CWSN LSI Node"
                    projectFiles="true">
-    </logicalFolder>
-    <logicalFolder name="LinkerScript"
-                   displayName="Linker Files"
-                   projectFiles="true">
-    </logicalFolder>
-    <logicalFolder name="NODE FW.X" displayName="NODE FW.X" projectFiles="true">
-      <logicalFolder name="CWSN LSI Node"
-                     displayName="CWSN LSI Node"
-                     projectFiles="true">
+      <logicalFolder name="Common" displayName="Common" projectFiles="true">
+        <itemPath>CWSN LSI Node/Common/TimeDelay.c</itemPath>
+        <itemPath>CWSN LSI Node/Common/timer.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="Helpers" displayName="Helpers" projectFiles="true">
+      </logicalFolder>
+      <logicalFolder name="Include" displayName="Include" projectFiles="true">
         <logicalFolder name="Common" displayName="Common" projectFiles="true">
-          <itemPath>CWSN LSI Node/Common/TimeDelay.c</itemPath>
-          <itemPath>CWSN LSI Node/Common/timer.c</itemPath>
+          <itemPath>CWSN LSI Node/Include/Common/timer.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/Common/TimeDelay.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Helpers" displayName="Helpers" projectFiles="true">
-        </logicalFolder>
-        <logicalFolder name="Include" displayName="Include" projectFiles="true">
-          <logicalFolder name="Common" displayName="Common" projectFiles="true">
-            <itemPath>CWSN LSI Node/Include/Common/timer.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/Common/TimeDelay.h</itemPath>
-          </logicalFolder>
-          <logicalFolder name="Helpers" displayName="Helpers" projectFiles="true">
-          </logicalFolder>
-          <logicalFolder name="TCPIP Stack" displayName="TCPIP Stack" projectFiles="true">
-          </logicalFolder>
-          <logicalFolder name="Transceivers"
-                         displayName="Transceivers"
-                         projectFiles="true">
-            <itemPath>CWSN LSI Node/Include/Transceivers/MCHP_MAC.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/Transceivers/ConfigTransceivers.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/Transceivers/Transceivers.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/Transceivers/Security.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/Transceivers/crc.h</itemPath>
-          </logicalFolder>
-          <logicalFolder name="USB" displayName="USB" projectFiles="true">
-          </logicalFolder>
-          <logicalFolder name="WirelessProtocols"
-                         displayName="WirelessProtocols"
-                         projectFiles="true">
-            <logicalFolder name="MiWi" displayName="MiWi" projectFiles="true">
-              <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWi/ConfigMiWi.h</itemPath>
-              <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWi/MiWi.h</itemPath>
-            </logicalFolder>
-            <logicalFolder name="MiWiPRO" displayName="MiWiPRO" projectFiles="true">
-              <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWiPRO/MiWiPRO.h</itemPath>
-              <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWiPRO/ConfigMiWiPRO.h</itemPath>
-            </logicalFolder>
-            <logicalFolder name="P2P" displayName="P2P" projectFiles="true">
-              <itemPath>CWSN LSI Node/Include/WirelessProtocols/P2P/ConfigP2P.h</itemPath>
-              <itemPath>CWSN LSI Node/Include/WirelessProtocols/P2P/P2P.h</itemPath>
-            </logicalFolder>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/MCHP_API.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/LCDBlocking.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/Console.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/MSPI.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/ConfigApp.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/EEPROM.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/SymbolTime.h</itemPath>
-            <itemPath>CWSN LSI Node/Include/WirelessProtocols/NVM.h</itemPath>
-          </logicalFolder>
-          <itemPath>CWSN LSI Node/Include/struct_queue.h</itemPath>
-          <itemPath>CWSN LSI Node/Include/HardwareProfile.h</itemPath>
-          <itemPath>CWSN LSI Node/Include/NodeHAL.h</itemPath>
-          <itemPath>CWSN LSI Node/Include/GenericTypeDefs.h</itemPath>
-          <itemPath>CWSN LSI Node/Include/Compiler.h</itemPath>
-          <itemPath>CWSN LSI Node/Include/HW_Validations.h</itemPath>
-          <itemPath>CWSN LSI Node/Include/HW_BConfig.h</itemPath>
         </logicalFolder>
         <logicalFolder name="TCPIP Stack" displayName="TCPIP Stack" projectFiles="true">
         </logicalFolder>
         <logicalFolder name="Transceivers"
                        displayName="Transceivers"
                        projectFiles="true">
-          <logicalFolder name="MRF24J40" displayName="MRF24J40" projectFiles="true">
-            <itemPath>CWSN LSI Node/Transceivers/MRF24J40/MRF24J40.c</itemPath>
-          </logicalFolder>
-          <logicalFolder name="MRF49XA" displayName="MRF49XA" projectFiles="true">
-            <itemPath>CWSN LSI Node/Transceivers/MRF49XA/MRF49XA.c</itemPath>
-          </logicalFolder>
-          <logicalFolder name="MRF89XA" displayName="MRF89XA" projectFiles="true">
-            <itemPath>CWSN LSI Node/Transceivers/MRF89XA/MRF89XA.c</itemPath>
-          </logicalFolder>
-          <itemPath>CWSN LSI Node/Transceivers/crc.c</itemPath>
-          <itemPath>CWSN LSI Node/Transceivers/security.c</itemPath>
+          <itemPath>CWSN LSI Node/Include/Transceivers/MCHP_MAC.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/Transceivers/ConfigTransceivers.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/Transceivers/Transceivers.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/Transceivers/Security.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/Transceivers/crc.h</itemPath>
         </logicalFolder>
         <logicalFolder name="USB" displayName="USB" projectFiles="true">
         </logicalFolder>
@@ -94,25 +34,82 @@
                        displayName="WirelessProtocols"
                        projectFiles="true">
           <logicalFolder name="MiWi" displayName="MiWi" projectFiles="true">
-            <itemPath>CWSN LSI Node/WirelessProtocols/MiWi/MiWi.c</itemPath>
+            <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWi/ConfigMiWi.h</itemPath>
+            <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWi/MiWi.h</itemPath>
           </logicalFolder>
           <logicalFolder name="MiWiPRO" displayName="MiWiPRO" projectFiles="true">
-            <itemPath>CWSN LSI Node/WirelessProtocols/MiWiPRO/MiWiPRO.c</itemPath>
+            <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWiPRO/MiWiPRO.h</itemPath>
+            <itemPath>CWSN LSI Node/Include/WirelessProtocols/MiWiPRO/ConfigMiWiPRO.h</itemPath>
           </logicalFolder>
           <logicalFolder name="P2P" displayName="P2P" projectFiles="true">
-            <itemPath>CWSN LSI Node/WirelessProtocols/P2P/P2P.c</itemPath>
+            <itemPath>CWSN LSI Node/Include/WirelessProtocols/P2P/ConfigP2P.h</itemPath>
+            <itemPath>CWSN LSI Node/Include/WirelessProtocols/P2P/P2P.h</itemPath>
           </logicalFolder>
-          <itemPath>CWSN LSI Node/WirelessProtocols/SymbolTime.c</itemPath>
-          <itemPath>CWSN LSI Node/WirelessProtocols/NVM.c</itemPath>
-          <itemPath>CWSN LSI Node/WirelessProtocols/EEPROM.c</itemPath>
-          <itemPath>CWSN LSI Node/WirelessProtocols/LCDBlocking.c</itemPath>
-          <itemPath>CWSN LSI Node/WirelessProtocols/MSPI.c</itemPath>
-          <itemPath>CWSN LSI Node/WirelessProtocols/Console.c</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/MCHP_API.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/LCDBlocking.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/Console.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/MSPI.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/ConfigApp.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/EEPROM.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/SymbolTime.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/WirelessProtocols/NVM.h</itemPath>
         </logicalFolder>
-        <itemPath>CWSN LSI Node/HardwareProfile.c</itemPath>
-        <itemPath>CWSN LSI Node/NodeHAL.c</itemPath>
+        <itemPath>CWSN LSI Node/Include/HW_Validations.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/struct_queue.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/HardwareProfile.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/NodeHAL.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/GenericTypeDefs.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/Compiler.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/HW_BasicConfig.h</itemPath>
       </logicalFolder>
-      <itemPath>MainAppCode_NodeTest.c</itemPath>
+      <logicalFolder name="TCPIP Stack" displayName="TCPIP Stack" projectFiles="true">
+      </logicalFolder>
+      <logicalFolder name="Transceivers"
+                     displayName="Transceivers"
+                     projectFiles="true">
+        <logicalFolder name="MRF24J40" displayName="MRF24J40" projectFiles="true">
+          <itemPath>CWSN LSI Node/Transceivers/MRF24J40/MRF24J40.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="MRF49XA" displayName="MRF49XA" projectFiles="true">
+          <itemPath>CWSN LSI Node/Transceivers/MRF49XA/MRF49XA.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="MRF89XA" displayName="MRF89XA" projectFiles="true">
+          <itemPath>CWSN LSI Node/Transceivers/MRF89XA/MRF89XA.c</itemPath>
+        </logicalFolder>
+        <itemPath>CWSN LSI Node/Transceivers/crc.c</itemPath>
+        <itemPath>CWSN LSI Node/Transceivers/security.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="USB" displayName="USB" projectFiles="true">
+      </logicalFolder>
+      <logicalFolder name="WirelessProtocols"
+                     displayName="WirelessProtocols"
+                     projectFiles="true">
+        <logicalFolder name="MiWi" displayName="MiWi" projectFiles="true">
+          <itemPath>CWSN LSI Node/WirelessProtocols/MiWi/MiWi.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="MiWiPRO" displayName="MiWiPRO" projectFiles="true">
+          <itemPath>CWSN LSI Node/WirelessProtocols/MiWiPRO/MiWiPRO.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="P2P" displayName="P2P" projectFiles="true">
+          <itemPath>CWSN LSI Node/WirelessProtocols/P2P/P2P.c</itemPath>
+        </logicalFolder>
+        <itemPath>CWSN LSI Node/WirelessProtocols/SymbolTime.c</itemPath>
+        <itemPath>CWSN LSI Node/WirelessProtocols/NVM.c</itemPath>
+        <itemPath>CWSN LSI Node/WirelessProtocols/EEPROM.c</itemPath>
+        <itemPath>CWSN LSI Node/WirelessProtocols/LCDBlocking.c</itemPath>
+        <itemPath>CWSN LSI Node/WirelessProtocols/MSPI.c</itemPath>
+        <itemPath>CWSN LSI Node/WirelessProtocols/Console.c</itemPath>
+      </logicalFolder>
+      <itemPath>CWSN LSI Node/HardwareProfile.c</itemPath>
+      <itemPath>CWSN LSI Node/NodeHAL.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="LinkerScript"
+                   displayName="Linker Files"
+                   projectFiles="true">
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -123,6 +120,7 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>MainAppCode_NodeTest.c</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
@@ -198,6 +196,7 @@
         <property key="DMA" value="true"/>
         <property key="Freeze All Other Peripherals" value="true"/>
         <property key="I2C1" value="true"/>
+        <property key="I2C2" value="true"/>
         <property key="I2C3" value="true"/>
         <property key="I2C4" value="true"/>
         <property key="I2C5" value="true"/>

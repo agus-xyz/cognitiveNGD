@@ -35,7 +35,7 @@
 
 #include "Compiler.h"
 #include "GenericTypeDefs.h"
-#include "HW_BConfig.h"
+#include "HW_BasicConfig.h"
 #include "WirelessProtocols/ConfigApp.h"
 #include "Transceivers/ConfigTransceivers.h"
 
@@ -199,13 +199,6 @@
     #define EXTINT_INT4 PORTAbits.RA15
     #define INT4_TRIS   TRISAbits.TRISA15
 
-    //IO PORTS Change Notification *******************************  TO DO **********
-    #define BUTTON_1            PORTDbits.RD5   //CN14
-    #define BUTTON_2            PORTDbits.RD4   //CN13
-    #define ReadBUTTONS()       PORTD
-    #define BUTTON_1_PORT_MASK  0x00000020
-    #define BUTTON_2_PORT_MASK  0x00000010
-
 #elif defined (__32MX795F512H__)
     //SPI1
     #if defined MRF49XA_1_IN_SPI1 || defined MRF49XA_2_IN_SPI1 || \
@@ -294,6 +287,28 @@
     #define BUTTON_2_PORT_MASK  0x00000010      //Bit4
 #endif
 /******************************************************************************/
+
+#if defined FCD_Exp_PLATFORM
+
+//IO PORTS Change Notification
+    #define BUTTON_1            PORTDbits.RD5   //CN14
+    #define BUTTON_2            PORTDbits.RD4   //CN13
+    #define ReadBUTTONS()       PORTD
+    #define BUTTON_1_PORT_MASK  0x00000020
+    #define BUTTON_2_PORT_MASK  0x00000010
+
+#elif defined cNGD_PLATFORM
+
+//************************************ TO DO *********************************
+    #define BUTTON_1            PORTDbits.RD5   //CN14
+    #define BUTTON_2            PORTDbits.RD4   //CN13
+    #define ReadBUTTONS()       PORTD
+    #define BUTTON_1_PORT_MASK  0x00000020
+    #define BUTTON_2_PORT_MASK  0x00000010
+
+#endif
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /* I/O pin definitions ********************************************************/
@@ -616,13 +631,24 @@
         #define SPICONCLR   SPI4CONCLR
     #endif
 
-    //For debugging with Flopez's "old" node.
+ #if defined FCD_Exp_PLATFORM
         #define PHY_CS              LATEbits.LATE5          
         #define PHY_CS_TRIS         TRISEbits.TRISE5
         #define PHY_RESETn          LATEbits.LATE7
         #define PHY_RESETn_TRIS     TRISEbits.TRISE7
         #define PHY_WAKE            LATEbits.LATE6
         #define PHY_WAKE_TRIS       TRISEbits.TRISE6
+
+#elif defined cNGD_PLATFORM
+
+        #define PHY_CS              LATEbits.LATE3
+        #define PHY_CS_TRIS         TRISEbits.TRISE3
+        #define PHY_RESETn          LATEbits.LATE0
+        #define PHY_RESETn_TRIS     TRISEbits.TRISE0
+        #define PHY_WAKE            LATEbits.LATE1
+        #define PHY_WAKE_TRIS       TRISEbits.TRISE1
+
+#endif
 
     #if defined MRF24J40_USES_INT0
         #define MRF24J40_INT_PIN    EXTINT_INT0
