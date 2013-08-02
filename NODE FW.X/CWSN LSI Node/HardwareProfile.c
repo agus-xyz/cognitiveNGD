@@ -148,26 +148,26 @@ void BoardInit(void){
             #endif
         #endif
         #if defined(MRF49XA_1)
-            //Configuration for Guilja's Expansion Board, Connection SLot 1 --//
-            mPORTESetPinsDigitalOut(BIT_1); //nCS
-            mPORTBSetPinsDigitalIn(BIT_2);  //FINT      //Juan: Added.
-            //----------------------------------------------------------------//
 
-            MRF49XA_1_PHY_CS_TRIS = 0;
+            // configuration.   Juan: Added; Agus: Modified to a standard way
+           // MRF49XA_1_PHY_CS_TRIS = 0;    //DIGITAL OUT
+           // MRF49XA_1_FINT_TRIS = 1;      //DIGITAL IN
+
+            MRF49XA_1_PHY_CS_TRIS = OUTPUT_PIN;
             MRF49XA_1_PHY_CS = 1;
-            MRF49XA_1_PHY_RESETn_TRIS = 0;
+            MRF49XA_1_PHY_RESETn_TRIS = OUTPUT_PIN;
             MRF49XA_1_PHY_RESETn = 1;
 
-            MRF49XA_1_INT_TRIS = 1;
+            MRF49XA_1_INT_TRIS = INPUT_PIN;
 
-            MRF49XA_1_SDI_TRIS = 1;
-            MRF49XA_1_SDO_TRIS = 0;
-            MRF49XA_1_SCK_TRIS = 0;
+            MRF49XA_1_SDI_TRIS = INPUT_PIN;
+            MRF49XA_1_SDO_TRIS = OUTPUT_PIN;
+            MRF49XA_1_SCK_TRIS = OUTPUT_PIN;
             MRF49XA_1_SPI_SDO = 0;
             MRF49XA_1_SPI_SCK = 0;
 
-            MRF49XA_1_nFSEL_TRIS = 0;
-            MRF49XA_1_FINT_TRIS = 1;
+            MRF49XA_1_nFSEL_TRIS = OUTPUT_PIN;
+            MRF49XA_1_FINT_TRIS = INPUT_PIN;
             MRF49XA_1_nFSEL = 1;          // nFSEL inactive
 
             MRF49XA_1_SPICONCLR = 0xFFFFFFFF;       //Clear SPIxCON register
@@ -277,140 +277,77 @@ void BoardInit(void){
         #endif
 
     // SPI & EXTERNAL INTERRUPTS PINS AND CONFIGURATION ----------------------//
-        #if defined (__32MX795F512L__)
         /* Set the SPI Port Directions (SDO, SDI, SCK) for every SPI module.*/
-            #if defined MRF49XA_1_IN_SPI1 || defined MRF49XA_2_IN_SPI1 || \
-                defined MRF89XA_IN_SPI1   || defined MRF24J40_IN_SPI1  || \
-                defined MRF24WB0M_ IN_SPI1
-                mPORTDSetPinsDigitalOut(BIT_0);     //SDO1
-                mPORTDSetPinsDigitalOut(BIT_10);    //SCK1
-                mPORTCSetPinsDigitalIn(BIT_4);      //SDI1
-            #endif
-            #if defined MRF49XA_1_IN_SPI2 || defined MRF49XA_2_IN_SPI2 || \
-                defined MRF89XA_IN_SPI2   || defined MRF24J40_IN_SPI2  || \
-                defined MRF24WB0M
-                mPORTGSetPinsDigitalOut(BIT_8);     //SDO2
-                mPORTGSetPinsDigitalOut(BIT_6);     //SCK2
-                mPORTGSetPinsDigitalIn(BIT_7);      //SDI2
-            #endif
-            #if defined MRF49XA_1_IN_SPI3 || defined MRF49XA_2_IN_SPI3 || \
-                defined MRF89XA_IN_SPI3   || defined MRF24J40_IN_SPI3  || \
-                defined MRF24WB0M
-                mPORTFSetPinsDigitalOut(BIT_8);     //SDO3
-                mPORTDSetPinsDigitalOut(BIT_15);    //SCK3
-                mPORTFSetPinsDigitalIn(BIT_2);      //SDI3
-            #endif
-//            #if defined MRF24WB0M_IN_SPI4
-//                mPORTFSetPinsDigitalOut(BIT_5);     //SDO4
-//                mPORTFSetPinsDigitalOut(BIT_13);    //SCK4
-//                mPORTFSetPinsDigitalIn(BIT_4);      //SDI4
-//            #endif
-        #elif defined (__32MX795F512H__)
-            #if defined MRF49XA_1_IN_SPI2 || defined MRF49XA_2_IN_SPI2 || \
-                defined MRF89XA_IN_SPI2   || defined MRF24J40_IN_SPI2  || \
-                defined MRF24WB0M_IN_SPI2
-                mPORTGSetPinsDigitalOut(BIT_8);     //SDO2
-                mPORTGSetPinsDigitalOut(BIT_6);     //SCK2
-                mPORTGSetPinsDigitalIn(BIT_7);      //SDI2
-            #endif
-            #if defined MRF49XA_1_IN_SPI3 || defined MRF49XA_2_IN_SPI3 || \
-                defined MRF89XA_IN_SPI3   || defined MRF24J40_IN_SPI3  || \
-                defined MRF24WB0M_IN_SPI3
-                mPORTDSetPinsDigitalOut(BIT_3);     //SDO3
-                mPORTDSetPinsDigitalOut(BIT_1);     //SCK3
-                mPORTDSetPinsDigitalIn(BIT_2);      //SDI3
-            #endif
-            #if defined MRF24J40_IN_SPI4 || defined MRF24WB0M_IN_SPI4
-                mPORTFSetPinsDigitalOut(BIT_5);     //SDO4
-                mPORTBSetPinsDigitalOut(BIT_14);    //SCK4
-                mPORTFSetPinsDigitalIn(BIT_4);      //SDI4
-            #endif
-        #endif
+            #if defined SPI1_IS_USED
+  
+                SDI1_TRIS = INPUT_PIN;   //DIGITAL IN
+                SDO1_TRIS = OUTPUT_PIN;  //DIGITAL OUT
+                SCK1_TRIS = OUTPUT_PIN;  //DIGITAL OUT
 
-        #if defined (__32MX795F512L__)
+            #endif
+
+            #if defined SPI2_IS_USED
+
+                SDI2_TRIS = INPUT_PIN;   //DIGITAL IN
+                SDO2_TRIS = OUTPUT_PIN;  //DIGITAL OUT
+                SCK2_TRIS = OUTPUT_PIN;  //DIGITAL OUT
+
+            #endif
+
+            #if defined SPI3_IS_USED
+
+                SDI3_TRIS = INPUT_PIN;   //DIGITAL IN
+                SDO3_TRIS = OUTPUT_PIN;  //DIGITAL OUT
+                SCK3_TRIS = OUTPUT_PIN;  //DIGITAL OUT
+
+            #endif
+
+            #if defined SPI4_IS_USED
+
+                SDI4_TRIS = INPUT_PIN;   //DIGITAL IN
+                SDO4_TRIS = OUTPUT_PIN;  //DIGITAL OUT
+                SCK4_TRIS = OUTPUT_PIN;  //DIGITAL OUT
+
+            #endif
+
         /* Set the external interrups Pin Directions and Priority*/
-            #if defined MRF49XA_1_USES_INT1 || defined MRF49XA_2_USES_INT1 || \
-                defined MRF89XA_USES_INT1   || defined MRF24J40_USES_INT1  || \
-                defined MRF24WB0M_USES_INT1
-                mPORTESetPinsDigitalIn(BIT_8);
+            #if defined INT1_IS_USED
+
+               INT1_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT1SetIntPriority(4);
                 mINT1SetIntSubPriority(2);
                 mINT1SetEdgeMode(0);                //0: Falling Edge.
-                /* Enable INT1 */
-                mINT1IntEnable(1);
+                // Enable INT1
+                mINT1IntEnable(1); 
             #endif
-            #if defined MRF49XA_1_USES_INT2 || defined MRF49XA_2_USES_INT2 || \
-                defined MRF89XA_USES_INT2   || defined MRF24J40_USES_INT2  || \
-                defined MRF24WB0M_USES_INT2
-                mPORTESetPinsDigitalIn(BIT_9);
+            #if defined INT2_IS_USED
+                
+                INT2_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT2SetIntPriority(4);
                 mINT2SetIntSubPriority(2);
                 mINT2SetEdgeMode(0);                //0: Falling Edge.
                 /* Enable INT2 */
                 mINT2IntEnable(1);
             #endif
-            #if defined MRF49XA_1_USES_INT3 || defined MRF49XA_2_USES_INT3 || \
-                defined MRF89XA_USES_INT3   || defined MRF24J40_USES_INT3  || \
-                defined MRF24WB0M_USES_INT3
-                mPORTASetPinsDigitalIn(BIT_14);
+            #if defined INT3_IS_USED
+                
+                INT3_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT3SetIntPriority(4);
                 mINT3SetIntSubPriority(2);
                 mINT3SetEdgeMode(0);                //0: Falling Edge.
                 /* Enable INT3 */
                 mINT3IntEnable(1);
             #endif
-            #if defined MRF49XA_1_USES_INT4 || defined MRF49XA_2_USES_INT4 || \
-                defined MRF89XA_USES_INT4   || defined MRF24J40_USES_INT4  || \
-                defined MRF24WB0M_USES_INT4
-                mPORTASetPinsDigitalIn(BIT_15);
+            #if defined INT4_IS_USED
+               
+                INT4_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT4SetIntPriority(4);
                 mINT4SetIntSubPriority(2);
                 mINT4SetEdgeMode(0);                //0: Falling Edge.
                 /* Enable INT4 */
                 mINT4IntEnable(1);
             #endif
-        #elif defined (__32MX795F512H__)
-            #if defined MRF49XA_1_USES_INT1 || defined MRF49XA_2_USES_INT1 || \
-                defined MRF89XA_USES_INT1   || defined MRF24J40_USES_INT1  || \
-                defined MRF24WB0M_USES_INT1
-                mPORTDSetPinsDigitalIn(BIT_8);
-                mINT1SetIntPriority(4);
-                mINT1SetIntSubPriority(2);
-                mINT1SetEdgeMode(0);                //0: Falling Edge.
-                /* Enable INT1 */
-                mINT1IntEnable(1);
-            #endif
-            #if defined MRF49XA_1_USES_INT2 || defined MRF49XA_2_USES_INT2 || \
-                defined MRF89XA_USES_INT2   || defined MRF24J40_USES_INT2  || \
-                defined MRF24WB0M_USES_INT2
-                mPORTDSetPinsDigitalIn(BIT_9);  //Warning. Shared with SPI3 nSS3
-                mINT2SetIntPriority(4);
-                mINT2SetIntSubPriority(2);
-                mINT2SetEdgeMode(0);                //0: Falling Edge.
-                /* Enable INT2 */
-                mINT2IntEnable(1);
-            #endif
-            #if defined MRF49XA_1_USES_INT3 || defined MRF49XA_2_USES_INT3 || \
-                defined MRF89XA_USES_INT3   || defined MRF24J40_USES_INT3  || \
-                defined MRF24WB0M_USES_INT3
-                mPORTDSetPinsDigitalIn(BIT_10);
-                mINT3SetIntPriority(4);
-                mINT3SetIntSubPriority(2);
-                mINT3SetEdgeMode(0);                //0: Falling Edge.
-                /* Enable INT3 */
-                mINT3IntEnable(1);
-            #endif
-            #if defined MRF49XA_1_USES_INT4 || defined MRF49XA_2_USES_INT4 || \
-                defined MRF89XA_USES_INT4   || defined MRF24J40_USES_INT4  || \
-                defined MRF24WB0M_USES_INT4
-                mPORTDSetPinsDigitalIn(BIT_11);
-                mINT4SetIntPriority(4);
-                mINT4SetIntSubPriority(2);
-                mINT4SetEdgeMode(0);                //0: Falling Edge.
-                /* Enable INT4 */
-                mINT4IntEnable(1);
-            #endif
-        #endif
+
 
     // TIMER 1 FOR TIME_SYNC -------------------------------------------------//
         #if defined(ENABLE_TIME_SYNC)   
@@ -439,7 +376,7 @@ void BoardInit(void){
             IEC0SET = 0x00000010;   //Set T1IE
             //Timer will be triggered after initialization.
         #endif
-
+//************************************* TODO
     // IOPORT CN - For waking up the node manually. --------------------------//
         mPORTDSetPinsDigitalIn(BIT_5); // CN14
         CNCON = 0x8000;         //Module enabled.
@@ -450,9 +387,7 @@ void BoardInit(void){
         IPC6SET = 0x00180000;   //Set CN priority 6, subpriority 0.
         //It will be enabled only during sleep mode time interval
     //------------------------------------------------------------------------//
-
-
-        																										// Lo modifico en el wifi config
+																										// Lo modifico en el wifi config
         #if defined(ENABLE_NVM)     //REVIEW
             //EE_nCS_TRIS = 0;//FERNANDO, CUIDADO NO SE SI LA PILA REALMENTE FUNCIONA CON FLASH MEMORY
             //EE_nCS = 1;

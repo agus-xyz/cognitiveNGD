@@ -12,4 +12,5 @@ build/default/production/CWSN\ LSI\ Node/Transceivers/crc.o:  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/MiWi/ConfigMiWi.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/MiWi/MiWi.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/MCHP_API.h  \
- /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/ConfigApp.h 
+ /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/ConfigApp.h  \
+ /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Transceivers/crc.h 

@@ -114,7 +114,7 @@
     //PICs 7xx and 6xx are not 100% pin-to-pin compatible (but ther share common
     //pin layout for SPIs, UARTs, I2C and external interrupts).
 
-    //SPI1 & INTERRUPT 0
+    //SPI1
     #define SPI_SDI1    PORTCbits.RC4
     #define SDI1_TRIS   TRISCbits.TRISC4
     #define SPI_SDO1    PORTDbits.RD0
@@ -124,9 +124,11 @@
     #define SPI_nSS1    PORTDbits.RD9
     #define nSS1_TRIS   TRISDbits.TRISD9
 
+    //INTERRUPT 0
     #define EXTINT_INT0 PORTDbits.RD0
     #define INT0_TRIS   TRISDbits.TRISD0
-    //SPI2 & UART3, UART6
+
+    //SPI2
     #define SPI_SDI2    PORTGbits.RG7
     #define SDI2_TRIS   TRISGbits.TRISG7
     #define SPI_SDO2    PORTGbits.RG8
@@ -136,16 +138,19 @@
     #define SPI_nSS2    PORTGbits.RG9
     #define nSS2_TRIS   TRISGbits.TRISG9
 
+    //UART3
     #define UART_U3TX   PORTGbits.RG8
     #define U3TX_TRIS   TRISGbits.TRISG8
     #define UART_U3RX   PORTGbits.RG7
     #define U3RX_TRIS   TRISGbits.TRISG7
 
+    //UART6
     #define UART_U6TX   PORTGbits.RG6
     #define U6TX_TRIS   TRISGbits.TRISG6
     #define UART_U6RX   PORTGbits.RG9
     #define U6RX_TRIS   TRISGbits.TRISG9
-    //SPI3 & UART1, UART4
+
+    //SPI3  
     #define SPI_SDI3    PORTFbits.RF2
     #define SDI3_TRIS   TRISFbits.TRISF2
     #define SPI_SDO3    PORTFbits.RF8
@@ -155,16 +160,19 @@
     #define SPI_nSS3    PORTDbits.RD14
     #define nSS3_TRIS   TRISDbits.TRISD14
 
+    //UART1
     #define UART_U1TX   PORTFbits.RF8
     #define U1TX_TRIS   TRISFbits.TRISF8
     #define UART_U1RX   PORTFbits.RF2
     #define U1RX_TRIS   TRISFbits.TRISF2
 
+    //UART4
     #define UART_U4TX   PORTDbits.RD15
     #define U4TX_TRIS   TRISDbits.TRISD15
     #define UART_U4RX   PORTDbits.RD14
     #define U4RX_TRIS   TRISDbits.TRISD14
-    //SPI4 & UART2, UART5
+
+    //SPI4
     #define SPI_SDI4    PORTFbits.RF4
     #define SDI4_TRIS   TRISFbits.TRISF4
     #define SPI_SDO4    PORTFbits.RF5
@@ -174,15 +182,18 @@
     #define SPI_nSS4    PORTFbits.RF12
     #define nSS4_TRIS   TRISFbits.TRISF12
 
+    //UART2
     #define UART_U2TX   PORTFbits.RF5
     #define U2TX_TRIS   TRISFbits.TRISF5
     #define UART_U2RX   PORTFbits.RF4
     #define U2RX_TRIS   TRISFbits.TRISF4
 
+    //UART5
     #define UART_U5TX   ORTFbits.RF13
     #define U5TX_TRIS   TRISFbits.TRISF13
     #define UART_U5RX   PORTFbits.RF12
     #define U5RX_TRIS   TRISFbits.TRISF12
+
     //I2C
     #define I2C_SDA2    PORTAbits.RA3
     #define SDA2_TRIS   TRISAbits.TRISA3
@@ -299,12 +310,11 @@
 
 #elif defined cNGD_PLATFORM
 
-//************************************ TO DO *********************************
     #define BUTTON_1            PORTDbits.RD5   //CN14
-    #define BUTTON_2            PORTDbits.RD4   //CN13
+    #define BUTTON_2            PORTDbits.RD7   //CN16
     #define ReadBUTTONS()       PORTD
-    #define BUTTON_1_PORT_MASK  0x00000020
-    #define BUTTON_2_PORT_MASK  0x00000010
+    #define BUTTON_1_PORT_MASK  0x00100000  //esto esta bien? ********* PREGUNTAR
+    #define BUTTON_2_PORT_MASK  0x10000000  //esto esta bien?
 
 #endif
 
@@ -391,17 +401,8 @@
         #define MRF49XA_1_SPICON      SPI4CON
         #define MRF49XA_1_SPICONCLR   SPI4CONCLR
     #endif
-
-    //Pins selection for debugging with Guilja's extension board Conn. Slot 1 //
-        #define MRF49XA_1_PHY_CS            LATEbits.LATE1
-        #define MRF49XA_1_PHY_CS_TRIS       TRISEbits.TRISE1
-        #define MRF49XA_1_PHY_RESETn        LATEbits.LATE4
-        #define MRF49XA_1_PHY_RESETn_TRIS   TRISEbits.TRISE4
-        #define MRF49XA_1_nFSEL             LATEbits.LATE3
-        #define MRF49XA_1_nFSEL_TRIS        TRISEbits.TRISE3
-        #define MRF49XA_1_FINT              PORTBbits.RB2
-        #define MRF49XA_1_FINT_TRIS         TRISBbits.TRISB2
-    //------------------------------------------------------------------------//
+    
+    // INTERRUPTION PINS
     #if defined MRF49XA_1_USES_INT0
         #define MRF49XA_1_INT_PIN   EXTINT_INT0
         #define MRF49XA_1_INT_TRIS  INT0_TRIS
@@ -433,6 +434,31 @@
         #define MRF49XA_1_IF        IFS0bits.INT4IF
         #define MRF49XA_1_IE        IEC0bits.INT4IE
     #endif
+
+ // DEBUGGING PINS
+ #if defined cNGD_PLATFORM
+
+        #define MRF49XA_1_PHY_CS            LATBbits.LATB10
+        #define MRF49XA_1_PHY_CS_TRIS       TRISBbits.TRISB10
+        #define MRF49XA_1_PHY_RESETn        LATBbits.LATB7
+        #define MRF49XA_1_PHY_RESETn_TRIS   TRISBbits.TRISB7
+        #define MRF49XA_1_nFSEL             LATGbits.LATG14
+        #define MRF49XA_1_nFSEL_TRIS        TRISGbits.TRISG14
+        #define MRF49XA_1_FINT              PORTGbits.RG13
+        #define MRF49XA_1_FINT_TRIS         TRISGbits.TRISG13
+
+ #elif defined FCD_Exp_PLATFORM
+
+        #define MRF49XA_1_PHY_CS            LATEbits.LATE1
+        #define MRF49XA_1_PHY_CS_TRIS       TRISEbits.TRISE1
+        #define MRF49XA_1_PHY_RESETn        LATEbits.LATE4
+        #define MRF49XA_1_PHY_RESETn_TRIS   TRISEbits.TRISE4
+        #define MRF49XA_1_nFSEL             LATEbits.LATE3
+        #define MRF49XA_1_nFSEL_TRIS        TRISEbits.TRISE3
+        #define MRF49XA_1_FINT              PORTBbits.RB2
+        #define MRF49XA_1_FINT_TRIS         TRISBbits.TRISB2
+  #endif
+
 #endif
 
 #if defined (MRF49XA_2)
