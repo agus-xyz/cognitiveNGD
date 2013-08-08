@@ -4,6 +4,4 @@ Console.c  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/GenericTypeDefs.h  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/Compiler.h  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/SystemProfile.h  \
- /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/ConfigApp.h  \
- /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/HardwareProfile.h  \
- /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/HardwareProfile\ -\ B105CNBOARD\ PIM.h 
+ /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/HardwareProfile.h 

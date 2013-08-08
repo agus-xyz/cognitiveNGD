@@ -210,21 +210,22 @@ void BoardInit(void){
             #endif
         #endif
         #if defined(MRF49XA_2)
-            MRF49XA_2_PHY_CS_TRIS = 0;
+
+            MRF49XA_2_PHY_CS_TRIS = OUTPUT_PIN;
             MRF49XA_2_PHY_CS = 1;
-            MRF49XA_2_PHY_RESETn_TRIS = 0;
+            MRF49XA_2_PHY_RESETn_TRIS = OUTPUT_PIN;
             MRF49XA_2_PHY_RESETn = 1;
 
             MRF49XA_2_INT_TRIS = 1;
 
-            MRF49XA_2_SDI_TRIS = 1;
-            MRF49XA_2_SDO_TRIS = 0;
-            MRF49XA_2_SCK_TRIS = 0;
+            MRF49XA_2_SDI_TRIS = INPUT_PIN;
+            MRF49XA_2_SDO_TRIS = OUTPUT_PIN;
+            MRF49XA_2_SCK_TRIS = OUTPUT_PIN;
             MRF49XA_2_SPI_SDO = 0;
             MRF49XA_2_SPI_SCK = 0;
 
-            MRF49XA_2_nFSEL_TRIS = 0;
-            MRF49XA_2_FINT_TRIS = 1;
+            MRF49XA_2_nFSEL_TRIS = OUTPUT_PIN;
+            MRF49XA_2_FINT_TRIS = INPUT_PIN;
             MRF49XA_2_nFSEL = 1;          // nFSEL inactive
 
             MRF49XA_2_SPICONCLR = 0xFFFFFFFF;       // Clear SPIxCON register
@@ -313,7 +314,7 @@ void BoardInit(void){
         /* Set the external interrups Pin Directions and Priority*/
             #if defined INT1_IS_USED
 
-               INT1_TRIS = INPUT_PIN; // DIGITAL IN
+                INT1_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT1SetIntPriority(4);
                 mINT1SetIntSubPriority(2);
                 mINT1SetEdgeMode(0);                //0: Falling Edge.

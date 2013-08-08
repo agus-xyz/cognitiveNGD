@@ -438,14 +438,25 @@
  // DEBUGGING PINS
  #if defined cNGD_PLATFORM
 
-        #define MRF49XA_1_PHY_CS            LATBbits.LATB10
+   /*     #define MRF49XA_1_PHY_CS            LATBbits.LATB10
         #define MRF49XA_1_PHY_CS_TRIS       TRISBbits.TRISB10
         #define MRF49XA_1_PHY_RESETn        LATBbits.LATB7
         #define MRF49XA_1_PHY_RESETn_TRIS   TRISBbits.TRISB7
         #define MRF49XA_1_nFSEL             LATGbits.LATG14
         #define MRF49XA_1_nFSEL_TRIS        TRISGbits.TRISG14
         #define MRF49XA_1_FINT              PORTGbits.RG13
-        #define MRF49XA_1_FINT_TRIS         TRISGbits.TRISG13
+        #define MRF49XA_1_FINT_TRIS         TRISGbits.TRISG13 */
+
+// PARA PRUEBA Y TEMPORALMENTE
+
+    #define MRF49XA_1_PHY_CS            LATDbits.LATD4
+    #define MRF49XA_1_PHY_CS_TRIS       TRISDbits.TRISD4
+    #define MRF49XA_1_PHY_RESETn        LATDbits.LATD1
+    #define MRF49XA_1_PHY_RESETn_TRIS   TRISDbits.TRISD1
+    #define MRF49XA_1_nFSEL             LATDbits.LATD14
+    #define MRF49XA_1_nFSEL_TRIS        TRISDbits.TRISD14
+    #define MRF49XA_1_FINT              PORTFbits.RF12
+    #define MRF49XA_1_FINT_TRIS         TRISFbits.TRISF12
 
  #elif defined FCD_Exp_PLATFORM
 
@@ -457,6 +468,7 @@
         #define MRF49XA_1_nFSEL_TRIS        TRISEbits.TRISE3
         #define MRF49XA_1_FINT              PORTBbits.RB2
         #define MRF49XA_1_FINT_TRIS         TRISBbits.TRISB2
+
   #endif
 
 #endif
@@ -505,7 +517,20 @@
         #define MRF49XA_2_SPICONCLR   SPI4CONCLR
     #endif
 
-    //Pins selection ---------------------------------------------------------//
+// DEBUGGING PINS
+ #if defined cNGD_PLATFORM
+
+    #define MRF49XA_2_PHY_CS            LATDbits.LATD4
+    #define MRF49XA_2_PHY_CS_TRIS       TRISDbits.TRISD4
+    #define MRF49XA_2_PHY_RESETn        LATDbits.LATD1
+    #define MRF49XA_2_PHY_RESETn_TRIS   TRISDbits.TRISD1
+    #define MRF49XA_2_nFSEL             LATDbits.LATD14
+    #define MRF49XA_2_nFSEL_TRIS        TRISDbits.TRISD14
+    #define MRF49XA_2_FINT              PORTFbits.RF12
+    #define MRF49XA_2_FINT_TRIS         TRISFbits.TRISF12
+
+#elif defined FCD_Exp_PLATFORM
+
     #define MRF49XA_2_PHY_CS            LATEbits.LATE5
     #define MRF49XA_2_PHY_CS_TRIS       TRISEbits.TRISE5
     #define MRF49XA_2_PHY_RESETn        LATEbits.LATE7
@@ -514,6 +539,8 @@
     #define MRF49XA_2_nFSEL_TRIS        TRISBbits.TRISB1
     #define MRF49XA_2_FINT              PORTEbits.RE9
     #define MRF49XA_2_FINT_TRIS         TRISEbits.TRISE9
+
+#endif
 
     #if defined MRF49XA_2_USES_INT0
         #define MRF49XA_2_INT_PIN   EXTINT_INT0

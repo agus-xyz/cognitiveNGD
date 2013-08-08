@@ -62,7 +62,7 @@
 #include "HardwareProfile.h"
 
 #if defined(ENABLE_CONSOLE)
-#if defined(__dsPIC33F__) || defined(__PIC24F__) || defined(__PIC24FK__) || defined(__PIC24H__) || defined(__PIC32MX__)
+#if defined(__PIC32MX__)
 
 /************************ VARIABLES ********************************/
 ROM unsigned char CharacterArray[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
@@ -95,20 +95,12 @@ void ConsoleInit(void)
     #define DESIRED_BAUDRATE 19200
 
 //XXX-Willy. Aqui usaba la uart4 pero he puesto la 3 para que no haya problemas con el modulo conectado MRF49XA_alt.
-        UARTConfigure(UART4, UART_ENABLE_PINS_TX_RX_ONLY);
-    	UARTSetFifoMode(UART4, UART_INTERRUPT_ON_TX_NOT_FULL | UART_INTERRUPT_ON_RX_NOT_EMPTY);
-    	UARTSetLineControl(UART4, UART_DATA_SIZE_8_BITS | UART_PARITY_NONE | UART_STOP_BITS_1);
-    	UARTSetDataRate(UART4, GetPeripheralClock(), DESIRED_BAUDRATE);
-        UARTEnable(UART4, UART_ENABLE_FLAGS(UART_PERIPHERAL | UART_RX | UART_TX));
+        UARTConfigure(UART3, UART_ENABLE_PINS_TX_RX_ONLY); //AGUS
+    	UARTSetFifoMode(UART3, UART_INTERRUPT_ON_TX_NOT_FULL | UART_INTERRUPT_ON_RX_NOT_EMPTY);//AGUS
+    	UARTSetLineControl(UART3, UART_DATA_SIZE_8_BITS | UART_PARITY_NONE | UART_STOP_BITS_1);//AGUS
+    	UARTSetDataRate(UART3, GetPeripheralClock(), DESIRED_BAUDRATE);//AGUS
+        UARTEnable(UART3, UART_ENABLE_FLAGS(UART_PERIPHERAL | UART_RX | UART_TX));//AGUS
         /***************************************FIN GUILLERMO**************************/
-
-    #else
-        U2BRG   = (CLOCK_FREQ/2/16)/BAUD_RATE-1;
-        IFS1bits.U2RXIF = 0;
-        U2STA  = 0;
-        U2MODE = 0b0000000010000000;
-        U2MODEbits.UARTEN = 1;
-        U2STAbits.UTXEN = 1;
     #endif
 }
 
@@ -164,8 +156,8 @@ void ConsolePut(BYTE c)
     #else
         //while(U2STAbits.TRMT == 0);//XXX-Willy
         //U2TXREG = c;//Guillermo
-        while(U4STAbits.TRMT == 0);//XXX-Willy. Para la configuración de la placa.
-        U4TXREG = c;//XXX-Willy. Para la configuración de la placa.
+        while(U3STAbits.TRMT == 0);//XXX-Willy. Para la configuración de la placa. //AGUS
+        U3TXREG = c;//XXX-Willy. Para la configuración de la placa. //AGUS
     #endif
 }
 
@@ -197,18 +189,16 @@ BYTE ConsoleGet(void)
 
 //    while(IFS2bits.U4RXIF == 0);//XXX-Willy. Lo modifico para que no se quede
         //bloqueado esperando recibir algo.
-    if(IFS2bits.U4RXIF ==1)
+    if(IFS1bits.U3RXIF ==1) //AGUS
     {
-        Temp = U4RXREG;
-        IFS2bits.U4RXIF = 0;
+        Temp = U3RXREG; //AGUS
+        IFS1bits.U3RXIF = 0; //AGUS
     }
     else
         Temp=0;
 
     return Temp;
 }
-	
-
 
 /*********************************************************************
 * Function:         void PrintChar(BYTE toPrint)
@@ -264,221 +254,7 @@ void PrintDec(BYTE toPrint)
     ConsolePut(CharacterArray[toPrint%10]);
 }
 
-#elif defined(__18CXX)
 
-/************************ VARIABLES ********************************/
-ROM unsigned char CharacterArray[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-    
-/************************ DEFINITIONS ******************************/
-#define USART_USE_BRGH_HIGH
-#if defined(USART_USE_BRGH_LOW)
-    #define SPBRG_VAL   ( ((CLOCK_FREQ/BAUD_RATE)/64) - 1)
-#else
-    #define SPBRG_VAL   ( ((CLOCK_FREQ/BAUD_RATE)/16) - 1)
-#endif
-
-#if SPBRG_VAL > 255
-    #error "Calculated SPBRG value is out of range for currnet CLOCK_FREQ."
-#endif
-
-/************************ FUNCTIONS ********************************/
-    
-/*********************************************************************
-* Function:         void ConsoleInit(void)
-*
-* PreCondition:     none
-*
-* Input:		    none
-*
-* Output:		    none
-*
-* Side Effects:	    UART2 is configured
-*
-* Overview:		    This function will configure the UART for use at 
-*                   in 8 bits, 1 stop, no flowcontrol mode
-*
-* Note:			    None
-********************************************************************/
-void ConsoleInit(void)
-{
-    #if defined(EIGHT_BIT_WIRELESS_BOARD)
-        TRISDbits.TRISD2 = 1;
-        TRISCbits.TRISC6 = 0;
-        #if defined(USART_USE_BRGH_HIGH)
-            TXSTA2 = 0x24;
-        #else
-            TXSTA2 = 0x20;
-        #endif
-        
-        RCSTA2 = 0x90;
-        SPBRG2 = SPBRG_VAL;
-    #else   
-        TRISCbits.TRISC7 = 1;
-        TRISCbits.TRISC6 = 0;
-        #if defined(USART_USE_BRGH_HIGH)
-            TXSTA = 0x24;
-        #else
-            TXSTA = 0x20;
-        #endif
-    
-        RCSTA = 0x90; // 0b10010000;
-        SPBRG = SPBRG_VAL;
-    #endif
-}
-
-/*********************************************************************
-* Function:         void ConsolePutROMString(ROM char* str)
-*
-* PreCondition:     none
-*
-* Input:		    str - ROM string that needs to be printed
-*
-* Output:		    none
-*
-* Side Effects:	    str is printed to the console
-*
-* Overview:		    This function will print the inputed ROM string
-*
-* Note:			    Do not power down the microcontroller until 
-*                   the transmission is complete or the last 
-*                   transmission of the string can be corrupted.  
-********************************************************************/
-void ConsolePutROMString(ROM char* str)
-{
-    BYTE c;
-
-    while( c = *str++ )
-        ConsolePut(c);
-}
-
-/*********************************************************************
-* Function:         void ConsolePut(BYTE c)
-*
-* PreCondition:     none
-*
-* Input:		    c - character to be printed
-*
-* Output:		    none
-*
-* Side Effects:	    c is printed to the console
-*
-* Overview:		    This function will print the inputed character
-*
-* Note:			    Do not power down the microcontroller until 
-*                   the transmission is complete or the last 
-*                   transmission of the string can be corrupted.  
-********************************************************************/
-void ConsolePut(BYTE c)
-{
-    while( !ConsoleIsPutReady() );
-    #if defined(EIGHT_BIT_WIRELESS_BOARD)
-        TXREG2 = c;
-    #else
-        TXREG = c;
-    #endif
-}
-
-
-/*********************************************************************
-* Function:         BYTE ConsoleGet(void)
-*
-* PreCondition:     none
-*
-* Input:		    none
-*
-* Output:		    one byte received by UART
-*
-* Side Effects:	    none
-*
-* Overview:		    This function will receive one byte from UART
-*
-* Note:			    Do not power down the microcontroller until 
-*                   the transmission is complete or the last 
-*                   transmission of the string can be corrupted.  
-********************************************************************/
-BYTE ConsoleGet(void)
-{
-    #if defined(EIGHT_BIT_WIRELESS_BOARD)
-        // Clear overrun error if it has occured
-        // New bytes cannot be received if the error occurs and isn't cleared
-        if(RCSTA2bits.OERR)
-        {
-            RCSTA2bits.CREN = 0;   // Disable UART receiver
-            RCSTA2bits.CREN = 1;   // Enable UART receiver
-        }
-
-        return RCREG2;
-
-    #else
-        // Clear overrun error if it has occured
-        // New bytes cannot be received if the error occurs and isn't cleared
-        if(RCSTAbits.OERR)
-        {
-            RCSTAbits.CREN = 0;   // Disable UART receiver
-            RCSTAbits.CREN = 1;   // Enable UART receiver
-        }
-
-        return RCREG;
-    #endif
-}
-
-
-/*********************************************************************
-* Function:         void PrintChar(BYTE toPrint)
-*
-* PreCondition:     none
-*
-* Input:		    toPrint - character to be printed
-*
-* Output:		    none
-*
-* Side Effects:	    toPrint is printed to the console
-*
-* Overview:		    This function will print the inputed BYTE to 
-*                   the console in hexidecimal form
-*
-* Note:			    Do not power down the microcontroller until 
-*                   the transmission is complete or the last 
-*                   transmission of the string can be corrupted.  
-********************************************************************/
-void PrintChar(BYTE toPrint)
-{
-    BYTE PRINT_VAR;
-    PRINT_VAR = toPrint;
-    toPrint = (toPrint>>4)&0x0F;
-    ConsolePut(CharacterArray[toPrint]);
-    toPrint = (PRINT_VAR)&0x0F;
-    ConsolePut(CharacterArray[toPrint]);
-    return;
-}
-
-/*********************************************************************
-* Function:         void PrintDec(BYTE toPrint)
-*
-* PreCondition:     none
-*
-* Input:		    toPrint - character to be printed. Range is 0-99
-*
-* Output:		    none
-*
-* Side Effects:	    toPrint is printed to the console in decimal
-*                   
-*
-* Overview:		    This function will print the inputed BYTE to 
-*                   the console in decimal form
-*
-* Note:			    Do not power down the microcontroller until 
-*                   the transmission is complete or the last 
-*                   transmission of the string can be corrupted.  
-********************************************************************/
-void PrintDec(BYTE toPrint)
-{
-    if( toPrint >= 100 )
-        ConsolePut(CharacterArray[toPrint/100]);
-    if( toPrint >= 10 )
-        ConsolePut(CharacterArray[(toPrint%100)/10]);
-    ConsolePut(CharacterArray[toPrint%10]);
-}
 #else
     #error Unknown processor.  See Compiler.h
 #endif

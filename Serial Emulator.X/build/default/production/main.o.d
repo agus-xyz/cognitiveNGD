@@ -12,7 +12,5 @@ main.c  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/./USB/usb_function_cdc.h  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/USB/usb.h  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/HardwareProfile.h  \
- /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/HardwareProfile\ -\ B105CNBOARD\ PIM.h  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/WirelessProtocols/Console.h  \
- /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/SystemProfile.h  \
- /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/ConfigApp.h 
+ /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/SystemProfile.h 

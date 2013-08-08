@@ -51,79 +51,87 @@
 #ifndef HARDWARE_PROFILE_H
 #define HARDWARE_PROFILE_H
 
-//#define DEMO_BOARD USER_DEFINED_BOARD
-//#define B105CNBOARD
+    /*******************************************************************/
+    /******** USB stack hardware selection options *********************/
+    /*******************************************************************/
+    //This section is the set of definitions required by the MCHPFSUSB
+    //  framework.  These definitions tell the firmware what mode it is
+    //  running in, and where it can find the results to some information
+    //  that the stack needs.
+    //These definitions are required by every application developed with
+    //  this revision of the MCHPFSUSB framework.  Please review each
+    //  option carefully and determine which options are desired/required
+    //  for your application.
 
-#if !defined(DEMO_BOARD)
-    #if defined(__C32__)
-        #if defined(__32MX675F256L__)
-            #include "HardwareProfile - B105CNBOARD PIM.h"
-        #endif
-    #endif
-#endif
+    //#define USE_SELF_POWER_SENSE_IO
+//    #define tris_self_power     TRISAbits.TRISA2    // Input //Porque en nuestro
+// ni siquiera existe.
+    #define self_power          1
 
-#if !defined(DEMO_BOARD)
-    #if defined(__C32__)
-        #if defined(__32MX460F512L__)
-            #if defined(PIC32MX460F512L_PIM)
-                #include "HardwareProfile - PIC32MX460F512L PIM.h"
-            #elif defined(PIC32_USB_STARTER_KIT)
-                #include "HardwareProfile - PIC32 USB Starter Kit.h"
-            #endif
-        #elif defined(__32MX795F512L__)
-            #if defined(PIC32MX795F512L_PIM)
-                #include "HardwareProfile - PIC32MX795F512L PIM.h"
-            #elif defined(PIC32_USB_STARTER_KIT)
-                //PIC32 USB Starter Kit II
-                #include "HardwareProfile - PIC32 USB Starter Kit.h"
-            #endif
-        #endif
+    //#define USE_USB_BUS_SENSE_IO
+//    #define tris_usb_bus_sense  TRISBbits.TRISB5    // Input //XXX-Willy. Porque
+// lo utilizamos para otra cosa.
+    #define USB_BUS_SENSE       1
+
+    /*******************************************************************/
+    /*******************************************************************/
+    /*******************************************************************/
+    /******** Application specific definitions *************************/
+    /*******************************************************************/
+    /*******************************************************************/
+    /*******************************************************************/
+
+    /** Board definition ***********************************************/
+    //These defintions will tell the main() function which board is
+    //  currently selected.  This will allow the application to add
+    //  the correct configuration bits as wells use the correct
+    //  initialization functions for the board.  These defitions are only
+    //  required in the stack provided demos.  They are not required in
+    //  final application design.
+    #define DEMO_BOARD PIC32MX795F512H_PIM //XXX-Willy.
+    #define B105CNBOARD //XXX-Willy.
+
+    //#define RUN_AT_48MHZ
+    //#define RUN_AT_24MHZ
+    //#define RUN_AT_60MHZ //XXX-Willy.
+    #define RUN_AT_80MHZ //XXX-Willy.
+
+    // Various clock values
+    #if defined(RUN_AT_48MHZ)
+        #define GetSystemClock()            48000000UL
+        #define GetPeripheralClock()        48000000UL
+        #define GetInstructionClock()       (GetSystemClock() / 2) ???
+    #elif defined(RUN_AT_24MHZ)
+        #define GetSystemClock()            24000000UL
+        #define GetPeripheralClock()        24000000UL
+        #define GetInstructionClock()       (GetSystemClock() / 2) ???
+    #elif defined(RUN_AT_60MHZ)
+        #define GetSystemClock()            60000000UL
+        #define GetPeripheralClock()        60000000UL  // Will be divided down
+        #define GetInstructionClock()       (GetSystemClock() / 2) ???
+    #elif defined(RUN_AT_80MHZ) //XXX-Willy.
+        #define GetSystemClock()            80000000UL
+        #define CLOCK_FREQ   80000000UL
+//        #define GetPeripheralClock()        80000000UL  // Will be divided down
+        #define GetInstructionClock()       (GetSystemClock() / 2) ???
+    #else
+        #error Choose a speed
     #endif
 
-    #if defined(__C30__)
-        #if defined(__PIC24FJ256GB110__)
-            #include "HardwareProfile - PIC24FJ256GB110 PIM.h"
-        #elif defined(__PIC24FJ256GB210__)
-            #include "HardwareProfile - PIC24FJ256GB210 PIM.h"
-        #elif defined(__PIC24FJ256GB106__)
-            #include "HardwareProfile - PIC24F Starter Kit.h"
-        #elif defined(__PIC24FJ64GB004__)
-            #include "HardwareProfile - PIC24FJ64GB004 PIM.h"
-        #elif defined(__PIC24FJ256DA210__)
-            #include "HardwareProfile - PIC24FJ256DA210 Development Board.h"
-        #elif defined(__dsPIC33EP512MU810__)
-            #if defined(DSPIC33EP512MU810_PIM)
-                #include "HardwareProfile - dsPIC33EP512MU810 PIM.h"
-            #endif
-            #if defined(DSPIC33E_USB_STARTER_KIT)
-                #include "HardwareProfile - dsPIC33E USB Starter Kit.h"
-            #endif
-        #elif defined(__PIC24EP512GU810__)
-            #if defined(PIC24EP512GU810_PIM)
-                #include "HardwareProfile - PIC24EP512GU810 PIM.h"
-            #endif
-        #endif
-    #endif
 
-    #if defined(__18CXX)
-        #if defined(__18F4550)
-            #include "HardwareProfile - PICDEM FSUSB.h"
-        #elif defined(__18F87J50)
-            #include "HardwareProfile - PIC18F87J50 PIM.h"
-        #elif defined(__18F14K50) 
-            #include "HardwareProfile - Low Pin Count USB Development Kit.h"
-        #elif defined(__18F13K50) 
-            #include "HardwareProfile - Low Pin Count USB Development Kit.h"
-        #elif defined(__18F46J50)
-            #include "HardwareProfile - PIC18F46J50 PIM.h"
-        #elif defined(__18F47J53)
-            #include "HardwareProfile - PIC18F47J53 PIM.h"
-        #endif
-    #endif
-#endif
+    /** UART ***********************************************************/
+    #define BAUDRATE2       19200UL
+    #define BRG_DIV2        4
+    #define BRGH2           1
+
+    /** I/O pin definitions ********************************************/
+    #define INPUT_PIN 1
+    #define OUTPUT_PIN 0
+
 
 #if !defined(DEMO_BOARD)
     #error "Demo board not defined.  Either define DEMO_BOARD for a custom board or select the correct processor for the demo board."
 #endif
+
 
 #endif  //HARDWARE_PROFILE_H

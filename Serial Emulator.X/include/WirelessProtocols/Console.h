@@ -68,8 +68,7 @@
 #define BAUD_RATE 19200
 
 /************************ FUNCTION PROTOTYPES **********************/
-#if defined(__dsPIC30F__) || defined(__dsPIC33F__) || defined(__PIC24F__) || defined(__PIC24FK__) || defined(__PIC24H__) || defined(__PIC32MX__)
-    #if defined(ENABLE_CONSOLE)
+#if defined(__PIC32MX__)
         void ConsoleInit(void);
         #define ConsoleIsPutReady()     (U4STAbits.TRMT)
         void ConsolePut(BYTE c);
@@ -81,64 +80,13 @@
         //BYTE ConsoleGetString(char *buffer, BYTE bufferLen);
         void PrintChar(BYTE);
         void PrintDec(BYTE);
-    #else
-        #define ConsoleInit()
-        #define ConsoleIsPutReady() 1
-        #define ConsolePut(c)
-        #define ConsolePutString(s)
-        #define ConsolePutROMString(str)
-
-        #define ConsoleIsGetReady() 1
-        #define ConsoleGet()        'a'
-        #define ConsoleGetString(buffer, bufferLen) 0
-        #define PrintChar(a)
-        #define PrintDec(a)
-    #endif
-#elif defined(__18CXX)
-
-    #if defined(ENABLE_CONSOLE)   // Useful for disabling the console (saving power)
-        void ConsoleInit(void);
-        #if defined(EIGHT_BIT_WIRELESS_BOARD)
-            #define ConsoleIsPutReady()     (TXSTA2bits.TRMT)
-        #else
-            #define ConsoleIsPutReady()     (TXSTAbits.TRMT)
-        #endif
-        void ConsolePut(BYTE c);
-        void ConsolePutString(BYTE *s);
-        void ConsolePutROMString(ROM char* str);
-    
-        #if defined(EIGHT_BIT_WIRELESS_BOARD)
-            #define ConsoleIsGetReady()     (PIR3bits.RC2IF)
-        #else
-            #define ConsoleIsGetReady()     (PIR1bits.RCIF)
-        #endif
-        BYTE ConsoleGet(void);
-        BYTE ConsoleGetString(char *buffer, BYTE bufferLen);
-        void PrintChar(BYTE);
-        void PrintDec(BYTE);
-    #else
-        #define ConsoleInit()
-        #define ConsoleIsPutReady() 1
-        #define ConsolePut(c)
-        #define ConsolePutString(s)
-        #define ConsolePutROMString(str)
-    
-        #define ConsoleIsGetReady() 1
-        #define ConsoleGet()        'a'
-        #define ConsoleGetString(buffer, bufferLen) 0
-        #define PrintChar(a)
-        #define PrintDec(a)
-    #endif
 #else
-#error Unknown processor.  See Compiler.h
+    #error Unknown processor.  See Compiler.h
 #endif
 
 #if defined(B105CNBOARD) && defined(USB_DEBUG)
     #define Printf(x) B105_USB_Printf(x)
 #else
     #define Printf(x) ConsolePutROMString((ROM char*)x)
-//#define printf(x) ConsolePutROMString((ROM char*)x)
 #endif
 #endif
-
-

@@ -84,93 +84,93 @@ ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/main.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
+	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
 	
 ${OBJECTDIR}/usb_descriptors.o: usb_descriptors.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/usb_descriptors.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/usb_descriptors.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/usb_descriptors.o.d" -o ${OBJECTDIR}/usb_descriptors.o usb_descriptors.c   
+	@${FIXDEPS} "${OBJECTDIR}/usb_descriptors.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/usb_descriptors.o.d" -o ${OBJECTDIR}/usb_descriptors.o usb_descriptors.c   
 	
 ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o: ../libs/Microchip/USB/CDC\ Device\ Driver/usb_function_cdc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1104080584 
 	@${RM} ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" -o ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o "../libs/Microchip/USB/CDC Device Driver/usb_function_cdc.c"   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" -o ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o "../libs/Microchip/USB/CDC Device Driver/usb_function_cdc.c"   
 	
 ${OBJECTDIR}/_ext/967747917/usb_device.o: ../libs/Microchip/USB/usb_device.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/967747917 
 	@${RM} ${OBJECTDIR}/_ext/967747917/usb_device.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/967747917/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/967747917/usb_device.o.d" -o ${OBJECTDIR}/_ext/967747917/usb_device.o ../libs/Microchip/USB/usb_device.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/967747917/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/967747917/usb_device.o.d" -o ${OBJECTDIR}/_ext/967747917/usb_device.o ../libs/Microchip/USB/usb_device.c   
 	
 ${OBJECTDIR}/_ext/67102156/SymbolTime.o: ../libs/Microchip/WirelessProtocols/SymbolTime.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/SymbolTime.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" -o ${OBJECTDIR}/_ext/67102156/SymbolTime.o ../libs/Microchip/WirelessProtocols/SymbolTime.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" -o ${OBJECTDIR}/_ext/67102156/SymbolTime.o ../libs/Microchip/WirelessProtocols/SymbolTime.c   
 	
 ${OBJECTDIR}/_ext/67102156/NVM.o: ../libs/Microchip/WirelessProtocols/NVM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/NVM.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/NVM.o.d" -o ${OBJECTDIR}/_ext/67102156/NVM.o ../libs/Microchip/WirelessProtocols/NVM.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/NVM.o.d" -o ${OBJECTDIR}/_ext/67102156/NVM.o ../libs/Microchip/WirelessProtocols/NVM.c   
 	
 ${OBJECTDIR}/_ext/67102156/EEPROM.o: ../libs/Microchip/WirelessProtocols/EEPROM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/EEPROM.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" -o ${OBJECTDIR}/_ext/67102156/EEPROM.o ../libs/Microchip/WirelessProtocols/EEPROM.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" -o ${OBJECTDIR}/_ext/67102156/EEPROM.o ../libs/Microchip/WirelessProtocols/EEPROM.c   
 	
 ${OBJECTDIR}/_ext/67102156/LCDBlocking.o: ../libs/Microchip/WirelessProtocols/LCDBlocking.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" -o ${OBJECTDIR}/_ext/67102156/LCDBlocking.o ../libs/Microchip/WirelessProtocols/LCDBlocking.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" -o ${OBJECTDIR}/_ext/67102156/LCDBlocking.o ../libs/Microchip/WirelessProtocols/LCDBlocking.c   
 	
 ${OBJECTDIR}/Console.o: Console.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/Console.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/Console.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/Console.o.d" -o ${OBJECTDIR}/Console.o Console.c   
+	@${FIXDEPS} "${OBJECTDIR}/Console.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/Console.o.d" -o ${OBJECTDIR}/Console.o Console.c   
 	
 else
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/main.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
+	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
 	
 ${OBJECTDIR}/usb_descriptors.o: usb_descriptors.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/usb_descriptors.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/usb_descriptors.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/usb_descriptors.o.d" -o ${OBJECTDIR}/usb_descriptors.o usb_descriptors.c   
+	@${FIXDEPS} "${OBJECTDIR}/usb_descriptors.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/usb_descriptors.o.d" -o ${OBJECTDIR}/usb_descriptors.o usb_descriptors.c   
 	
 ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o: ../libs/Microchip/USB/CDC\ Device\ Driver/usb_function_cdc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1104080584 
 	@${RM} ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" -o ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o "../libs/Microchip/USB/CDC Device Driver/usb_function_cdc.c"   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o.d" -o ${OBJECTDIR}/_ext/1104080584/usb_function_cdc.o "../libs/Microchip/USB/CDC Device Driver/usb_function_cdc.c"   
 	
 ${OBJECTDIR}/_ext/967747917/usb_device.o: ../libs/Microchip/USB/usb_device.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/967747917 
 	@${RM} ${OBJECTDIR}/_ext/967747917/usb_device.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/967747917/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/967747917/usb_device.o.d" -o ${OBJECTDIR}/_ext/967747917/usb_device.o ../libs/Microchip/USB/usb_device.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/967747917/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/967747917/usb_device.o.d" -o ${OBJECTDIR}/_ext/967747917/usb_device.o ../libs/Microchip/USB/usb_device.c   
 	
 ${OBJECTDIR}/_ext/67102156/SymbolTime.o: ../libs/Microchip/WirelessProtocols/SymbolTime.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/SymbolTime.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" -o ${OBJECTDIR}/_ext/67102156/SymbolTime.o ../libs/Microchip/WirelessProtocols/SymbolTime.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/SymbolTime.o.d" -o ${OBJECTDIR}/_ext/67102156/SymbolTime.o ../libs/Microchip/WirelessProtocols/SymbolTime.c   
 	
 ${OBJECTDIR}/_ext/67102156/NVM.o: ../libs/Microchip/WirelessProtocols/NVM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/NVM.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/NVM.o.d" -o ${OBJECTDIR}/_ext/67102156/NVM.o ../libs/Microchip/WirelessProtocols/NVM.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/NVM.o.d" -o ${OBJECTDIR}/_ext/67102156/NVM.o ../libs/Microchip/WirelessProtocols/NVM.c   
 	
 ${OBJECTDIR}/_ext/67102156/EEPROM.o: ../libs/Microchip/WirelessProtocols/EEPROM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/EEPROM.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" -o ${OBJECTDIR}/_ext/67102156/EEPROM.o ../libs/Microchip/WirelessProtocols/EEPROM.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/EEPROM.o.d" -o ${OBJECTDIR}/_ext/67102156/EEPROM.o ../libs/Microchip/WirelessProtocols/EEPROM.c   
 	
 ${OBJECTDIR}/_ext/67102156/LCDBlocking.o: ../libs/Microchip/WirelessProtocols/LCDBlocking.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/67102156 
 	@${RM} ${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" -o ${OBJECTDIR}/_ext/67102156/LCDBlocking.o ../libs/Microchip/WirelessProtocols/LCDBlocking.c   
+	@${FIXDEPS} "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/_ext/67102156/LCDBlocking.o.d" -o ${OBJECTDIR}/_ext/67102156/LCDBlocking.o ../libs/Microchip/WirelessProtocols/LCDBlocking.c   
 	
 ${OBJECTDIR}/Console.o: Console.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/Console.o.d 
-	@${FIXDEPS} "${OBJECTDIR}/Console.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -I"/home/agus/pfc/code/cognitiveNGD/libs/GuilJa Libs/Include" -MMD -MF "${OBJECTDIR}/Console.o.d" -o ${OBJECTDIR}/Console.o Console.c   
+	@${FIXDEPS} "${OBJECTDIR}/Console.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include" -MMD -MF "${OBJECTDIR}/Console.o.d" -o ${OBJECTDIR}/Console.o Console.c   
 	
 endif
 

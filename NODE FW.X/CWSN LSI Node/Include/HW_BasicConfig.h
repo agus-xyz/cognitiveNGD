@@ -30,23 +30,27 @@
 
 //*********** INTERFACE N1 *****************************************************
 #define MRF49XA_1
-//#define MRF49XA_1_IN_434
-#define MRF49XA_1_IN_868 //para prueba
+#define MRF49XA_1_IN_434
+//#define MRF49XA_1_IN_868 //para prototipo fallido
 
-#define MRF49XA_1_IN_SPI1
-#define MRF49XA_1_USES_INT1
+//#define MRF49XA_1_IN_SPI1
+//#define MRF49XA_1_USES_INT1
+#define MRF49XA_1_IN_SPI3 //prototipo fallido
+#define MRF49XA_1_USES_INT3 //prototipo fallido
 
-//#define MIWI_0434_RI
-#define MIWI_0868_RI //para prueba
+#define MIWI_0434_RI
+//#define MIWI_0868_RI //para prototipo fallido
 
 //*********** INTERFACE N2 *****************************************************
-/*#define MRF49XA_2
-#define MRF49XA_2_IN_868
+//#define MRF49XA_2
+//#define MRF49XA_2_IN_868
+//#define MRF49XA_2_IN_434 //para prototipo fallido
 
-#define MRF49XA_2_IN_SPI3
-#define MRF49XA_2_USES_INT3
+//#define MRF49XA_2_IN_SPI3
+//#define MRF49XA_2_USES_INT3
 
-#define MIWI_0868_RI*/
+//#define MIWI_0868_RI
+//#define MIWI_0434_RI //para prototipo fallido
 //*********** INTERFACE N3 *****************************************************
 /*#define MRF24J40
 

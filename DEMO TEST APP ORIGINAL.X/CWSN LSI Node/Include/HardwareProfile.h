@@ -42,8 +42,8 @@
 /* RADIO INTERFACES - See individual stacks' config files *********************/
 ////////////////////////////////////////////////////////////////////////////////
 
-//#define MIWI_0434_RI     //Comment if it is not available in the target board.
-#define MIWI_0868_RI     //Comment if it is not available in the target board.
+#define MIWI_0434_RI     //Comment if it is not available in the target board.
+//#define MIWI_0868_RI     //Comment if it is not available in the target board.
 //#define MIWI_2400_RI     //Comment if it is not available in the target board.
 //#define WIFI_2400_RI     //Comment if it is not available in the target board.
 
@@ -51,6 +51,7 @@
     #define MRF24WB0M       //TEMPORALMENTE AQUI...
 #endif
 
+#define MRF49XA_1_IN_434
 ////////////////////////////////////////////////////////////////////////////////
 /* TRANSCEIVERS Board configuration *******************************************/
 ////////////////////////////////////////////////////////////////////////////////
@@ -873,7 +874,8 @@
     #endif
 
     //Pins selection ---------------------------------------------------------//
-    #define MRF49XA_2_PHY_CS            LATEbits.LATE5
+               //SLOT 2
+  #define MRF49XA_2_PHY_CS            LATEbits.LATE5
     #define MRF49XA_2_PHY_CS_TRIS       TRISEbits.TRISE5
     #define MRF49XA_2_PHY_RESETn        LATEbits.LATE7
     #define MRF49XA_2_PHY_RESETn_TRIS   TRISEbits.TRISE7
@@ -881,6 +883,17 @@
     #define MRF49XA_2_nFSEL_TRIS        TRISBbits.TRISB1
     #define MRF49XA_2_FINT              PORTEbits.RE9
     #define MRF49XA_2_FINT_TRIS         TRISEbits.TRISE9
+
+    // SLOT 1
+        /*#define MRF49XA_2_PHY_CS            LATEbits.LATE1
+        #define MRF49XA_2_PHY_CS_TRIS       TRISEbits.TRISE1
+        #define MRF49XA_2_PHY_RESETn        LATEbits.LATE4
+        #define MRF49XA_2_PHY_RESETn_TRIS   TRISEbits.TRISE4
+        #define MRF49XA_2_nFSEL             LATEbits.LATE3
+        #define MRF49XA_2_nFSEL_TRIS        TRISEbits.TRISE3
+        #define MRF49XA_2_FINT              PORTBbits.RB2
+        #define MRF49XA_2_FINT_TRIS         TRISBbits.TRISB2 */
+
 
     #if defined MRF49XA_2_USES_INT0
         #define MRF49XA_2_INT_PIN   EXTINT_INT0

@@ -1414,7 +1414,7 @@ TX_END_HERE:
                     else if(AssessmentMode == CHANNEL_ASSESSMENT_ENERGY_DETECT){
                         count += MRF49XA_Status->bits.RSSI_ATS;
                     }
-                    MRF49XA_1_PHY_CS = 1;
+                    MRF49XA_1_PHY_CS = 1; ////// AGUS CAMBIADO - BUG
                     for(k = 0; k < 0x1F; k++) {}
                 }
 
@@ -1921,8 +1921,8 @@ IGNORE_HERE:
                     MRF49XA_2_IF = 0;
                     MRF49XA_RegisterSet(PMCREG, 2);  // turn off the transmitter and receiver
                     MRF49XA_RegisterSet(FIFORSTREG, 2);          // reset FIFO
-                    MRF49XA_RegisterSet(MRF49XA_1_GENCREG, 2);   // disable FIFO, TX_latch
-                    MRF49XA_RegisterSet((MRF49XA_1_GENCREG | 0x0040), 2);  // enable FIFO
+                    MRF49XA_RegisterSet(MRF49XA_2_GENCREG, 2);   // disable FIFO, TX_latch // AGUS CAMBIADO
+                    MRF49XA_RegisterSet((MRF49XA_2_GENCREG | 0x0040), 2);  // enable FIFO  // AGUS CAMBIADO
                     MRF49XA_RegisterSet((PMCREG | 0x0080), 2);     // turn on receiver
                     MRF49XA_RegisterSet((FIFORSTREG | 0x0002), 2); // FIFO synchron latch re-enabled
                     goto RETURN_HERE;

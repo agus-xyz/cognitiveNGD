@@ -836,8 +836,8 @@ static void Transceivers_Tasks(BYTE transceiver){
                         AckAddr = & Ack0434Addr;
                         CapacityInfo = & MIWI0434CapacityInfo;
                         #ifdef NWK_ROLE_COORDINATOR
-                            RoutingTable = & Routing0434Table;
-                            RouterFailures = & Router0434Failures;
+                            RoutingTable = & Routing0434Table[0]; //AGUS CAMBIADO
+                            RouterFailures = & Router0434Failures[0]; //AGUS CAMBIADO
                             knownCoordinators = & known0434Coordinators;
                         #endif
                     #elif defined MRF49XA_2_IN_868

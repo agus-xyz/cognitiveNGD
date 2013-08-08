@@ -105,6 +105,7 @@
         #if defined MRF49XA_1
             //#define MRF49XA_2   //Then, if needed, define this one too.
         #endif
+         
 
         /**********************************************************************/
         // Definition of MRF89XA enables the application to use Microchip

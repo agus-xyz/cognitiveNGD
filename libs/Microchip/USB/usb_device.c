@@ -566,11 +566,7 @@ void USBDeviceInit(void)
 //DOM-IGNORE-END
 
 #if defined(USB_INTERRUPT) 
-  #if defined(__18CXX)
-    void USBDeviceTasks(void)
-  #elif defined(__C30__)
-    void __attribute__((interrupt,auto_psv)) _USB1Interrupt()
-  #elif defined(__PIC32MX__)
+  #if defined(__PIC32MX__)
     void __attribute__((interrupt(),vector(45))) _USB1Interrupt( void ) 
   #endif
 #else
@@ -2877,5 +2873,5 @@ void USBDeviceAttach(void)
         }
     }
 }
-#endif  //#if defined(USB_INTERRUPT)
+#endif 
 /** EOF USBDevice.c *****************************************************/
