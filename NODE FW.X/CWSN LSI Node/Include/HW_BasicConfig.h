@@ -25,7 +25,8 @@
 
 //*********** CONSOLE INTERFACE *****************************************************
 #if defined ENABLE_CONSOLE
-#define DEBUG_UART3
+//#define DEBUG_UART3
+    #define DEBUG_USB
 #endif
 
 //*********** INTERFACE N1 *****************************************************

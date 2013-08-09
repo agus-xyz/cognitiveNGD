@@ -423,6 +423,10 @@ void BoardInit(void){
 }
 
 #if defined ENABLE_CONSOLE
+#if defined DEBUG_USB
+
+
+#else
 void WriteStringPC(const char *string){
     while (*string != '\0'){    // If next char is not the end of the string.
         while(TxNotRdyUART());  // Wait for Debug UART Tx buffer to accept more data.
@@ -431,4 +435,5 @@ void WriteStringPC(const char *string){
         while(BusyUART());      // Wait for the transmission to finish.
     }
 }
+#endif
 #endif

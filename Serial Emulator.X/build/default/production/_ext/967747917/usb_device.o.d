@@ -10,4 +10,5 @@ build/default/production/_ext/967747917/usb_device.o:  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/USB/usb_hal.h  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/USB/usb_hal_pic32.h  \
  /home/agus/pfc/code/cognitiveNGD/Serial\ Emulator.X/include/HardwareProfile.h  \
- ../libs/Microchip/USB/../USB/usb_device_local.h 
+ ../libs/Microchip/USB/../USB/usb_device_local.h  \
+ /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_config.h 

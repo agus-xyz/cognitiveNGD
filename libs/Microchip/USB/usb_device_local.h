@@ -83,7 +83,7 @@
          Fixed BD() and EP() macro computation error, when running in
          USB_PING_PONG__EP0_OUT_ONLY mode.
 ********************************************************************/
-#include "usb_config.h"
+#include "USB/usb_config.h"
 
 /* Short Packet States - Used by Control Transfer Read  - CTRL_TRF_TX */
 #define SHORT_PKT_NOT_USED  0

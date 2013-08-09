@@ -29,6 +29,8 @@
           <itemPath>CWSN LSI Node/Include/Transceivers/crc.h</itemPath>
         </logicalFolder>
         <logicalFolder name="USB" displayName="USB" projectFiles="true">
+          <itemPath>CWSN LSI Node/Include/USB/usb_config.h</itemPath>
+          <itemPath>CWSN LSI Node/Include/USB/usb_console.h</itemPath>
         </logicalFolder>
         <logicalFolder name="WirelessProtocols"
                        displayName="WirelessProtocols"
@@ -80,6 +82,10 @@
         <itemPath>CWSN LSI Node/Transceivers/security.c</itemPath>
       </logicalFolder>
       <logicalFolder name="USB" displayName="USB" projectFiles="true">
+        <itemPath>CWSN LSI Node/USB/usb_descriptors.c</itemPath>
+        <itemPath>../libs/Microchip/USB/usb_device.c</itemPath>
+        <itemPath>../libs/Microchip/USB/CDC Device Driver/usb_function_cdc.c</itemPath>
+        <itemPath>CWSN LSI Node/USB/usb_callback_functions.c</itemPath>
       </logicalFolder>
       <logicalFolder name="WirelessProtocols"
                      displayName="WirelessProtocols"

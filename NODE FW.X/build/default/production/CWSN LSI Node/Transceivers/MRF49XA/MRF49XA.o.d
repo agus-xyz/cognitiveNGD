@@ -20,5 +20,6 @@ build/default/production/CWSN\ LSI\ Node/Transceivers/MRF49XA/MRF49XA.o:  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/HW_BasicConfig.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/ConfigApp.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Transceivers/ConfigTransceivers.h  \
+ /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/USB/usb_console.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/NVM.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Transceivers/crc.h 

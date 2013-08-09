@@ -57,10 +57,10 @@
     #pragma config FPLLIDIV = DIV_2  //PLL Input Divider: /2 Divider
     #pragma config FPLLODIV = DIV_1  //SYSCLK PLL Output Divider: /1 Divider
     #pragma config FPLLMUL = MUL_20  //PLL Multiplier: x20 Multiplier
-    #pragma config UPLLIDIV = DIV_12 //USB PLL Input Divider: /12 Divider
-    #pragma config UPLLEN = OFF      //USB PLL Enable: Disabled and Bypassed
+    #pragma config UPLLIDIV = DIV_2 //USB PLL Input Divider: /12 Divider
+    #pragma config UPLLEN = ON     //USB PLL Enable: Disabled and Bypassed  //AGUS - ON
     // DEVCFG1 ---------------------------------------------------------------//
-    #pragma config FNOSC = PRIPLL    //Oscillator Selection: Primary + PLL
+    #pragma config FNOSC = PRIPLL    //Oscillator Selection: Primary + PLL *
   #if defined WAKE_FROM_SLEEP_SOSC_T1
       #pragma config FSOSCEN  = ON   //Secondary Oscillator Enable: Enabled
   #else
@@ -234,11 +234,15 @@ BYTE InitNode(){
         ConsoleInit();          //PIC ---(UART - RS232)---> PC (debugging).
     //#endif
 
+
     INTEnableSystemMultiVectoredInt();
+
+
+    
 
     //Radio Interfaces Protocols Initialization
     #if defined MIWI_0434_RI || defined MIWI_0868_RI || defined MIWI_2400_RI
-        InitMIWI();
+        //InitMIWI();
     #endif
     #if defined (WIFI_2400_RI)
 	InitWIFI();

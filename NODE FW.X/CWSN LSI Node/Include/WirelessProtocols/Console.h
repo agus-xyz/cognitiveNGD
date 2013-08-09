@@ -51,9 +51,11 @@
 #include "ConfigApp.h"
 #include "HardwareProfile.h"
 
+#include "USB/usb_console.h"
+
 /******************************* DEFINITIONS **********************************/
 #define BAUD_RATE 115200    //Typ. 9600, 19200, 38400, 57600, 115200, 230400...
-
+#define USB_BAUD_RATE 19200 //Fix
 /* LSI-CWSN Node: UART MODE configuration depending on UART BAUD RATE **********
  * Default Node Configuration: SYSCLK = 80 MHz, PBCLK = 20 MHz (SYSCLK / PBDIV).
  * Default UART Configuration: UART enabled, 8 bits data, no parity, 1 stop bit.
@@ -79,16 +81,24 @@
     defined(__PIC24FK__)  || defined(__PIC24H__)   || defined(__PIC32MX__)
     #if defined(ENABLE_CONSOLE)
         void ConsoleInit(void);
-        #define ConsoleIsPutReady()     (U2STAbits.TRMT)
-        void ConsolePut(BYTE c);
-        //void ConsolePutString(BYTE *s);
-        void ConsolePutROMString(ROM char* str);
-    
-        #define ConsoleIsGetReady()     (IFS1bits.U2RXIF)
         BYTE ConsoleGet(void);
-        //BYTE ConsoleGetString(char *buffer, BYTE bufferLen);
+        void ConsolePut(BYTE c);
         void PrintChar(BYTE);
         void PrintDec(BYTE);
+
+        void ConsolePutROMString(ROM char* str);
+
+        #if defined DEBUG_USB
+
+            #define ConsoleIsGetReady()   (IFS1bits.U3RXIF)//XXX-Willy.
+            #define ConsoleIsPutReady()   (U3STAbits.TRMT)//XXX-Willy.
+
+        #else
+        
+            #define ConsoleIsPutReady()     (U2STAbits.TRMT)
+            #define ConsoleIsGetReady()     (IFS1bits.U2RXIF)
+
+        #endif
     #else
         #define ConsoleInit()
         #define ConsoleIsPutReady() 1
@@ -107,7 +117,7 @@
 #endif
 
 #define Printf(x) ConsolePutROMString((ROM char*)x)
-//#define printf(x) ConsolePutROMString((ROM char*)x)
-#endif
 
+
+#endif
 

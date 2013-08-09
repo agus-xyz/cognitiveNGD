@@ -24,5 +24,6 @@ build/default/production/CWSN\ LSI\ Node/WirelessProtocols/MiWi/MiWi.o:  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/MSPI.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/Console.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/HardwareProfile.h  \
+ /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/USB/usb_console.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/NVM.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/EEPROM.h 

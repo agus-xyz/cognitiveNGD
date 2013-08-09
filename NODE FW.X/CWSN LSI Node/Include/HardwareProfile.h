@@ -940,4 +940,49 @@
     #define putsUART(a)  WriteStringPC(a)
     void WriteStringPC(const char *string);
 #endif
+//**********************************  USB *****************************//
+     /*******************************************************************/
+    /******** USB stack hardware selection options *********************/
+    /*******************************************************************/
+    //This section is the set of definitions required by the MCHPFSUSB
+    //  framework.  These definitions tell the firmware what mode it is
+    //  running in, and where it can find the results to some information
+    //  that the stack needs.
+    //These definitions are required by every application developed with
+    //  this revision of the MCHPFSUSB framework.  Please review each
+    //  option carefully and determine which options are desired/required
+    //  for your application.
+
+    //#define USE_SELF_POWER_SENSE_IO
+//    #define tris_self_power     TRISAbits.TRISA2    // Input //Porque en nuestro
+// ni siquiera existe.
+    #define self_power          1
+
+    //#define USE_USB_BUS_SENSE_IO
+//    #define tris_usb_bus_sense  TRISBbits.TRISB5    // Input //XXX-Willy. Porque
+// lo utilizamos para otra cosa.
+    #define USB_BUS_SENSE       1
+
+    /*******************************************************************/
+    /*******************************************************************/
+    /*******************************************************************/
+    /******** Application specific definitions *************************/
+    /*******************************************************************/
+    /*******************************************************************/
+    /*******************************************************************/
+
+    /** Board definition ***********************************************/
+    //These defintions will tell the main() function which board is
+    //  currently selected.  This will allow the application to add
+    //  the correct configuration bits as wells use the correct
+    //  initialization functions for the board.  These defitions are only
+    //  required in the stack provided demos.  They are not required in
+    //  final application design.
+    //#define DEMO_BOARD PIC32MX795F512H_PIM //XXX-Willy.
+    //#define B105CNBOARD //XXX-Willy.
+
+    /** UART ***********************************************************/
+    #define BRG_DIV2        4
+    #define BRGH2           1
+
 /******************************************************************************/

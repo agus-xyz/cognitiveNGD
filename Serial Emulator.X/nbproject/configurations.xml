@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="62">
   <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="CDC Device Driver"
+                   displayName="CDC Device Driver"
+                   projectFiles="true">
+      <itemPath>../libs/Microchip/USB/CDC Device Driver/usb_function_cdc.c</itemPath>
+    </logicalFolder>
     <logicalFolder name="Common" displayName="Common" projectFiles="true">
     </logicalFolder>
     <logicalFolder name="HeaderFiles"
@@ -17,14 +22,6 @@
       <itemPath>main.c</itemPath>
       <itemPath>usb_descriptors.c</itemPath>
     </logicalFolder>
-    <logicalFolder name="USB" displayName="USB" projectFiles="true">
-      <logicalFolder name="CDC Device Driver"
-                     displayName="CDC Device Driver"
-                     projectFiles="true">
-        <itemPath>../libs/Microchip/USB/CDC Device Driver/usb_function_cdc.c</itemPath>
-      </logicalFolder>
-      <itemPath>../libs/Microchip/USB/usb_device.c</itemPath>
-    </logicalFolder>
     <logicalFolder name="WirelessProtocols"
                    displayName="WirelessProtocols"
                    projectFiles="true">
@@ -39,6 +36,7 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>../libs/Microchip/USB/usb_device.c</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
@@ -91,7 +89,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include"/>
+                  value="/home/agus/pfc/code/cognitiveNGD/Serial Emulator.X/include;/home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>

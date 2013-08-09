@@ -13,6 +13,7 @@
 #include "NodeHAL.h"
 #include "WirelessProtocols/Console.h"    //Pruebas
 
+
 #if defined MIWI_2400_RI
     radioInterface ri = MIWI_2400;
     BYTE NumChannels = MIWI2400NumChannels;
@@ -57,12 +58,27 @@ void PrintTestAddress(BYTE AddrMode, BYTE* Address){
     }
 }
 
-int mainApp(void) {
+int mainApppppp(void) {
 
 INIT_STAGE:
     InitAppVariables();
-    InitNode();
+    //nitNode();
 
+    
+    ConsoleInit();
+
+    Printf("\r\n1 Starting MiWi(TM) LSI-CWSN Stack ...");
+    Printf("\r\n2 Starting MiWi(TM) LSI-CWSN Stack ...");
+    Printf("\r\n3 Starting MiWi(TM) LSI-CWSN Stack ...");
+    Printf("\r\n4 Starting MiWi(TM) LSI-CWSN Stack ...");
+    Printf("\r\n5 Starting MiWi(TM) LSI-CWSN Stack ...");
+    Printf("\r\n6 Starting MiWi(TM) LSI-CWSN Stack ...");
+    Printf("\r\n7 Starting MiWi(TM) LSI-CWSN Stack ...");
+    Printf("\r\n8 Starting MiWi(TM) LSI-CWSN Stack ...");
+
+    USB_Console_Tasks();
+    
+    while(1);
     //SWDelay(20000);
 
 //STAGE_TEMP:

@@ -53,6 +53,11 @@
 #include "GenericTypeDefs.h"
 #include "HardwareProfile.h"
 
+#include "USB/usb_config.h"
+#include "./USB/usb.h"
+#include "./USB/usb_function_cdc.h"
+#include "USB/usb_device.h"
+
 #if defined(ENABLE_CONSOLE)
 #if defined(__dsPIC33F__) || defined(__PIC24F__) || defined(__PIC24FK__) || \
     defined(__PIC24H__) || defined(__PIC32MX__)
@@ -60,6 +65,22 @@
 /******************************* VARIABLES ************************************/
 ROM unsigned char CharacterArray[]={'0','1','2','3','4','5','6','7','8','9','A',
                                     'B','C','D','E','F'};
+#if defined DEBUG_USB
+
+    char USB_Out_Buffer[CDC_DATA_OUT_EP_SIZE];
+    char RS232_Out_Data[CDC_DATA_IN_EP_SIZE];
+    char USB_In_Buffer[CDC_DATA_IN_EP_SIZE];//XXX-Willy.
+    BOOL USB_Console_Initialized = FALSE; //XXX_Willy.
+
+    unsigned char  NextUSBOut;
+    unsigned char    NextUSBOut;
+
+    unsigned char    LastRS232Out;  // Number of characters in the buffer
+    unsigned char    RS232cp;       // current position within the buffer
+    unsigned char RS232_Out_Data_Rdy = 0;
+    USB_HANDLE  lastTransmission;
+
+#endif
 
 /******************************* FUNCTIONS ************************************/
 
@@ -105,27 +126,79 @@ void ConsoleInit(void){
             U6STA = 0;
             U6MODE = UMODE_CONF;
             U6STA = (1 << 12)|UART_TX_ENABLE;   //0x1400    TX/RX EN
+        #elif defined DEBUG_USB
+
+            AD1PCFG = 0xFFFF;
+
+
+        //	The USB specifications require that USB peripheral devices must never source
+        //	current onto the Vbus pin.  Additionally, USB peripherals should not source
+        //	current on D+ or D- when the host/hub is not actively powering the Vbus line.
+        //	When designing a self powered (as opposed to bus powered) USB peripheral
+        //	device, the firmware should make sure not to turn on the USB module and D+
+        //	or D- pull up resistor unless Vbus is actively powered.  Therefore, the
+        //	firmware needs some means to detect when Vbus is being powered by the host.
+        //	A 5V tolerant I/O pin can be connected to Vbus (through a resistor), and
+        // 	can be used to detect when Vbus is high (host actively powering), or low
+        //	(host is shut down or otherwise not supplying power).  The USB firmware
+        // 	can then periodically poll this I/O pin to know when it is okay to turn on
+        //	the USB module/D+/D- pull up resistor.  When designing a purely bus powered
+        //	peripheral device, it is not possible to source current on D+ or D- when the
+        //	host is not actively providing power on Vbus. Therefore, implementing this
+        //	bus sense feature is optional.  This firmware can be made to use this bus
+        //	sense feature by making sure "USE_USB_BUS_SENSE_IO" has been defined in the
+        //	HardwareProfile.h file.
+            #if defined(USE_USB_BUS_SENSE_IO)
+                 tris_usb_bus_sense = INPUT_PIN; // See HardwareProfile.h
+            #endif
+
+        //	If the host PC sends a GetStatus (device) request, the firmware must respond
+        //	and let the host know if the USB peripheral device is currently bus powered
+        //	or self powered.  See chapter 9 in the official USB specifications for details
+        //	regarding this request.  If the peripheral device is capable of being both
+        //	self and bus powered, it should not return a hard coded value for this request.
+        //	Instead, firmware should check if it is currently self or bus powered, and
+        //	respond accordingly.  If the hardware has been configured like demonstrated
+        //	on the PICDEM FS USB Demo Board, an I/O pin can be polled to determine the
+        //	currently selected power source.  On the PICDEM FS USB Demo Board, "RA2"
+        //	is used for	this purpose.  If using this feature, make sure "USE_SELF_POWER_SENSE_IO"
+        //	has been defined in HardwareProfile.h, and that an appropriate I/O pin has been mapped
+        //	to it in HardwareProfile.h.
+
+            #if defined(USE_SELF_POWER_SENSE_IO)
+                tris_self_power = INPUT_PIN;	// See HardwareProfile.h
+            #endif
+
+
+            // USER INIT
+
+            UARTConfigure(UART3, UART_ENABLE_PINS_TX_RX_ONLY); 
+            UARTSetFifoMode(UART3, UART_INTERRUPT_ON_TX_NOT_FULL | UART_INTERRUPT_ON_RX_NOT_EMPTY);
+            UARTSetLineControl(UART3, UART_DATA_SIZE_8_BITS | UART_PARITY_NONE | UART_STOP_BITS_1);
+            UARTSetDataRate(UART3, GetPeripheralClock(), USB_BAUD_RATE);
+            UARTEnable(UART3, UART_ENABLE_FLAGS(UART_PERIPHERAL | UART_RX | UART_TX));
+
+            unsigned char i;
+            // 	 Initialize the arrays
+            for (i=0; i<sizeof(USB_Out_Buffer); i++)
+                {
+                    USB_Out_Buffer[i] = 0;
+                }
+
+             NextUSBOut = 0;
+             LastRS232Out = 0;
+             lastTransmission = 0;
+
+             USBDeviceInit();
+
+              #if defined(USB_INTERRUPT)
+                USBDeviceAttach();
+              #endif
+
         #endif
     #else    
         #error Microcontroller not supported.
     #endif
-}
-
-/*******************************************************************************
-* Function:         void ConsolePutROMString(ROM char* str)
-* PreCondition:     none
-* Input:	    str - ROM string that needs to be printed
-* Output:           none
-* Side Effects:	    str is printed to the console
-* Overview:         This function will print the inputed ROM string
-* Note:             Do not power down the microcontroller until the transmission
-*                   is complete or the last transmission of the string can be
-*                   corrupted.
-*******************************************************************************/
-void ConsolePutROMString(ROM char* str){
-    BYTE c;
-    while((c = *str++))
-        ConsolePut(c);
 }
 
 /*******************************************************************************
@@ -158,6 +231,8 @@ void ConsolePut(BYTE c){
     #elif defined DEBUG_UART6
         while(U6STAbits.TRMT == 0);
         U6TXREG = c;
+    #elif defined DEBUG_USB
+        ConsolePutROMString(&c);
     #endif
 }
 
@@ -174,6 +249,7 @@ void ConsolePut(BYTE c){
 *******************************************************************************/
 BYTE ConsoleGet(void){
     char Temp;
+    //BYTE numBytes;
 
     #if defined DEBUG_UART1
         while(IFS0bits.U1RXIF == 0);
@@ -199,7 +275,16 @@ BYTE ConsoleGet(void){
         while(IFS2bits.U6RXIF == 0);
         Temp = U6RXREG;
         IFS2bits.U6RXIF = 0;
-    #endif
+    #elif defined DEBUG_USB
+        while(getsUSBUSART(USB_In_Buffer,sizeof(USB_In_Buffer))== 0); // PRUEBA
+      //  if(getsUSBUSART(USB_In_Buffer,sizeof(USB_In_Buffer)) > 0)
+        //{
+            Temp = USB_In_Buffer[0];
+        //we received numBytes bytes of data and they are copied into
+        //  the "buffer" variable.  We can do something with the data
+        //  here.
+        //}else{Temp= 0;}
+     #endif
 
     return Temp;
 }
@@ -220,10 +305,49 @@ void PrintChar(BYTE toPrint){
     BYTE PRINT_VAR;
     PRINT_VAR = toPrint;
     toPrint = (toPrint>>4)&0x0F;
-    ConsolePut(CharacterArray[toPrint]);
+    
+    #if defined DEBUG_USB
+        ConsolePutROMString(&CharacterArray[toPrint]);
+    #else
+        ConsolePut(CharacterArray[toPrint]);
+    #endif
+    
     toPrint = (PRINT_VAR)&0x0F;
-    ConsolePut(CharacterArray[toPrint]);
-    return;
+
+    #if defined DEBUG_USB
+        ConsolePutROMString(&CharacterArray[toPrint]);
+    #else
+        ConsolePut(CharacterArray[toPrint]);
+    #endif
+}
+
+/*******************************************************************************
+* Function:         void ConsolePutROMString(ROM char* str)
+* PreCondition:     none
+* Input:	    str - ROM string that needs to be printed
+* Output:           none
+* Side Effects:	    str is printed to the console
+* Overview:         This function will print the inputed ROM string
+* Note:             Do not power down the microcontroller until the transmission
+*                   is complete or the last transmission of the string can be
+*                   corrupted.
+*******************************************************************************/
+void ConsolePutROMString(ROM char* str){
+
+#if defined DEBUG_USB
+    while (!USB_Console_Tasks());
+        while(!USBUSARTIsTxTrfReady())
+            CDCTxService();
+        putrsUSBUSART(str);
+
+#else
+
+    BYTE c;
+    while((c = *str++))
+        ConsolePut(c);
+
+#endif
+
 }
 
 /*******************************************************************************
@@ -242,6 +366,263 @@ void PrintDec(BYTE toPrint){
     ConsolePut(CharacterArray[toPrint/10]);
     ConsolePut(CharacterArray[toPrint%10]);
 }
+
+/******************************************************************************
+ * Function:        void USB_Console_Init(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        Para inicializar el USB.
+ *
+ * Note:            None
+ *****************************************************************************/
+/*void USB_Console_Init(void)
+{
+    if(!USB_Console_Initialized)
+    {
+        InitializeSystem();
+        #if defined(USB_INTERRUPT)
+            USBDeviceAttach();
+        #endif
+        USB_Console_Initialized=TRUE;
+    }
+}*/
+
+/********************************************************************
+ * Function:        static void InitializeSystem(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        InitializeSystem is a centralize initialization
+ *                  routine. All required USB initialization routines
+ *                  are called from here.
+ *
+ *                  User application initialization routine should
+ *                  also be called from here.
+ *
+ * Note:            None
+ *******************************************************************/
+/*static void InitializeSystem(void)
+{
+        AD1PCFG = 0xFFFF;
+
+
+//	The USB specifications require that USB peripheral devices must never source
+//	current onto the Vbus pin.  Additionally, USB peripherals should not source
+//	current on D+ or D- when the host/hub is not actively powering the Vbus line.
+//	When designing a self powered (as opposed to bus powered) USB peripheral
+//	device, the firmware should make sure not to turn on the USB module and D+
+//	or D- pull up resistor unless Vbus is actively powered.  Therefore, the
+//	firmware needs some means to detect when Vbus is being powered by the host.
+//	A 5V tolerant I/O pin can be connected to Vbus (through a resistor), and
+// 	can be used to detect when Vbus is high (host actively powering), or low
+//	(host is shut down or otherwise not supplying power).  The USB firmware
+// 	can then periodically poll this I/O pin to know when it is okay to turn on
+//	the USB module/D+/D- pull up resistor.  When designing a purely bus powered
+//	peripheral device, it is not possible to source current on D+ or D- when the
+//	host is not actively providing power on Vbus. Therefore, implementing this
+//	bus sense feature is optional.  This firmware can be made to use this bus
+//	sense feature by making sure "USE_USB_BUS_SENSE_IO" has been defined in the
+//	HardwareProfile.h file.
+    #if defined(USE_USB_BUS_SENSE_IO)
+        tris_usb_bus_sense = INPUT_PIN; // See HardwareProfile.h
+    #endif
+
+//	If the host PC sends a GetStatus (device) request, the firmware must respond
+//	and let the host know if the USB peripheral device is currently bus powered
+//	or self powered.  See chapter 9 in the official USB specifications for details
+//	regarding this request.  If the peripheral device is capable of being both
+//	self and bus powered, it should not return a hard coded value for this request.
+//	Instead, firmware should check if it is currently self or bus powered, and
+//	respond accordingly.  If the hardware has been configured like demonstrated
+//	on the PICDEM FS USB Demo Board, an I/O pin can be polled to determine the
+//	currently selected power source.  On the PICDEM FS USB Demo Board, "RA2"
+//	is used for	this purpose.  If using this feature, make sure "USE_SELF_POWER_SENSE_IO"
+//	has been defined in HardwareProfile.h, and that an appropriate I/O pin has been mapped
+//	to it in HardwareProfile.h.
+    #if defined(USE_SELF_POWER_SENSE_IO)
+    tris_self_power = INPUT_PIN;	// See HardwareProfile.h
+    #endif
+
+    UserInit();
+
+    USBDeviceInit();	//usb_device.c.  Initializes USB module SFRs and firmware
+    					//variables to known states.
+}//end InitializeSystem*/
+
+/******************************************************************************
+ * Function:        void UserInit(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        This routine should take care of all of the demo code
+ *                  initialization that is required.
+ *
+ * Note:
+ *
+ *****************************************************************************/
+/*void UserInit(void)
+{
+    unsigned char i;
+    ConsoleInit();//XXX-Willy.
+
+// 	 Initialize the arrays
+	for (i=0; i<sizeof(USB_Out_Buffer); i++)
+    {
+		USB_Out_Buffer[i] = 0;
+    }
+
+	NextUSBOut = 0;
+	LastRS232Out = 0;
+	lastTransmission = 0;
+
+	//mInitAllLEDs();
+}//end UserInit
+*/
+
+
+/********************************************************************
+ * Function:        void ProcessIO(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        This function is a place holder for other user
+ *                  routines. It is a mixture of both USB and
+ *                  non-USB tasks.
+ *
+ * Note:            None
+ *******************************************************************/
+void ProcessIO(void)
+{
+
+char tecla;
+tecla=ConsoleGet();
+if(tecla!=0)
+{
+    switch(tecla)
+    {
+        case 'a':
+            Printf("\r\nRecibido una a.");
+            break;
+        case 'b':
+            Printf("\r\nRecibido una b.");
+            break;
+        case 'c':
+            Printf("\r\nRecibido una c.");
+            break;
+        default:
+            Printf("\r\nLo que se ha recibido no se contemplaba.");
+            break;
+    }
+}
+
+}//end ProcessIO
+
+
+
+/******************************************************************************
+ * Function:        BYTE USB_Console_Tasks(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          1 si esta listo para procesar la I/O.
+ *
+ * Side Effects:    None
+ *
+ * Overview:        Hace efectivo el envío. Debe ejecutarse al menos una vez
+ *                  por bucle.
+ *
+ * Note:            None
+ *****************************************************************************/
+BYTE USB_Console_Tasks(void)
+{
+    CDCTxService();
+    #if defined(USB_POLLING)
+            // Check bus status and service USB interrupts.
+        USBDeviceTasks(); // Interrupt or polling method.  If using polling, must call
+                                          // this function periodically.  This function will take care
+                                          // of processing and responding to SETUP transactions
+                                          // (such as during the enumeration process when you first
+                                          // plug in).  USB hosts require that USB devices should accept
+                                          // and process SETUP packets in a timely fashion.  Therefore,
+                                          // when using polling, this function should be called
+                                          // regularly (such as once every 1.8ms or faster** [see
+                                          // inline code comments in usb_device.c for explanation when
+                                          // "or faster" applies])  In most cases, the USBDeviceTasks()
+                                          // function does not take very long to execute (ex: <100
+                                          // instruction cycles) before it returns.
+    #endif
+    if((USBDeviceState < CONFIGURED_STATE)||(USBSuspendControl==1)) return 0;
+    return 1;
+} 
+
+/******************************************************************************
+ * Function:        void main(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        Main program entry point.
+ *
+ * Note:            None
+ *****************************************************************************/
+int mainApp(void)
+{
+    //USB_Console_Init();
+    ConsoleInit();
+    while(1)
+    {
+        
+    	char tecla;
+        tecla=ConsoleGet();
+        if(tecla!=0){
+            Printf("\r\n%c Starting MiWi(TM) LSI-CWSN Stack ...",tecla);
+        }
+        }
+    }
+            /*if(USB_Console_Tasks())
+        {
+            //ProcessIO();
+              Printf("\n1 Starting MiWi(TM) LSI-CWSN Stack ...");
+                Printf("\n2 Starting MiWi(TM) LSI-CWSN Stack ...");
+                Printf("\n3 Starting MiWi(TM) LSI-CWSN Stack ...");
+            Printf("\n4 Starting MiWi(TM) LSI-CWSN Stack ...");
+
+        }*/
+
+   
+}//end main
 
 #else
     #error Unknown processor.  See Compiler.h
