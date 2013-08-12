@@ -39,7 +39,7 @@ void InitAppVariables(){
 void PrintTestAddress(BYTE AddrMode, BYTE* Address){
     BYTE i;
     BYTE j = 0;
-    Printf("\rAddrMode: ");
+    Printf("\r\nAddrMode: ");
     switch(AddrMode){
         case LONG_MIWI_ADDRMODE:
             Printf("LONG_ADDR    Address: ");
@@ -58,16 +58,31 @@ void PrintTestAddress(BYTE AddrMode, BYTE* Address){
     }
 }
 
-int mainApppppp(void) {
+int mainApp(void) {
 
 INIT_STAGE:
     InitAppVariables();
-    //nitNode();
+    InitNode();
+  //  ConsoleInit();
+BYTE uno = 1;
+BYTE diez = 10;
+//    Printf("\n\r");
+    //PrintDec(uno);
+  //  Printf("\n\r");
+   // Printf("\n\r");
+   // Printf("\n\r");
+    //PrintDec(diez);
 
-    
+/*
+    BYTE a = 'a';
+    BYTE b = 'b';
+    BYTE c = 'c';
+
     ConsoleInit();
+while(1){
 
-    Printf("\r\n1 Starting MiWi(TM) LSI-CWSN Stack ...");
+    DelayMs(500);
+    /*Printf("\r\n1 Starting MiWi(TM) LSI-CWSN Stack ...");
     Printf("\r\n2 Starting MiWi(TM) LSI-CWSN Stack ...");
     Printf("\r\n3 Starting MiWi(TM) LSI-CWSN Stack ...");
     Printf("\r\n4 Starting MiWi(TM) LSI-CWSN Stack ...");
@@ -76,20 +91,29 @@ INIT_STAGE:
     Printf("\r\n7 Starting MiWi(TM) LSI-CWSN Stack ...");
     Printf("\r\n8 Starting MiWi(TM) LSI-CWSN Stack ...");
 
-    USB_Console_Tasks();
+    //ConsolePut('a');
+    //ConsolePut('a');
+    //ConsolePut('a');
+    //ConsolePut('b');
+    //ConsolePut('c');
+    Printf("\r\nesto va ");
+
+} */
+  // while(!USB_Console_Tasks());
     
-    while(1);
+   // Printf("\r\n PASO POR AQUI ...");
+   // Printf("\r\n PASO POR AQUI TB...");
     //SWDelay(20000);
 
 //STAGE_TEMP:
-//    Printf("\rDurmiendo Nodo... ");
+//    Printf("\r\nDurmiendo Nodo... ");
 //    //SleepNode(MIWI_0434, 5000);
 //    //SleepNode(NONE, 5000);
 //    SleepNode((MIWI_0434 | MIWI_2400), 5000);
 //    Printf("YA!");
 //    while(OSCCONbits.SLOCK == 0);
 //    //SWDelay(2000);
-//    goto STAGE_TEMP;
+ //   goto STAGE07;
 
 
     #if defined NODE_NOP
@@ -97,7 +121,7 @@ INIT_STAGE:
             #if defined NOP_JOINS_AND_LEAVES_LOOP
                 SWDelay(6000);
                 #if defined MIWI_0434_RI
-                    Printf("\rSearching for PANs and establishing connections "
+                    Printf("\r\nSearching for PANs and establishing connections "
                            "in 434 MHZ.");
                     if(MiApp_SearchConnection(9, 0xFFFFFFFF, MIWI_0434)){
                         MiApp_EstablishConnection(0, 0, MIWI_0434);
@@ -106,7 +130,7 @@ INIT_STAGE:
                     DumpConnection(0xFF);
                 #endif
 //                #if defined MIWI_2400_RI
-//                    Printf("\rSearching for PANs and establishing connections "
+//                    Printf("\r\nSearching for PANs and establishing connections "
 //                           "in 2,4 GHZ.");
 //                    if(MiApp_SearchConnection(9, 0xFFFFFFFF, MIWI_2400)){
 //                        MiApp_EstablishConnection(0, 0, MIWI_2400);
@@ -115,13 +139,13 @@ INIT_STAGE:
 //                    DumpConnection(0xFF);
 //                #endif
 //                #if defined MIWI_0434_RI
-//                    Printf("\rRemoving 434 MHz interface - connection slot 0.");
+//                    Printf("\r\nRemoving 434 MHz interface - connection slot 0.");
 //                    MiApp_RemoveConnection(0, MIWI_0434);
 //                    SWDelay(6000);
 //                    DumpConnection(0xFF);
 //                #endif
 //                #if defined MIWI_2400_RI
-//                    Printf("\rRemoving 2,4 GHz interface - connection slot 0.");
+//                    Printf("\r\nRemoving 2,4 GHz interface - connection slot 0.");
 //                    MiApp_RemoveConnection(0, MIWI_2400);
 //                    SWDelay(6000);
 //                    DumpConnection(0xFF);
@@ -165,72 +189,72 @@ INIT_STAGE:
 
 STAGE01:        //COMPROBACION DEL ESTADO INICIAL.
 
-        Printf("\r\rPruebas de comprobacion del estado inicial.\r");
+        Printf("\r\n\nPruebas de comprobacion del estado inicial.\r");
         i = GetStatusFlags();
-        Printf("\rStatusFlags: ");
+        Printf("\r\nStatusFlags: ");
         PrintChar(i);
         i = GetFreeTXBufSpace(ri);   //Deberia ser igual al tama?o del BUFFER
-        Printf("\rCapacidad libre del buffer de TX de MiWi: ");
+        Printf("\r\nCapacidad libre del buffer de TX de MiWi: ");
         PrintDec(i);
         i = GetPayloadToRead(ri);    //Deberia ser 0
-        Printf("\rDatos pendientes de leer de MiWi: ");
+        Printf("\r\nDatos pendientes de leer de MiWi: ");
         PrintDec(i);
         
         SWDelay(1000);
 
 STAGE02:        //DORMIR Y DESPERTAR INTERFACES Y NODO.
 
-        Printf("\r\rPruebas de dormir y despertar interfaces o el nodo completo.\r");
-        Printf("\rDuerme, MiWi!");
+        Printf("\r\n\nPruebas de dormir y despertar interfaces o el nodo completo.\r");
+        Printf("\r\nDuerme, MiWi!");
         i = SleepRadioInterface(ri);
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetStatusFlags();
-        Printf("\r(Comprobacion) StatusFlags: ");
+        Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
-        Printf("\rIntenta dormir MiWi cuando ya esta dormido.");
+        Printf("\r\nIntenta dormir MiWi cuando ya esta dormido.");
         i = SleepRadioInterface(ri);
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetStatusFlags();
-        Printf("\r(Comprobacion) StatusFlags: ");
+        Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
-        Printf("\rDespierta, MiWi!");
+        Printf("\r\nDespierta, MiWi!");
         i = WakeUpRadioInterface(ri);
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetStatusFlags();
-        Printf("\r(Comprobacion) StatusFlags: ");
+        Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
-        Printf("\rDuerme, mi amado nodo cognitivo!");
+        Printf("\r\nDuerme, mi amado nodo cognitivo!");
         i = SleepNode(NONE, 16000);
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetStatusFlags();
-        Printf("\r(Comprobacion) StatusFlags: ");
+        Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
 
         SWDelay(1000);
 
 STAGE03:        //CAMBIOS DE CANAL Y GETTER DEL CANAL
 
-        Printf("\r\rPruebas de canal inicial y cambios de canal.\r");
+        Printf("\r\n\nPruebas de canal inicial y cambios de canal.\r");
         i = GetOpChannel(ri);    //ri: Canal tras escaneo
-        Printf("\r(Inicializacion) Canal de MiWi: ");
+        Printf("\r\n(Inicializacion) Canal de MiWi: ");
         PrintDec(i);
-        Printf("\rIntenta cambiar a un canal no permitido.");
+        Printf("\r\nIntenta cambiar a un canal no permitido.");
         i = SetChannel(ri, 20);      //Intenta poner canal no permitido.
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetOpChannel(ri);    //Sigue canal anterior
-        Printf("\r(Comprobacion) Canal de MiWi: ");
+        Printf("\r\n(Comprobacion) Canal de MiWi: ");
         PrintDec(i);
-        Printf("\rCambio a un canal permitido (canal 1).");
+        Printf("\r\nCambio a un canal permitido (canal 1).");
         i = SetChannel(ri, 1);       //Pone un canal permitido.
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetOpChannel(ri);
-        Printf("\r(Comprobacion) Canal de MiWi: ");
+        Printf("\r\n(Comprobacion) Canal de MiWi: ");
         PrintDec(i);
 
         SWDelay(1000);
@@ -239,9 +263,9 @@ STAGE03:        //CAMBIOS DE CANAL Y GETTER DEL CANAL
 
 STAGE04:        //REESCANEO DE CANALES.
 
-        Printf("\r\rPruebas de reescaneo de canales.\rValores guardados:");
+        Printf("\r\n\nPruebas de reescaneo de canales.\rValores guardados:");
         for(i=0; i<NumChannels; i++){
-            Printf("\rCanal: ");
+            Printf("\r\nCanal: ");
             PrintDec(i);
             Printf("    RSSI: ");
             j= GetScanResult(ri, i, &k);
@@ -249,13 +273,13 @@ STAGE04:        //REESCANEO DE CANALES.
         }
         //Reescaneo
         i = DoChannelScanning(ri, &k);
-        Printf("\r\rCanal con menor ruido: ");
+        Printf("\r\n\nCanal con menor ruido: ");
         PrintDec(i);
         Printf("   RSSI: ");
         PrintChar(k);
 
         for(i=0; i<NumChannels; i++){         
-            Printf("\rCanal: ");
+            Printf("\r\nCanal: ");
             PrintDec(i);
             Printf("    RSSI: ");
             j = GetScanResult(ri, i, &k);
@@ -263,29 +287,29 @@ STAGE04:        //REESCANEO DE CANALES.
         }
 
         i = GetStatusFlags();
-        Printf("\r(Comprobacion) StatusFlags: ");
+        Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
 
         SWDelay(1000);
 
-        Printf("\rEscaneo de todas las interfaces:\r");
+        Printf("\r\nEscaneo de todas las interfaces:\r");
         i = DoChannelScanning(ALL_MIWI, &k);
         if(k == MIWI_0434_RI_MASK){
-            Printf("\rMiWi a 434 MHz es la interfaz con el canal menos ruidoso."
+            Printf("\r\nMiWi a 434 MHz es la interfaz con el canal menos ruidoso."
                    " Canal: ");
             PrintDec(i);
             Printf("   RSSI: ");
             GetScanResult(MIWI_0434, i, &k);
             PrintChar(k);
         }else if(k == MIWI_0868_RI_MASK){
-            Printf("\rMiWi a 868 MHz es la interfaz con el canal menos ruidoso."
+            Printf("\r\nMiWi a 868 MHz es la interfaz con el canal menos ruidoso."
                    " Canal: ");
             PrintDec(i);
             Printf("   RSSI: ");
             GetScanResult(MIWI_0868, i, &k);
             PrintChar(k);
         }else{
-            Printf("\rMiWi a 2,4 GHz es la interfaz con el canal menos ruidoso."
+            Printf("\r\nMiWi a 2,4 GHz es la interfaz con el canal menos ruidoso."
                    " Canal: ");
             PrintDec(i);
             Printf("   RSSI: ");
@@ -297,32 +321,32 @@ STAGE04:        //REESCANEO DE CANALES.
 STAGE05:    //BUFFERS DE TX Y RX. ENVIO, RECEPCION Y COMPROBACION DE UN PAQUETE BROADCAST.
 
         #if defined NODE_1
-            Printf("\r\rPruebas de buffer de TX y rx. Envio broadcast de paquetes.\r");
-            Printf("\rIntenta leer un dato recibido inexistente...");
+            Printf("\r\n\nPruebas de buffer de TX y rx. Envio broadcast de paquetes.\r");
+            Printf("\r\nIntenta leer un dato recibido inexistente...");
             i = GetRXData(ri, &j);
             if (i == NO_ERROR){
-                Printf("\rError: ha interpretado que hay un dato.");
+                Printf("\r\nError: ha interpretado que hay un dato.");
             }
             Printf(" Valor de retorno: ");
             PrintChar(i);
 
             i = GetPayloadToRead(ri);
-            Printf("\r(Comprobacion) Datos pendientes de leer de MiWi:");
+            Printf("\r\n(Comprobacion) Datos pendientes de leer de MiWi:");
             PrintDec(i);
 
-            Printf("\rLlenamos el buffer de TX y enviamos un paquete broadcast.");
+            Printf("\r\nLlenamos el buffer de TX y enviamos un paquete broadcast.");
             i = 0;
             while(GetFreeTXBufSpace(ri) > 0){     //Hasta llenar el buffer de transmision
                 //j = PutTXData(ri, 0x00);//For checking MiWi Fix
                 j = PutTXData(ri, beatles[i]);
                 if (j != NO_ERROR){
-                    Printf("\rFallo al escribir en el buffer: ");
+                    Printf("\r\nFallo al escribir en el buffer: ");
                     PrintChar(j);
                 }
                 else
                     i++;
             }
-            Printf("\rSe escribieron en el buffer ");
+            Printf("\r\nSe escribieron en el buffer ");
             PrintDec(i);
             Printf(" caracteres.\rAhora que esta lleno, intento meter otro dato.");
             j = PutTXData(ri, i);
@@ -330,19 +354,19 @@ STAGE05:    //BUFFERS DE TX Y RX. ENVIO, RECEPCION Y COMPROBACION DE UN PAQUETE 
             PrintChar(j);
 
             i = GetStatusFlags();
-            Printf("\r(Comprobacion) StatusFlags: ");
+            Printf("\r\n(Comprobacion) StatusFlags: ");
             PrintChar(i);
 
-            Printf("\rEnvio broadcast de lo que se ha escrito.");
+            Printf("\r\nEnvio broadcast de lo que se ha escrito.");
             while(TRUE){
                 //Enviar paquete con los datos que haya en el buffer de la interfaz
                 i = SendPckt(ri, BROADCAST_ADDRMODE, NULL);
-                Printf("\rMiMAC_SendPacket devuelve: ");
+                Printf("\r\nMiMAC_SendPacket devuelve: ");
                 PrintChar(i);
                 if (i != NO_ERROR){
                     Printf(" => FALLO");
                     i = GetFreeTXBufSpace(ri);
-                    Printf("\rCapacidad libre del buffer de TX: ");
+                    Printf("\r\nCapacidad libre del buffer de TX: ");
                     PrintDec(i);
                 }
                 else{
@@ -350,19 +374,19 @@ STAGE05:    //BUFFERS DE TX Y RX. ENVIO, RECEPCION Y COMPROBACION DE UN PAQUETE 
                     //Al enviarlo, se inicializa de nuevo el buffer de TX y queda
                     //preparado para la siguiente transmisi?n.
                     i = GetFreeTXBufSpace(ri);   //Deberia ser igual al tama?o del BUFFER
-                    Printf("\rLa capacidad del buffer es: ");
+                    Printf("\r\nLa capacidad del buffer es: ");
                     PrintDec(i);
                     break;  //TRANSMISION CORRECTA, SALE DEL BUCLE
                 }
             }
             i = GetStatusFlags();
-            Printf("\r(Comprobacion) StatusFlags: ");
+            Printf("\r\n(Comprobacion) StatusFlags: ");
             PrintChar(i);
 
             SWDelay(2000);
 
         #elif defined NODE_2
-            Printf("\r\rPrueba de recepcion de un paquete broadcast.\r");
+            Printf("\r\n\nPrueba de recepcion de un paquete broadcast.\r");
             while (TRUE){
                 i = WhichRIHasData();
 
@@ -370,7 +394,7 @@ STAGE05:    //BUFFERS DE TX Y RX. ENVIO, RECEPCION Y COMPROBACION DE UN PAQUETE 
                     DumpRXPckt(ri);
 
                     j = GetPayloadToRead(ri);
-                    Printf("\rPaquete recibido.\rPayload (bytes): ");
+                    Printf("\r\nPaquete recibido.\rPayload (bytes): ");
                     PrintDec(j);
                     i = GetRSSI(ri, &j);
                     Printf("    RSSI: ");
@@ -381,7 +405,7 @@ STAGE05:    //BUFFERS DE TX Y RX. ENVIO, RECEPCION Y COMPROBACION DE UN PAQUETE 
                     i = GetRXSourceAddr(ri, TestAddress);
                     PrintTestAddress(i, TestAddress);
 
-                    Printf("\rEl mensaje dice lo siguiente:\r");
+                    Printf("\r\nEl mensaje dice lo siguiente:\r");
                     while(GetPayloadToRead(ri) > 0){
                         GetRXData(ri, &data);
                         ConsolePut(data);
@@ -398,17 +422,17 @@ STAGE05:    //BUFFERS DE TX Y RX. ENVIO, RECEPCION Y COMPROBACION DE UN PAQUETE 
 STAGE06:    //TX Y RX DE PAQUETES BROADCAST CON SEGURIDAD HABILITADA.
 
         #if defined NODE_1
-            Printf("\r\rEnvio Broadcast con seguridad habilitada.");
+            Printf("\r\n\nEnvio Broadcast con seguridad habilitada.");
             i = GetFreeTXBufSpace(ri);
-            Printf("\rCapacidad libre del buffer de TX: ");
+            Printf("\r\nCapacidad libre del buffer de TX: ");
             PrintDec(i);
-            Printf("\rComprobamos el flag de seguridad en StatusFlags: ");
+            Printf("\r\nComprobamos el flag de seguridad en StatusFlags: ");
             i = GetStatusFlags();
             PrintChar(i);
-            Printf("\rActivo el flag de seguridad. SetSecurityLevel devuelve: ");
+            Printf("\r\nActivo el flag de seguridad. SetSecurityLevel devuelve: ");
             i = SetSecurityLevel(1);
             PrintChar(i);
-            Printf("\rComprobamos el flag de seguridad en StatusFlags: ");
+            Printf("\r\nComprobamos el flag de seguridad en StatusFlags: ");
             i = GetStatusFlags();
             PrintChar(i);
 
@@ -416,19 +440,19 @@ STAGE06:    //TX Y RX DE PAQUETES BROADCAST CON SEGURIDAD HABILITADA.
             while(i < sizeof(SMS4)){
                 j = PutTXData(ri, SMS4[i]);
                 if (j){
-                    Printf("\rFallo al escribir en el buffer. Codigo de error: ");
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
                     PrintChar(j);
                 }else{
                     i++;
                 }
             }
-            Printf("\rEnvio broadcast. Se escribieron en el buffer ");
+            Printf("\r\nEnvio broadcast. Se escribieron en el buffer ");
             PrintDec(i);
             Printf(" caracteres.");
             while(TRUE){
                 //Enviar paquete con los datos que haya en el buffer de la interfaz
                 i = SendPckt(ri, BROADCAST_ADDRMODE, NULL);
-                Printf("\rMiMAC_SendPacket devuelve: ");
+                Printf("\r\nMiMAC_SendPacket devuelve: ");
                 PrintChar(i);
                 if (i==0){
                     Printf(" => OK");
@@ -439,10 +463,10 @@ STAGE06:    //TX Y RX DE PAQUETES BROADCAST CON SEGURIDAD HABILITADA.
                     //SWDelay(500);
                 }
             }
-            Printf("\rDesactivo el flag de seguridad. Valor de retorno: ");
+            Printf("\r\nDesactivo el flag de seguridad. Valor de retorno: ");
             i= SetSecurityLevel(0);
             PrintChar(i);
-            Printf("\r(Comprobacion) StatusFlags: ");
+            Printf("\r\n(Comprobacion) StatusFlags: ");
             i = GetStatusFlags();
             PrintChar(i);
 
@@ -450,13 +474,13 @@ STAGE06:    //TX Y RX DE PAQUETES BROADCAST CON SEGURIDAD HABILITADA.
 
 
         #elif defined NODE_2
-            Printf("\r\rRecepcion de un paquete broadcast con seguridad.\r");
+            Printf("\r\n\nRecepcion de un paquete broadcast con seguridad.\r");
             while (TRUE){
                 i = WhichRIHasData();
 
                 if (i & ri_RI_MASK){
                     DumpRXPckt(ri);
-                    Printf("\rEl mensaje dice lo siguiente:\r");
+                    Printf("\r\nEl mensaje dice lo siguiente:\r");
                     while(GetPayloadToRead(ri) >0){
                         GetRXData(ri, &data);
                         ConsolePut(data);
@@ -472,7 +496,7 @@ STAGE06:    //TX Y RX DE PAQUETES BROADCAST CON SEGURIDAD HABILITADA.
 STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
 
         #if defined NODE_1
-            Printf("\r\rAjuste de la potencia de transmision. Pruebas de alcance.");
+            Printf("\r\n\nAjuste de la potencia de transmision. Pruebas de alcance.");
             //Rampa de bajada
             j = 0x00;
             do{
@@ -483,7 +507,7 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
                 while(i < sizeof(SMS1)){
                     k = PutTXData(ri, SMS1[i]);
                     if (k){
-                        Printf("\rFallo al escribir en el buffer. Codigo de error: ");
+                        Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
                         PrintChar(k);
                     }else{
                         i++;
@@ -491,13 +515,13 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
                 }
                 while(PutTXData(ri, j) != 0);   //Escribo el valor de la potencia de TX.
                 i++;
-                Printf("\rEnvio broadcast. Se escribieron en el buffer ");
+                Printf("\r\nEnvio broadcast. Se escribieron en el buffer ");
                 PrintDec(i);
                 Printf(" caracteres.");
                 //Enviar paquete con los datos que haya en el buffer de la interfaz.
                 while (TRUE){
                     i = SendPckt(ri, BROADCAST_ADDRMODE, NULL);
-                    Printf("\rMiMAC_SendPacket devuelve: ");
+                    Printf("\r\nMiMAC_SendPacket devuelve: ");
                     PrintChar(i);
                     if (i==0){
                         Printf(" => OK");
@@ -524,7 +548,7 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
                 while(i < sizeof(SMS1)){
                     k = PutTXData(ri, SMS1[i]);
                     if (k){
-                        Printf("\rFallo al escribir en el buffer. Codigo de error: ");
+                        Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
                         PrintChar(k);
                     }else{
                         i++;
@@ -533,13 +557,13 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
                 //Me aseguro de que escribe el valor de la potencia de transmision.
                 while(PutTXData(ri, j) != 0);
                 i++;
-                Printf("\rEnvio broadcast. Se escribieron en el buffer ");
+                Printf("\r\nEnvio broadcast. Se escribieron en el buffer ");
                 PrintDec(i);
                 Printf(" caracteres.");
                 //Enviar paquete con los datos que haya en el buffer de la interfaz
                 while (TRUE){
                     i = SendPckt(ri, BROADCAST_ADDRMODE, NULL);
-                    Printf("\rMiMAC_SendPacket devuelve: ");
+                    Printf("\r\nMiMAC_SendPacket devuelve: ");
                     PrintChar(i);
                     if (i==0){
                         Printf(" => OK");
@@ -555,7 +579,7 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
             SWDelay(10000);
 
         #elif defined NODE_2
-            Printf("\r\rRecepcion con distintas potencias. Pruebas de alcance.\r"
+            Printf("\r\n\nRecepcion con distintas potencias. Pruebas de alcance.\r"
                    "Numero de paquetes que se esperan recibir: ");
             k = 512/powerStep;      //k paquetes que envian las rampas de potencia
             PrintDec(k);
@@ -566,7 +590,7 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
                 if (i & ri_RI_MASK){
                     j = GetPayloadToRead(ri);
                     k--;
-                    Printf("\rPaquete recibido.\rPayload (bytes): ");
+                    Printf("\r\nPaquete recibido.\rPayload (bytes): ");
                     PrintDec(j);
                     i = GetRSSI(ri, &j);
                     Printf("    RSSI: ");
@@ -577,7 +601,7 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
                     i = GetRXSourceAddr(ri, TestAddress);
                     PrintTestAddress(i, TestAddress);
 
-                    Printf("\rEl mensaje dice lo siguiente:\r");
+                    Printf("\r\nEl mensaje dice lo siguiente:\r");
                     while(GetPayloadToRead(ri) >1){
                         GetRXData(ri, &data);
                         ConsolePut(data);
@@ -591,7 +615,7 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
                 }
                 SWDelay(10);
                 if(--TimeOut == 0){
-                    Printf("\rNo se recibieron todos los paquetes esperados en el "
+                    Printf("\r\nNo se recibieron todos los paquetes esperados en el "
                            "tiempo prefijado. Se aborta la recepcion.");
                     break;
                 }
@@ -602,7 +626,7 @@ STAGE07:    //PRUEBAS DE POTENCIA DE TRANSMISION Y ALCANCE EN RECEPCION.
 STAGE08:
 
         #if defined NODE_1
-            Printf("\r\rEnvio Unicast usando la direccion larga predefinida del "
+            Printf("\r\n\nEnvio Unicast usando la direccion larga predefinida del "
                    "nodo 2.");
             TestAddress[0] = 0x00;
             TestAddress[1] = 0x11;
@@ -617,13 +641,13 @@ STAGE08:
             while(i < sizeof(SMS2)){
                 j = PutTXData(ri, SMS2[i]);
                 if (j){
-                    Printf("\rFallo al escribir en el buffer. Codigo de error: ");
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
                     PrintChar(j);
                 }else{
                     i++;
                 }
             }
-            Printf("\rSe escribieron en el buffer ");
+            Printf("\r\nSe escribieron en el buffer ");
             PrintDec(i);
             Printf(" caracteres.\rMensaje: 'Que tal'\rDireccion destino: ");
             PrintTestAddress(LONG_MIWI_ADDRMODE, TestAddress);
@@ -631,7 +655,7 @@ STAGE08:
             while(TRUE){
                 //Enviar paquete con los datos que haya en el buffer de la interfaz
                 i = SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
-                Printf("\rMiMAC_SendPacket devuelve: ");
+                Printf("\r\nMiMAC_SendPacket devuelve: ");
                 PrintChar(i);
                 if (i==0){
                     Printf(" => OK");
@@ -644,7 +668,7 @@ STAGE08:
             }
             SWDelay(500);
 
-            Printf("\r\rEsperando respuesta...");
+            Printf("\r\n\nEsperando respuesta...");
             while (TRUE){
                 i = WhichRIHasData();
 
@@ -656,7 +680,7 @@ STAGE08:
             SWDelay(500);
 
         #elif defined NODE_2
-            Printf("\r\rRecepcion de un paquete unicast.\r");
+            Printf("\r\n\nRecepcion de un paquete unicast.\r");
             while (TRUE){
                 i = WhichRIHasData();
 
@@ -664,7 +688,7 @@ STAGE08:
                     DumpRXPckt(ri);
                     i = GetPayloadToRead(ri);
                     if (i != sizeof(SMS2)){
-                        Printf("\rEl mensaje no tiene la longitud esperada. Dice lo"
+                        Printf("\r\nEl mensaje no tiene la longitud esperada. Dice lo"
                                " siguiente: ");
                         while(GetPayloadToRead(ri) >0){
                             GetRXData(ri, &data);
@@ -672,7 +696,7 @@ STAGE08:
                         }
                     }
                     else{
-                        Printf("\rEl mensaje dice lo siguiente:\r");
+                        Printf("\r\nEl mensaje dice lo siguiente:\r");
                         j = 0;
                         k = i;                      //Numero de caracteres erroneos.
                         while(GetPayloadToRead(ri) >0){
@@ -685,10 +709,10 @@ STAGE08:
                         }
 
                         if(k){
-                            Printf("\rHay errores. Numero de caracteres incorrectos: ");
+                            Printf("\r\nHay errores. Numero de caracteres incorrectos: ");
                             PrintDec(k);
                         }else{
-                            Printf("\rMensaje correcto. Envio la respuesta.\r");
+                            Printf("\r\nMensaje correcto. Envio la respuesta.\r");
 
                             SWDelay(1500);
                             TestAddress[0] = 0x00;
@@ -704,13 +728,13 @@ STAGE08:
                             while(i < sizeof(SMS3)){
                                 j = PutTXData(ri, SMS3[i]);
                                 if (j){
-                                    Printf("\rFallo al escribir en el buffer. Codigo de error: ");
+                                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
                                     PrintChar(j);
                                 }else{
                                     i++;
                                 }
                             }
-                            Printf("\rEnvio unicast. Se escribieron en el buffer ");
+                            Printf("\r\nEnvio unicast. Se escribieron en el buffer ");
                             PrintDec(i);
                             Printf(" caracteres.\rMensaje: 'Bien'\rDireccion destino: ");
                             PrintTestAddress(LONG_MIWI_ADDRMODE, TestAddress);
@@ -718,7 +742,7 @@ STAGE08:
                             while(TRUE){
                                 //Enviar paquete con los datos que haya en el buffer de la interfaz
                                 i = SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
-                                Printf("\rMiMAC_SendPacket devuelve: ");
+                                Printf("\r\nMiMAC_SendPacket devuelve: ");
                                 PrintChar(i);
                                 if (i==0){
                                     Printf(" => OK");
@@ -753,7 +777,7 @@ FINAL_STAGE:
         //goto...
 
         DumpConnTable();
-        Printf("\r\rFIN DEL TESTBENCH.");
+        Printf("\r\n\nFIN DEL TESTBENCH.");
         while (TRUE);           //Enable to check if indirect messages expire
         break;
 
@@ -772,7 +796,7 @@ TX_RX_MAXRATE:
 //            TestAddress[1] = 0x00;
         while(1){
             i = 255;
-            Printf("\rRafaga de paquetes...\rTiempo inicial y final:\r");
+            Printf("\r\nRafaga de paquetes...\rTiempo inicial y final:\r");
             Print32Dec(ReadCoreTimer());
             ConsolePut('\r');
             while(i-- > 1){
@@ -784,13 +808,13 @@ TX_RX_MAXRATE:
                 //SendPckt(ri, SHORT_MIWI_ADDRMODE, TestAddress);
             }
             Print32Dec(ReadCoreTimer());
-            Printf("\rPaquetes exitosos: ");
+            Printf("\r\nPaquetes exitosos: ");
             Print32Dec(GetSentPckts(ri));
             SWDelay(5000);
         }
         #elif defined NODE_2
         i = 0;
-        Printf("\rRafaga de paquetes...\rTiempo inicial y final:\r");
+        Printf("\r\nRafaga de paquetes...\rTiempo inicial y final:\r");
         while(1){
             if (WhichRIHasData() & ri_RI_MASK){
                 while(GetPayloadToRead(ri) > 0){
@@ -800,7 +824,7 @@ TX_RX_MAXRATE:
             }
                
             if (i >= 254){
-                Printf("\rFoo!\r");
+                Printf("\r\nFoo!\r");
                 break;
             }
                
@@ -811,7 +835,7 @@ TX_RX_MAXRATE:
             PrintChar(i);
             ConsolePut('\r');
         }
-        Printf("\rCOJONES YA!");
+        Printf("\r\nCOJONES YA!");
         while(1){
             while(GetPayloadToRead(ri) > 0){
                 GetRXData(ri, &(memStoreTest[i]));
@@ -823,7 +847,7 @@ TX_RX_MAXRATE:
 RF_FUNCTIONS_MAXRATE:
                         
         i = 200;
-        Printf("\rCambio de canal. Tiempo inicial y final:\r");
+        Printf("\r\nCambio de canal. Tiempo inicial y final:\r");
         Print32Dec(ReadCoreTimer());
         ConsolePut('\r');
         while(i-- > 0){
@@ -833,7 +857,7 @@ RF_FUNCTIONS_MAXRATE:
         SWDelay(2000);
 
         i = 200;
-        Printf("\rCambio de potencia de transmision. Tiempo inicial y final:\r");
+        Printf("\r\nCambio de potencia de transmision. Tiempo inicial y final:\r");
         Print32Dec(ReadCoreTimer());
         ConsolePut('\r');
         while(i-- > 0){
@@ -843,7 +867,7 @@ RF_FUNCTIONS_MAXRATE:
         SWDelay(2000);
 
         i = 200;
-        Printf("\rDormir/Despertar interfaz. Tiempo inicial y final:\r");
+        Printf("\r\nDormir/Despertar interfaz. Tiempo inicial y final:\r");
         Print32Dec(ReadCoreTimer());
         ConsolePut('\r');
         while(i-- > 0){
@@ -857,7 +881,7 @@ RF_FUNCTIONS_MAXRATE:
 
 SAVE_RESTORE:
 
-        Printf("\rGuardando la tabla de conexiones.\r");
+        Printf("\r\nGuardando la tabla de conexiones.\r");
         i = SaveConnTable(memStoreTest);
         ConsolePut('\r');
         i = 0;
@@ -872,11 +896,11 @@ SAVE_RESTORE:
         for (i=0;i<MIWI_CONN_ENTRY_SIZE; i++){
             memStoreTest[i] = 0xFF;
         }
-        Printf("\rRestaurando la tabla de conexiones.\r");
+        Printf("\r\nRestaurando la tabla de conexiones.\r");
         RestoreConnTable(memStoreTest, 1);
         DumpConnTable();
 
-        Printf("\rGuardando la tabla de rutado.\r");
+        Printf("\r\nGuardando la tabla de rutado.\r");
         SaveRoutingTable(ALL_MIWI,memStoreTest);
         i = 0;
         while(i < 34){
@@ -891,7 +915,7 @@ SAVE_RESTORE:
             memStoreTest[i]= 0x04;
             i++;
         }
-        Printf("\rRestaurando la tabla de conexiones.\r");
+        Printf("\r\nRestaurando la tabla de conexiones.\r");
         RestoreRoutingTable(ALL_MIWI,memStoreTest);
         DumpConnTable();
         while (1);
@@ -900,19 +924,19 @@ SAVE_RESTORE:
 POWER_DISSIPATION_TEST:
         while(1){
             DelayMs(3000);
-            Printf("\rDurmiendo 868\r");
+            Printf("\r\nDurmiendo 868\r");
             SleepRadioInterface(MIWI_0868);
             DelayMs(8000);
-            Printf("\rDurmiendo 2,4\r");    
+            Printf("\r\nDurmiendo 2,4\r");
             SleepRadioInterface(MIWI_2400);
             DelayMs(8000);
-            Printf("\rDurmiendo nodo\r");
+            Printf("\r\nDurmiendo nodo\r");
             SleepNode(NONE, 10000);
-            Printf("\rDespertando\r");
+            Printf("\r\nDespertando\r");
             //WakeUpRadioInterface(ALL);
             SetTXPower(ri,0);
             DelayMs(8000);
-            Printf("\rTransmitiendo\r");
+            Printf("\r\nTransmitiendo\r");
             i=20;
             while(i>0){
                 while(PutTXData(ri,i));
@@ -920,7 +944,7 @@ POWER_DISSIPATION_TEST:
                 i--;
             }
             DelayMs(3000);
-            Printf("\rReposo\r");
+            Printf("\r\nReposo\r\n");
         }
 
 DEMO_PFC:
@@ -1003,7 +1027,7 @@ static unsigned int _excep_addr;
 
 // this function overrides the normal _weak_ generic handler
 void _general_exception_handler(void){
-    Printf("\r\rGeneral Exception Handler...\r\r");
+    Printf("\r\n\nGeneral Exception Handler...\r\r");
 
     asm volatile("mfc0 %0,$13" : "=r" (_excep_code));
     asm volatile("mfc0 %0,$14" : "=r" (_excep_addr));

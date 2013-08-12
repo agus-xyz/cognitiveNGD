@@ -242,7 +242,7 @@ BYTE InitNode(){
 
     //Radio Interfaces Protocols Initialization
     #if defined MIWI_0434_RI || defined MIWI_0868_RI || defined MIWI_2400_RI
-        //InitMIWI();
+        InitMIWI();
     #endif
     #if defined (WIFI_2400_RI)
 	InitWIFI();
@@ -270,42 +270,42 @@ UINT16 GetSentPckts(radioInterface ri){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI0434_sentPckts;
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI0868_sentPckts;
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI2400_sentPckts;
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return WIFI2400_sentPckts;
             #endif
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Choose a single radioInterface.");
+            Printf("\r\nError: Choose a single radioInterface.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -314,42 +314,42 @@ UINT16 GetProcPckts(radioInterface ri){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI0434_procPckts;
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI0868_procPckts;
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI2400_procPckts;
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return WIFI2400_procPckts;
             #endif
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Choose a single radioInterface.");
+            Printf("\r\nError: Choose a single radioInterface.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -370,7 +370,7 @@ BYTE GetOpChannel(radioInterface ri){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return NodeStatus.MIWI0434_OpChannel;
@@ -378,7 +378,7 @@ BYTE GetOpChannel(radioInterface ri){
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return NodeStatus.MIWI0868_OpChannel;
@@ -386,7 +386,7 @@ BYTE GetOpChannel(radioInterface ri){
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return NodeStatus.MIWI2400_OpChannel;
@@ -394,7 +394,7 @@ BYTE GetOpChannel(radioInterface ri){
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return NodeStatus.WIFI2400_OpChannel;
@@ -402,15 +402,15 @@ BYTE GetOpChannel(radioInterface ri){
 
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Operating Channel of each Radio Interface must be "
+            Printf("\r\nError: Operating Channel of each Radio Interface must be "
                    "accessed one by one.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -431,7 +431,7 @@ BYTE GetScanResult(radioInterface ri, BYTE channel, BYTE *storeItHere){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < MIWI0434NumChannels){
@@ -442,7 +442,7 @@ BYTE GetScanResult(radioInterface ri, BYTE channel, BYTE *storeItHere){
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < MIWI0868NumChannels){
@@ -453,7 +453,7 @@ BYTE GetScanResult(radioInterface ri, BYTE channel, BYTE *storeItHere){
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < MIWI2400NumChannels){
@@ -464,7 +464,7 @@ BYTE GetScanResult(radioInterface ri, BYTE channel, BYTE *storeItHere){
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < WIFI2400NumChannels){
@@ -475,15 +475,15 @@ BYTE GetScanResult(radioInterface ri, BYTE channel, BYTE *storeItHere){
             #endif
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Scan results of each Radio Interface must be "
+            Printf("\r\nError: Scan results of each Radio Interface must be "
                    "accessed one by one.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -507,35 +507,35 @@ BYTE GetPayloadToRead(radioInterface ri){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI0434_payloadToRead;
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI0868_payloadToRead;
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return MIWI2400_payloadToRead;
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return WIFI2400_payloadToRead;
             #endif
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
@@ -560,7 +560,7 @@ BYTE GetPayloadToRead(radioInterface ri){
             else
                 return 0x7F;        //127 or more bytes pending. 0b01111111
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -580,7 +580,7 @@ BYTE GetRSSI(radioInterface ri, BYTE *storeItHere){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI0434_RXbuf_isEmpty){
@@ -593,7 +593,7 @@ BYTE GetRSSI(radioInterface ri, BYTE *storeItHere){
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI0868_RXbuf_isEmpty){
@@ -606,7 +606,7 @@ BYTE GetRSSI(radioInterface ri, BYTE *storeItHere){
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI2400_RXbuf_isEmpty){
@@ -619,22 +619,22 @@ BYTE GetRSSI(radioInterface ri, BYTE *storeItHere){
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return NO_ERROR;
             #endif
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Select a single Radio Interface to get the RSSI "
+            Printf("\r\nError: Select a single Radio Interface to get the RSSI "
                    "value of its last received packet.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -654,7 +654,7 @@ BYTE GetLQI(radioInterface ri, BYTE *storeItHere){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI0434_RXbuf_isEmpty){
@@ -667,7 +667,7 @@ BYTE GetLQI(radioInterface ri, BYTE *storeItHere){
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI0868_RXbuf_isEmpty){
@@ -680,7 +680,7 @@ BYTE GetLQI(radioInterface ri, BYTE *storeItHere){
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI2400_RXbuf_isEmpty){
@@ -693,22 +693,22 @@ BYTE GetLQI(radioInterface ri, BYTE *storeItHere){
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return NO_ERROR;
             #endif
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Select a single Radio Interface to get the LQI "
+            Printf("\r\nError: Select a single Radio Interface to get the LQI "
                    "value of its last received packet.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -726,43 +726,43 @@ BYTE GetFreeTXBufSpace(radioInterface ri){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return (MIWI0434_TX_BUF_SIZE - MIWI0434_datacount);
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return (MIWI0868_TX_BUF_SIZE - MIWI0868_datacount);
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return (MIWI2400_TX_BUF_SIZE - MIWI2400_datacount);
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 return (WIFI2400_TX_BUF_SIZE - WIFI2400_datacount);
             #endif
         case NONE:
             //NOP.
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Select a single Radio Interface to get the number "
+            Printf("\r\nError: Select a single Radio Interface to get the number "
                    "of free positions in its TX buffer.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -782,15 +782,15 @@ BYTE SleepRadioInterface(radioInterface ri){
     switch (ri){
         case MIWI_0434:
              #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #elif !defined ENABLE_SLEEP
-                Printf("\rDue to config issues, MiWi at 434 MHz must remain awake.");
+                Printf("\r\nDue to config issues, MiWi at 434 MHz must remain awake.");
                 return AWAKE_IS_MANDATORY_ERROR;
             #else
                 //Sleep MiWi at 434 MHz Interface
                 if(NodeStatus.flags.bits.MIWI0434isON == 0){
-                    Printf("\rMiWi at 434 MHz interface still remains asleep.");
+                    Printf("\r\nMiWi at 434 MHz interface still remains asleep.");
                     return NO_ERROR;
                 }
                 else {
@@ -803,7 +803,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                     switch (aux){
                         case 0x00:     //SUCCESS
                             NodeStatus.flags.bits.MIWI0434isON = 0;
-                            //Printf("\rMiWi at 434 MHz interface is now asleep.");
+                            //Printf("\r\nMiWi at 434 MHz interface is now asleep.");
                             return NO_ERROR;
                         case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
                             aux = TRANSCEIVER_PM_ERROR;
@@ -823,7 +823,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                             aux = MIWI0434_STACK_ERROR;
                             break;
                     }
-                    Printf("\rNode failed to sleep Miwi 434 MHz interface. "
+                    Printf("\r\nNode failed to sleep Miwi 434 MHz interface. "
                            "HAL error code: ");
                     PrintChar(aux);
                     return aux;
@@ -832,15 +832,15 @@ BYTE SleepRadioInterface(radioInterface ri){
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #elif !defined ENABLE_SLEEP
-                Printf("\rDue to config issues, MiWi at 868 MHz must remain awake.");
+                Printf("\r\nDue to config issues, MiWi at 868 MHz must remain awake.");
                 return AWAKE_IS_MANDATORY_ERROR;
             #else
                 //Sleep MiWi at 868 MHz Interface
                 if(NodeStatus.flags.bits.MIWI0868isON == 0){
-                    Printf("\rMiWi at 868 MHz interface still remains asleep.");
+                    Printf("\r\nMiWi at 868 MHz interface still remains asleep.");
                     return NO_ERROR;
                 }
                 else {
@@ -853,7 +853,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                     switch (aux){
                         case 0x00:     //SUCCESS
                             NodeStatus.flags.bits.MIWI0868isON = 0;
-                            //Printf("\rMiWi at 868 MHz interface is now asleep.");
+                            //Printf("\r\nMiWi at 868 MHz interface is now asleep.");
                             return NO_ERROR;
                         case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
                             aux = TRANSCEIVER_PM_ERROR;
@@ -871,7 +871,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                             aux = MIWI0868_STACK_ERROR;
                             break;
                     }
-                    Printf("\rNode failed to sleep Miwi 868 MHz interface. "
+                    Printf("\r\nNode failed to sleep Miwi 868 MHz interface. "
                            "HAL error code: ");
                     PrintChar(aux);
                     return aux;
@@ -880,15 +880,15 @@ BYTE SleepRadioInterface(radioInterface ri){
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #elif !defined ENABLE_SLEEP
-                Printf("\rDue to config issues, MiWi at 2,4 GHz must remain awake.");
+                Printf("\r\nDue to config issues, MiWi at 2,4 GHz must remain awake.");
                 return AWAKE_IS_MANDATORY_ERROR;
             #else
                 //Sleep MiWi at 2,4 GHz Interface
                 if(NodeStatus.flags.bits.MIWI2400isON == 0){
-                    Printf("\rMiWi at 2,4 GHz interface still remains asleep.");
+                    Printf("\r\nMiWi at 2,4 GHz interface still remains asleep.");
                     return NO_ERROR;
                 }
                 else {
@@ -901,7 +901,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                     switch (aux){
                         case 0x00:     //SUCCESS
                             NodeStatus.flags.bits.MIWI2400isON = 0;
-                            //Printf("\rMiWi at 2,4 GHz interface is now asleep.");
+                            //Printf("\r\nMiWi at 2,4 GHz interface is now asleep.");
                             return NO_ERROR;
                         case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
                             aux = TRANSCEIVER_PM_ERROR;
@@ -919,7 +919,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                             aux = MIWI2400_STACK_ERROR;
                             break;
                     }
-                    Printf("\rNode failed to sleep Miwi 2,4 GHz interface. "
+                    Printf("\r\nNode failed to sleep Miwi 2,4 GHz interface. "
                            "HAL error code: ");
                     PrintChar(aux);
                     return aux;
@@ -928,7 +928,7 @@ BYTE SleepRadioInterface(radioInterface ri){
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
 //FALTAN COSAS!!!//Sleep WiFi Interface
@@ -939,11 +939,11 @@ BYTE SleepRadioInterface(radioInterface ri){
         case ALL:
             #ifdef MIWI_0434_RI
                 #ifndef ENABLE_SLEEP
-                    Printf("\rDue to config issues, MiWi at 434 MHz must remain awake.");
+                    Printf("\r\nDue to config issues, MiWi at 434 MHz must remain awake.");
                 #else
                 //Sleep MiWi at 434 MHz Interface
                     if(NodeStatus.flags.bits.MIWI0434isON == 0){
-                        Printf("\rMiWi at 434 MHz interface still remains asleep.");
+                        Printf("\r\nMiWi at 434 MHz interface still remains asleep.");
                     }
                     else {
                         spi_prev_ec = GetSPIErrorCounter();
@@ -955,7 +955,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                         switch (aux){
                             case 0x00:     //SUCCESS
                                 NodeStatus.flags.bits.MIWI0434isON = 0;
-                                //Printf("\rMiWi at 434 MHz interface is now asleep.");
+                                //Printf("\r\nMiWi at 434 MHz interface is now asleep.");
                                 aux = NO_ERROR;
                                 break;
                             case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
@@ -975,7 +975,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                                 break;
                         }
                         if(aux != NO_ERROR){
-                            Printf("\rNode failed to sleep Miwi 434 MHz interface. "
+                            Printf("\r\nNode failed to sleep Miwi 434 MHz interface. "
                                    "HAL error code: ");
                             PrintChar(aux);
                             return aux;
@@ -985,11 +985,11 @@ BYTE SleepRadioInterface(radioInterface ri){
             #endif
             #ifdef MIWI_0868_RI
                 #ifndef ENABLE_SLEEP
-                    Printf("\rDue to config issues, MiWi at 868 MHz must remain awake.");
+                    Printf("\r\nDue to config issues, MiWi at 868 MHz must remain awake.");
                 #else
                     //Sleep MiWi at 868 MHz Interface
                     if(NodeStatus.flags.bits.MIWI0868isON == 0){
-                        Printf("\rMiWi at 868 MHz interface still remains asleep.");
+                        Printf("\r\nMiWi at 868 MHz interface still remains asleep.");
                     }
                     else {
                         spi_prev_ec = GetSPIErrorCounter();
@@ -1001,7 +1001,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                         switch (aux){
                             case 0x00:     //SUCCESS
                                 NodeStatus.flags.bits.MIWI0868isON = 0;
-                                //Printf("\rMiWi at 868 MHz interface is now asleep.");
+                                //Printf("\r\nMiWi at 868 MHz interface is now asleep.");
                                 aux = NO_ERROR;
                                 break;
                             case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
@@ -1021,7 +1021,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                                 break;
                         }
                         if (aux != NO_ERROR){
-                            Printf("\rNode failed to sleep Miwi 868 MHz interface. "
+                            Printf("\r\nNode failed to sleep Miwi 868 MHz interface. "
                                    "HAL error code: ");
                             PrintChar(aux);
                             return aux;
@@ -1031,11 +1031,11 @@ BYTE SleepRadioInterface(radioInterface ri){
             #endif
             #ifdef MIWI_2400_RI
                 #ifndef ENABLE_SLEEP
-                    Printf("\rDue to config issues, MiWi at 2,4 GHz must remain awake.");
+                    Printf("\r\nDue to config issues, MiWi at 2,4 GHz must remain awake.");
                 #else
                     //Sleep MiWi at 2,4 GHz Interface
                     if(NodeStatus.flags.bits.MIWI2400isON == 0){
-                        Printf("\rMiWi at 2,4 GHz interface still remains asleep.");
+                        Printf("\r\nMiWi at 2,4 GHz interface still remains asleep.");
                     }
                     else {
                         spi_prev_ec = GetSPIErrorCounter();
@@ -1047,7 +1047,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                         switch (aux){
                             case 0x00:     //SUCCESS
                                 NodeStatus.flags.bits.MIWI2400isON = 0;
-                                //Printf("\rMiWi at 2,4 GHz interface is now asleep.");
+                                //Printf("\r\nMiWi at 2,4 GHz interface is now asleep.");
                                 aux = NO_ERROR;
                                 break;
                             case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
@@ -1067,7 +1067,7 @@ BYTE SleepRadioInterface(radioInterface ri){
                                 break;
                         }
                         if (aux != NO_ERROR){
-                            Printf("\rNode failed to sleep Miwi 2,4 GHz interface. "
+                            Printf("\r\nNode failed to sleep Miwi 2,4 GHz interface. "
                                    "HAL error code: ");
                             PrintChar(aux);
                             return aux;
@@ -1084,11 +1084,11 @@ BYTE SleepRadioInterface(radioInterface ri){
             return NO_ERROR;    //All interfaces are switched off now.
         case NONE:
             //NOP
-            Printf("\rError: NONE of Radio Interfaces were selected to be "
+            Printf("\r\nError: NONE of Radio Interfaces were selected to be "
                    "switched off");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -1107,15 +1107,15 @@ BYTE WakeUpRadioInterface(radioInterface ri){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #elif !defined ENABLE_SLEEP
-                Printf("\rDue to config issues, MiWi at 434 MHz is always awake.");
+                Printf("\r\nDue to config issues, MiWi at 434 MHz is always awake.");
                 return NO_ERROR;
             #else
                 //Wake up MiWi at 434 MHz Interface
                 if(NodeStatus.flags.bits.MIWI0434isON == 1){
-                    Printf("\rMiWi at 434 MHz is still awake.");
+                    Printf("\r\nMiWi at 434 MHz is still awake.");
                     return NO_ERROR;
                 }
                 else{
@@ -1135,7 +1135,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                     switch (aux){
                         case 0x00:     //SUCCESS
                             NodeStatus.flags.bits.MIWI0434isON = 1;
-                            //Printf("\rMiWi at 434 MHz interface is now awake.");
+                            //Printf("\r\nMiWi at 434 MHz interface is now awake.");
                             return NO_ERROR;
                         case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
                             aux = TRANSCEIVER_PM_ERROR;
@@ -1153,7 +1153,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                             aux = MIWI0434_STACK_ERROR;
                             break;
                     }
-                    Printf("\rNode failed to wake MiWi 434 MHz interface up."
+                    Printf("\r\nNode failed to wake MiWi 434 MHz interface up."
                            " HAL error code: ");
                     PrintChar(aux);
                     return aux;
@@ -1162,15 +1162,15 @@ BYTE WakeUpRadioInterface(radioInterface ri){
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #elif !defined ENABLE_SLEEP
-                Printf("\rDue to config issues, MiWi at 868 MHz is always awake.");
+                Printf("\r\nDue to config issues, MiWi at 868 MHz is always awake.");
                 return NO_ERROR;
             #else
                 //Wake up MiWi at 868 MHz Interface
                 if(NodeStatus.flags.bits.MIWI0868isON == 1){
-                    Printf("\rMiWi at 868 MHz is still awake.");
+                    Printf("\r\nMiWi at 868 MHz is still awake.");
                     return NO_ERROR;
                 }
                 else{
@@ -1190,7 +1190,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                     switch (aux){
                         case 0x00:     //SUCCESS
                             NodeStatus.flags.bits.MIWI0868isON = 1;
-                            //Printf("\rMiWi at 868 MHz interface is now awake.");
+                            //Printf("\r\nMiWi at 868 MHz interface is now awake.");
                             return NO_ERROR;
                         case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
                             aux = TRANSCEIVER_PM_ERROR;
@@ -1208,7 +1208,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                             aux = MIWI0868_STACK_ERROR;
                             break;
                     }
-                    Printf("\rNode failed to wake Miwi 868 MHz interface up."
+                    Printf("\r\nNode failed to wake Miwi 868 MHz interface up."
                            " HAL error code: ");
                     PrintChar(aux);
                     return aux;
@@ -1217,15 +1217,15 @@ BYTE WakeUpRadioInterface(radioInterface ri){
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #elif !defined ENABLE_SLEEP
-                Printf("\rDue to config issues, MiWi at 2,4 GHz is always awake.");
+                Printf("\r\nDue to config issues, MiWi at 2,4 GHz is always awake.");
                 return NO_ERROR;
             #else
                 //Wake up MiWi at 2,4 GHz Interface
                 if(NodeStatus.flags.bits.MIWI2400isON == 1){
-                    Printf("\rMiWi at 2,4 GHz is still awake.");
+                    Printf("\r\nMiWi at 2,4 GHz is still awake.");
                     return 0x00;
                 }
                 else{
@@ -1243,7 +1243,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                     switch (aux){
                         case 0x00:     //SUCCESS
                             NodeStatus.flags.bits.MIWI2400isON = 1;
-                            //Printf("\rMiWi at 2,4 GHz interface is now awake.");
+                            //Printf("\r\nMiWi at 2,4 GHz interface is now awake.");
                             return NO_ERROR;
                         case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
                             aux = TRANSCEIVER_PM_ERROR;
@@ -1261,7 +1261,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                             aux = MIWI2400_STACK_ERROR;
                             break;
                     }
-                    Printf("\rNode failed to wake Miwi 2,4 GHz interface up."
+                    Printf("\r\nNode failed to wake Miwi 2,4 GHz interface up."
                            " HAL error code: ");
                     PrintChar(aux);
                     return aux;
@@ -1270,7 +1270,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
 //Wake up Wifi Interface
@@ -1282,11 +1282,11 @@ BYTE WakeUpRadioInterface(radioInterface ri){
         case ALL:
             #ifdef MIWI_0434_RI
                 #if !defined ENABLE_SLEEP
-                    Printf("\rDue to config issues, MiWi at 434 MHz is always awake.");
+                    Printf("\r\nDue to config issues, MiWi at 434 MHz is always awake.");
                 #else
                     //Wake up MiWi at 434 MHz Interface
                     if(NodeStatus.flags.bits.MIWI0434isON == 1){
-                        Printf("\rMiWi at 434 MHz is still awake.");
+                        Printf("\r\nMiWi at 434 MHz is still awake.");
                     }
                     else{
                         spi_prev_ec = GetSPIErrorCounter();
@@ -1298,7 +1298,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                         switch (aux){
                             case 0x00:     //SUCCESS
                                 NodeStatus.flags.bits.MIWI0434isON = 1;
-                                //Printf("\rMiWi at 434 MHz interface is now awake.");
+                                //Printf("\r\nMiWi at 434 MHz interface is now awake.");
                                 aux = NO_ERROR;
                                 break;
                             case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
@@ -1318,7 +1318,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                                 break;
                         }
                         if(aux != NO_ERROR){
-                            Printf("\rNode failed to wake MiWi 434 MHz interface up."
+                            Printf("\r\nNode failed to wake MiWi 434 MHz interface up."
                                    " HAL error code: ");
                             PrintChar(aux);
                             return aux;
@@ -1328,11 +1328,11 @@ BYTE WakeUpRadioInterface(radioInterface ri){
             #endif
             #ifdef MIWI_0868_RI
                 #if !defined ENABLE_SLEEP
-                    Printf("\rDue to config issues, MiWi at 868 MHz is always awake.");
+                    Printf("\r\nDue to config issues, MiWi at 868 MHz is always awake.");
                 #else
                     //Wake up MiWi at 868 MHz Interface
                     if(NodeStatus.flags.bits.MIWI0868isON == 1){
-                        Printf("\rMiWi at 868 MHz is still awake.");
+                        Printf("\r\nMiWi at 868 MHz is still awake.");
                         return NO_ERROR;
                     }
                     else{
@@ -1345,7 +1345,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                         switch (aux){
                             case 0x00:     //SUCCESS
                                 NodeStatus.flags.bits.MIWI0868isON = 1;
-                                //Printf("\rMiWi at 868 MHz interface is now awake.");
+                                //Printf("\r\nMiWi at 868 MHz interface is now awake.");
                                 aux = NO_ERROR;
                                 break;
                             case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
@@ -1365,7 +1365,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                                 break;
                         }
                         if(aux != NO_ERROR){
-                            Printf("\rNode failed to wake Miwi 868 MHz interface up."
+                            Printf("\r\nNode failed to wake Miwi 868 MHz interface up."
                                    " HAL error code: ");
                             PrintChar(aux);
                             return aux;
@@ -1375,11 +1375,11 @@ BYTE WakeUpRadioInterface(radioInterface ri){
             #endif
             #ifdef MIWI_2400_RI
                 #if !defined ENABLE_SLEEP
-                    Printf("\rDue to config issues, MiWi at 2,4 GHz is always awake.");
+                    Printf("\r\nDue to config issues, MiWi at 2,4 GHz is always awake.");
                 #else
                     //Wake up MiWi at 2,4 GHz Interface
                     if(NodeStatus.flags.bits.MIWI2400isON == 1){
-                        Printf("\rMiWi at 2,4 GHz is still awake.");
+                        Printf("\r\nMiWi at 2,4 GHz is still awake.");
                         return 0x00;
                     }
                     else{
@@ -1392,7 +1392,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                         switch (aux){
                             case 0x00:     //SUCCESS
                                 NodeStatus.flags.bits.MIWI2400isON = 1;
-                                Printf("\rMiWi at 2,4 GHz interface is now awake.");
+                                Printf("\r\nMiWi at 2,4 GHz interface is now awake.");
                                 aux = NO_ERROR;
                                 break;
                             case 0x01:     //ERR_TXR_FAIL [See MCHP_API.h]
@@ -1412,7 +1412,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
                                 break;
                         }
                         if(aux != NO_ERROR){
-                            Printf("\rNode failed to wake Miwi 2,4 GHz interface up."
+                            Printf("\r\nNode failed to wake Miwi 2,4 GHz interface up."
                                    " HAL error code: ");
                             PrintChar(aux);
                             return aux;
@@ -1431,12 +1431,12 @@ BYTE WakeUpRadioInterface(radioInterface ri){
 
         case NONE:
             //NOP
-            Printf("\rError: NONE of Radio Interfaces were selected to be "
+            Printf("\r\nError: NONE of Radio Interfaces were selected to be "
                    "switched on");
             return INVALID_INTERFACE_ERROR;
 
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -1472,7 +1472,7 @@ BYTE WakeUpRadioInterface(radioInterface ri){
 //        return NO_ERROR;
 //    }
 //    else{
-//        Printf("\rThe node is already awake.");
+//        Printf("\r\nThe node is already awake.");
 //        return NO_ERROR;
 //    }
 //}
@@ -1691,7 +1691,7 @@ BYTE SleepNode(radioInterface forceWakeUp, UINT32 slpTime_ms){
         return NO_ERROR;
     }
     else{
-        Printf("\rThe node is already asleep.");
+        Printf("\r\nThe node is already asleep.");
         return ASLEEP_NODE_ERROR;
     }
 }
@@ -1723,7 +1723,7 @@ BYTE SleepNode(radioInterface forceWakeUp, UINT32 slpTime_ms){
  ******************************************************************************/
 BYTE SetTXPower(radioInterface ri, BYTE power){
     if (NodeStatus.flags.bits.NodeAsleep){
-        Printf("\rError: Trying to write a data byte but node is asleep.");
+        Printf("\r\nError: Trying to write a data byte but node is asleep.");
         return ASLEEP_NODE_ERROR;
     }
     BYTE aux;
@@ -1732,7 +1732,7 @@ BYTE SetTXPower(radioInterface ri, BYTE power){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 //Only 8 possible values. Shift and extract only the 3 MS bits
@@ -1753,12 +1753,12 @@ BYTE SetTXPower(radioInterface ri, BYTE power){
                     MIWI0434_PowerOutput = (BYTE)(aux << 5);
                     return NO_ERROR;
                 }
-                Printf("\rError: MiWi at 434 MHz Power output was not changed.");
+                Printf("\r\nError: MiWi at 434 MHz Power output was not changed.");
                 return MIWI0434_STACK_ERROR;
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 //Only 8 possible values. Shift and extract only the 3 MS bits
@@ -1779,12 +1779,12 @@ BYTE SetTXPower(radioInterface ri, BYTE power){
                     MIWI0868_PowerOutput = (BYTE)(aux << 5);
                     return NO_ERROR;
                 }
-                Printf("\rError: MiWi at 2,4 GHz Power output was not changed.");
+                Printf("\r\nError: MiWi at 2,4 GHz Power output was not changed.");
                 return MIWI0868_STACK_ERROR;
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 spi_prev_ec = GetSPIErrorCounter();
@@ -1800,12 +1800,12 @@ BYTE SetTXPower(radioInterface ri, BYTE power){
                     MIWI2400_PowerOutput = (power & 0xF8);
                     return NO_ERROR;
                 }
-                Printf("\rError: MiWi at 2,4 GHz Power output was not changed.");
+                Printf("\r\nError: MiWi at 2,4 GHz Power output was not changed.");
                 return MIWI2400_STACK_ERROR;
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 // FALTAN COSAS AQUÍ
@@ -1813,16 +1813,16 @@ BYTE SetTXPower(radioInterface ri, BYTE power){
             #endif
         case NONE:
             //NOP
-            Printf("\rError: NONE of the Radio Interfaces were selected to set "
+            Printf("\r\nError: NONE of the Radio Interfaces were selected to set "
                     "its power output.");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Power Output of each Radio Interfaces must be set "
+            Printf("\r\nError: Power Output of each Radio Interfaces must be set "
                    "one by one.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -1855,7 +1855,7 @@ BYTE GetTXPower(radioInterface ri, BYTE *storeItHere){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 *storeItHere = MIWI0434_PowerOutput;
@@ -1863,7 +1863,7 @@ BYTE GetTXPower(radioInterface ri, BYTE *storeItHere){
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 *storeItHere = MIWI0868_PowerOutput;
@@ -1871,7 +1871,7 @@ BYTE GetTXPower(radioInterface ri, BYTE *storeItHere){
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 *storeItHere = MIWI2400_PowerOutput;
@@ -1879,7 +1879,7 @@ BYTE GetTXPower(radioInterface ri, BYTE *storeItHere){
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 *storeItHere = WIFI2400_PowerOutput;
@@ -1887,16 +1887,16 @@ BYTE GetTXPower(radioInterface ri, BYTE *storeItHere){
             #endif
         case NONE:
             //NOP
-            Printf("\rError: NONE of the Radio Interfaces were selected to get "
+            Printf("\r\nError: NONE of the Radio Interfaces were selected to get "
                     "its power output.");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Power Output of each Radio Interface must be read "
+            Printf("\r\nError: Power Output of each Radio Interface must be read "
                    "one by one.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -1914,13 +1914,13 @@ BYTE GetTXPower(radioInterface ri, BYTE *storeItHere){
  ******************************************************************************/
 BYTE PutTXData(radioInterface ri, BYTE data){
     if (NodeStatus.flags.bits.NodeAsleep){
-        Printf("\rError: Trying to write a data byte but node is asleep.");
+        Printf("\r\nError: Trying to write a data byte but node is asleep.");
         return ASLEEP_NODE_ERROR;
     }
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.MIWI0434isON){
@@ -1950,12 +1950,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                         }
                     }
                     else{
-                        Printf("\rError: MiWi at 434 MHz TX buffer is full");
+                        Printf("\r\nError: MiWi at 434 MHz TX buffer is full");
                         return TX_BUFFER_FULL_ERROR;
                     }
                 }
                 else{
-                    Printf("\rError: MiWi at 434 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 434 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -1963,7 +1963,7 @@ BYTE PutTXData(radioInterface ri, BYTE data){
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.MIWI0868isON){
@@ -1992,12 +1992,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                             NodeStatus.MIWI0868_TXbuf_isFull=TRUE;
                     }
                     else{
-                        Printf("\rError: MiWi at 868 MHz TX buffer is full");
+                        Printf("\r\nError: MiWi at 868 MHz TX buffer is full");
                         return TX_BUFFER_FULL_ERROR;
                     }
                 }
                 else{
-                    Printf("\rError: MiWi at 868 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 868 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -2005,7 +2005,7 @@ BYTE PutTXData(radioInterface ri, BYTE data){
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.MIWI2400isON){
@@ -2034,12 +2034,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                             NodeStatus.MIWI2400_TXbuf_isFull=TRUE;
                     }
                     else{
-                        Printf("\rError: MiWi at 2,4 GHz TX buffer is full");
+                        Printf("\r\nError: MiWi at 2,4 GHz TX buffer is full");
                         return TX_BUFFER_FULL_ERROR;
                     }
                 }
                 else{
-                    Printf("\rError: MiWi at 2,4 GHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 2,4 GHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -2047,7 +2047,7 @@ BYTE PutTXData(radioInterface ri, BYTE data){
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.WIFI2400isON){
@@ -2062,12 +2062,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                         else return WIFI_STACK_ERROR;
                     }
                     else{
-                        Printf("\rError: WiFi TX buffer is full");
+                        Printf("\r\nError: WiFi TX buffer is full");
                         return TX_BUFFER_FULL_ERROR;
                     }
                 }
                 else{
-                    Printf("\rError: WiFi Radio Interface is Asleep");
+                    Printf("\r\nError: WiFi Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -2102,12 +2102,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                             NodeStatus.MIWI0434_TXbuf_isFull=TRUE;
                     }
                     else{
-                        Printf("\rError: MiWi at 434 MHz TX buffer is full");
+                        Printf("\r\nError: MiWi at 434 MHz TX buffer is full");
                         return TX_BUFFER_FULL_ERROR;
                     }
                 }
                 else{
-                    Printf("\rError: MiWi at 434 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 434 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
             #endif
@@ -2138,12 +2138,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                             NodeStatus.MIWI0868_TXbuf_isFull=TRUE;
                     }
                     else{
-                        Printf("\rError: MiWi at 868 MHz TX buffer is full");
+                        Printf("\r\nError: MiWi at 868 MHz TX buffer is full");
                         return TX_BUFFER_FULL_ERROR;
                     }
                 }
                 else{
-                    Printf("\rError: MiWi at 868 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 868 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
             #endif
@@ -2174,12 +2174,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                             NodeStatus.MIWI2400_TXbuf_isFull=TRUE;
                     }
                     else{
-                        Printf("\rError: MiWi at 2,4 GHz TX buffer is full");
+                        Printf("\r\nError: MiWi at 2,4 GHz TX buffer is full");
                         return TX_BUFFER_FULL_ERROR;
                     }
                 }
                 else{
-                    Printf("\rError: MiWi at 2,4 GHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 2,4 GHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
             #endif
@@ -2197,12 +2197,12 @@ BYTE PutTXData(radioInterface ri, BYTE data){
                             else return WIFI_STACK_ERROR;
                         }
                         else{
-                            Printf("\rError: WiFi TX buffer is full");
+                            Printf("\r\nError: WiFi TX buffer is full");
                             return TX_BUFFER_FULL_ERROR;
                         }
                     }
                     else{
-                        Printf("\rError: WiFi Radio Interface is Asleep");
+                        Printf("\r\nError: WiFi Radio Interface is Asleep");
                         return ASLEEP_INTERFACE_ERROR;
                     }
                 #endif
@@ -2210,11 +2210,11 @@ BYTE PutTXData(radioInterface ri, BYTE data){
             return NO_ERROR;
         case NONE:
             //NOP
-            Printf("\rError: No data was written. NONE of the Radio Interfaces "
+            Printf("\r\nError: No data was written. NONE of the Radio Interfaces "
                    "were selected");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface. No data was written.");
+            Printf("\r\nError: Unknown Radio Interface. No data was written.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -2229,13 +2229,13 @@ BYTE PutTXData(radioInterface ri, BYTE data){
  ******************************************************************************/
 BYTE DiscardTXData(radioInterface ri){
     if (NodeStatus.flags.bits.NodeAsleep){
-        Printf("\rError: Trying to write a data byte but node is asleep.");
+        Printf("\r\nError: Trying to write a data byte but node is asleep.");
         return ASLEEP_NODE_ERROR;
     }
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.MIWI0434isON){
@@ -2244,7 +2244,7 @@ BYTE DiscardTXData(radioInterface ri){
                     NodeStatus.MIWI0434_TXbuf_isFull = FALSE;
                 }
                 else{
-                    Printf("\rError: MiWi at 434 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 434 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -2252,7 +2252,7 @@ BYTE DiscardTXData(radioInterface ri){
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.MIWI0868isON){
@@ -2261,7 +2261,7 @@ BYTE DiscardTXData(radioInterface ri){
                     NodeStatus.MIWI0868_TXbuf_isFull = FALSE;
                 }
                 else{
-                    Printf("\rError: MiWi at 868 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 868 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -2269,7 +2269,7 @@ BYTE DiscardTXData(radioInterface ri){
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.MIWI2400isON){
@@ -2278,7 +2278,7 @@ BYTE DiscardTXData(radioInterface ri){
                     NodeStatus.MIWI2400_TXbuf_isFull = FALSE;
                 }
                 else{
-                    Printf("\rError: MiWi at 2,4 GHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 2,4 GHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -2286,7 +2286,7 @@ BYTE DiscardTXData(radioInterface ri){
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.flags.bits.WIFI2400isON){
@@ -2295,7 +2295,7 @@ BYTE DiscardTXData(radioInterface ri){
                     NodeStatus.WIFI2400_TXbuf_isFull = FALSE;
                 }
                 else{
-                    Printf("\rError: WiFi Radio Interface is Asleep");
+                    Printf("\r\nError: WiFi Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
                 return NO_ERROR;
@@ -2310,7 +2310,7 @@ BYTE DiscardTXData(radioInterface ri){
                     NodeStatus.MIWI0434_TXbuf_isFull = FALSE;
                 }
                 else{
-                    Printf("\rError: MiWi at 434 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 434 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
             #endif
@@ -2321,7 +2321,7 @@ BYTE DiscardTXData(radioInterface ri){
                     NodeStatus.MIWI0868_TXbuf_isFull = FALSE;
                 }
                 else{
-                    Printf("\rError: MiWi at 868 MHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 868 MHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
             #endif
@@ -2332,7 +2332,7 @@ BYTE DiscardTXData(radioInterface ri){
                     NodeStatus.MIWI2400_TXbuf_isFull = FALSE;
                 }
                 else{
-                    Printf("\rError: MiWi at 2,4 GHz Radio Interface is Asleep");
+                    Printf("\r\nError: MiWi at 2,4 GHz Radio Interface is Asleep");
                     return ASLEEP_INTERFACE_ERROR;
                 }
             #endif
@@ -2344,7 +2344,7 @@ BYTE DiscardTXData(radioInterface ri){
                         NodeStatus.WIFI2400_TXbuf_isFull = FALSE;
                     }
                     else{
-                        Printf("\rError: WiFi Radio Interface is Asleep");
+                        Printf("\r\nError: WiFi Radio Interface is Asleep");
                         return ASLEEP_INTERFACE_ERROR;
                     }
                 #endif
@@ -2352,11 +2352,11 @@ BYTE DiscardTXData(radioInterface ri){
             return NO_ERROR;
         case NONE:
             //NOP
-            Printf("\rError: No data was written. NONE of the Radio Interfaces "
+            Printf("\r\nError: No data was written. NONE of the Radio Interfaces "
                    "were selected");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface. No data was written.");
+            Printf("\r\nError: Unknown Radio Interface. No data was written.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -2385,7 +2385,7 @@ BYTE DiscardTXData(radioInterface ri){
  ******************************************************************************/
 BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
     if (NodeStatus.flags.bits.NodeAsleep){
-        Printf("\rError: Trying to write a data byte but node is asleep.");
+        Printf("\r\nError: Trying to write a data byte but node is asleep.");
         return ASLEEP_NODE_ERROR;
     }
     BOOL isBroadcast = (AddrMode == BROADCAST_ADDRMODE)? TRUE: FALSE;
@@ -2393,7 +2393,7 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
     //If ri is "ALL", address mode must be broadcast. Otherwise, node HAL can't
     //manage to send packets to WiFi and MiWi interfaces using the same address.
     if ((ri == ALL) && !isBroadcast){
-        Printf("\rThe only way to send a packet through all radio interfaces is"
+        Printf("\r\nThe only way to send a packet through all radio interfaces is"
                "using broadcast mode.");
         return INVALID_ADDR_MODE_ERROR;
     }
@@ -2407,7 +2407,7 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(AddrMode & 0xE0){                 //Wifi modes filter
@@ -2416,20 +2416,20 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
                 //Try to send a MiWi packet with the stored data in 434 MHz band
                 aux = SendMIWI(ISM_434, isBroadcast, Address, isLongAddr);
                 if (aux == NO_ERROR){
-                    //Printf("\rSuccessful 434 MHz transmission. Data discarded.");
+                    //Printf("\r\nSuccessful 434 MHz transmission. Data discarded.");
                     MIWI0434_sentPckts++;   //Update statistics.
 
                     return DiscardTXData(ri);   //Discard successfully sent pckt
                 }
                 else{
-                    Printf("\rFailed 434 MHz transmission. Data not discarded.");
+                    Printf("\r\nFailed 434 MHz transmission. Data not discarded.");
                     return aux;
                 }
             #endif
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(AddrMode & 0xE0){                 //Wifi modes filter
@@ -2438,20 +2438,20 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
                 //Try to send a MiWi packet with the stored data in 868 MHz band
                 aux = SendMIWI(ISM_868, isBroadcast, Address, isLongAddr);
                 if(aux == NO_ERROR){
-                    //Printf("\rSuccessful 868 MHz transmission. Data discarded.");
+                    //Printf("\r\nSuccessful 868 MHz transmission. Data discarded.");
                     MIWI0868_sentPckts++;   //Update statistics.
 
                     return DiscardTXData(ri);   //Discard successfully sent pckt
                 }
                 else{
-                    Printf("\rFailed 868 MHz transmission. Data not discarded.");
+                    Printf("\r\nFailed 868 MHz transmission. Data not discarded.");
                     return aux;
                 }
             #endif
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(AddrMode & 0xE0){                 //Wifi modes filter
@@ -2460,20 +2460,20 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
                 //Try to send a MiWi packet with the stored data in 2,4 GHz band
                 aux = SendMIWI(ISM_2G4, isBroadcast, Address, isLongAddr);
                 if(aux == NO_ERROR){
-                    //Printf("\rSuccessful 2,4 GHz transmission. Data discarded.");
+                    //Printf("\r\nSuccessful 2,4 GHz transmission. Data discarded.");
                     MIWI2400_sentPckts++;   //Update statistics.
 
                     return DiscardTXData(ri);   //Discard successfully sent pckt
                 }
                 else{
-                    //Printf("\rFailed 2,4 GHz transmission. Data not discarded.");
+                    //Printf("\r\nFailed 2,4 GHz transmission. Data not discarded.");
                     return aux;
                 }
             #endif
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(AddrMode & 0xD0){                        //MiWi modes filter
@@ -2501,7 +2501,7 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
                     }
                 }
                 else{
-                    Printf("\rFailed 434 MHz transmission.");
+                    Printf("\r\nFailed 434 MHz transmission.");
                     return aux;
                 }
             #endif
@@ -2517,7 +2517,7 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
                     }
                 }
                 else{
-                    Printf("\rFailed 868 MHz transmission.");
+                    Printf("\r\nFailed 868 MHz transmission.");
                     return aux;
                 }
             #endif
@@ -2533,7 +2533,7 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
                     }
                 }
                 else{
-                    Printf("\rFailed 2,4 GHz transmission.");
+                    Printf("\r\nFailed 2,4 GHz transmission.");
                     return aux;
                 }
             #endif
@@ -2548,12 +2548,12 @@ BYTE SendPckt(radioInterface ri, BYTE AddrMode, BYTE *Address){
 
         case NONE:
             //NOP
-            Printf("\rError: No packets were sent. NONE of the Radio Interfaces"
+            Printf("\r\nError: No packets were sent. NONE of the Radio Interfaces"
                    " were selected");
             return INVALID_INTERFACE_ERROR;
 
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -2611,15 +2611,15 @@ BYTE GetRXData(radioInterface ri, BYTE *storeItHere){
     switch (ri){
         case NONE:
             //NOP
-            Printf("\rError: NONE of Radio Interfaces were selected");
+            Printf("\r\nError: NONE of Radio Interfaces were selected");
             return INVALID_INTERFACE_ERROR;
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.MIWI0434_RXbuf_isEmpty){
-                    Printf("\rError: No MiWi at 434 MHz data available!");
+                    Printf("\r\nError: No MiWi at 434 MHz data available!");
                     return RX_BUFFER_EMPTY_ERROR;
                 }
                 else{   //Packet received...
@@ -2652,18 +2652,18 @@ BYTE GetRXData(radioInterface ri, BYTE *storeItHere){
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.MIWI0868_RXbuf_isEmpty){
-                    Printf("\rError: No MiWi at 868 MHz data available!");
+                    Printf("\r\nError: No MiWi at 868 MHz data available!");
                     return RX_BUFFER_EMPTY_ERROR;
                 }
                 else{   //Packet received...
                     if (MIWI0868_payloadToRead > 0){  //...and available data.
                         index = MIWI0868_rxMessage.PayloadSize - MIWI0868_payloadToRead;
                         *storeItHere = MIWI0868_rxMessage.Payload[index];    //Write data
-                        //Printf("\rMiWi at 868 MHz: byte read");
+                        //Printf("\r\nMiWi at 868 MHz: byte read");
                         if(--MIWI0868_payloadToRead == 0){
                             //Decrease counter and evaluate if it was the last
                             //byte to be read. If so, discard the packet (free
@@ -2689,18 +2689,18 @@ BYTE GetRXData(radioInterface ri, BYTE *storeItHere){
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.MIWI2400_RXbuf_isEmpty){
-                    Printf("\rError: No MiWi at 2,4 GHz data available!");
+                    Printf("\r\nError: No MiWi at 2,4 GHz data available!");
                     return RX_BUFFER_EMPTY_ERROR;
                 }
                 else{   //Packet received...
                     if (MIWI2400_payloadToRead > 0){  //...and available data.
                         index = MIWI2400_rxMessage.PayloadSize - MIWI2400_payloadToRead;
                         *storeItHere = MIWI2400_rxMessage.Payload[index];    //Write data
-                        //Printf("\rMiWi at 2,4 GHz: byte read");
+                        //Printf("\r\nMiWi at 2,4 GHz: byte read");
                         if(--MIWI2400_payloadToRead == 0){
                             //Decrease counter and evaluate if it was the last
                             //byte to be read. If so, discard the packet (free
@@ -2726,18 +2726,18 @@ BYTE GetRXData(radioInterface ri, BYTE *storeItHere){
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if (NodeStatus.WIFI2400_RXbuf_isEmpty){
-                    Printf("\rError: No WiFi data available!");
+                    Printf("\r\nError: No WiFi data available!");
                     return RX_BUFFER_EMPTY_ERROR;
                 }
                 else{   //Packet received...
                     if (WIFI2400_payloadToRead > 0){  //...and available data.
                         if(UDPIsGetReady(skt) >0){
                             UDPGet(storeItHere);    //Write data
-                            Printf("\rWiFi byte read");
+                            Printf("\r\nWiFi byte read");
                             if(WIFI2400_payloadToRead-- == 0){
                                 //Decrease counter and evaluate if it was the last
                                 //byte to be read. If so, discard the packet (free
@@ -2770,11 +2770,11 @@ BYTE GetRXData(radioInterface ri, BYTE *storeItHere){
 
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Get received data from a single interface.");
+            Printf("\r\nError: Get received data from a single interface.");
             return INVALID_INTERFACE_ERROR;
         default:
             //NOP
-            Printf("\rError: Unknown radio interface.");
+            Printf("\r\nError: Unknown radio interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -2792,7 +2792,7 @@ BYTE GetRXSourceAddr(radioInterface ri, BYTE *storeItFromHere){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(MIWI0434_payloadToRead > 0){
@@ -2814,7 +2814,7 @@ BYTE GetRXSourceAddr(radioInterface ri, BYTE *storeItFromHere){
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(MIWI0868_payloadToRead > 0){
@@ -2836,7 +2836,7 @@ BYTE GetRXSourceAddr(radioInterface ri, BYTE *storeItFromHere){
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(MIWI2400_payloadToRead > 0){
@@ -2858,7 +2858,7 @@ BYTE GetRXSourceAddr(radioInterface ri, BYTE *storeItFromHere){
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 //Faltan cosas!
@@ -2866,15 +2866,15 @@ BYTE GetRXSourceAddr(radioInterface ri, BYTE *storeItFromHere){
             #endif
         case NONE:
             //NOP
-            Printf("\rError: NONE of Radio Interfaces were selected.");
+            Printf("\r\nError: NONE of Radio Interfaces were selected.");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: RX Source Address must be read for a single radio "
+            Printf("\r\nError: RX Source Address must be read for a single radio "
                    "interface.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -2900,7 +2900,7 @@ BYTE SetSecurityLevel(BYTE SecLevel){
             return NO_ERROR;
         //case...  FUTURE IMPLEMENTATION OF NEW SECURITY LEVELS
         default:
-            Printf("\rInvalid security level.");
+            Printf("\r\nInvalid security level.");
             return INVALID_SECLEVEL_ERROR;
     }
 }
@@ -2917,7 +2917,7 @@ BYTE SetSecurityLevel(BYTE SecLevel){
  ******************************************************************************/
 BYTE SetChannel(radioInterface ri, BYTE channel){
     if (NodeStatus.flags.bits.NodeAsleep){
-        Printf("\rError: Trying to write a data byte but node is asleep.");
+        Printf("\r\nError: Trying to write a data byte but node is asleep.");
         return ASLEEP_NODE_ERROR;
     }
     BOOL ok;
@@ -2925,7 +2925,7 @@ BYTE SetChannel(radioInterface ri, BYTE channel){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < MIWI0434NumChannels){
@@ -2941,13 +2941,13 @@ BYTE SetChannel(radioInterface ri, BYTE channel){
                     }
                     return MIWI0434_STACK_ERROR;
                 }
-                Printf("\rError: Invalid channel for MiWi at 434 MHz.");
+                Printf("\r\nError: Invalid channel for MiWi at 434 MHz.");
                 return INVALID_CHANNEL_ERROR;
             #endif
 
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < MIWI0868NumChannels){
@@ -2963,13 +2963,13 @@ BYTE SetChannel(radioInterface ri, BYTE channel){
                     }
                     return MIWI0868_STACK_ERROR;
                 }
-                Printf("\rError: Invalid channel for MiWi at 868 MHz.");
+                Printf("\r\nError: Invalid channel for MiWi at 868 MHz.");
                 return INVALID_CHANNEL_ERROR;
             #endif
 
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < MIWI2400NumChannels){
@@ -2985,13 +2985,13 @@ BYTE SetChannel(radioInterface ri, BYTE channel){
                     }
                     return MIWI2400_STACK_ERROR;
                 }
-                Printf("\rError: Invalid channel for MiWi at 2,4 GHz.");
+                Printf("\r\nError: Invalid channel for MiWi at 2,4 GHz.");
                 return INVALID_CHANNEL_ERROR;
             #endif
 
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(channel < WIFI2400NumChannels){
@@ -3000,23 +3000,23 @@ BYTE SetChannel(radioInterface ri, BYTE channel){
                     return NO_ERROR;
                 }
                 else{
-                    Printf("\rError: Invalid WiFi channel.");
+                    Printf("\r\nError: Invalid WiFi channel.");
                     return INVALID_CHANNEL_ERROR;
                 }
             #endif
 
         case NONE:
             //NOP
-            Printf("\rError: NONE of Radio Interfaces were selected to set "
+            Printf("\r\nError: NONE of Radio Interfaces were selected to set "
                    "its channel");
             return INVALID_INTERFACE_ERROR;
         case ALL_MIWI:
         case ALL:
-            Printf("\rError: Operating Channels of Radio Interfaces must be set"
+            Printf("\r\nError: Operating Channels of Radio Interfaces must be set"
                    " one by one.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -3049,7 +3049,7 @@ BYTE SetChannel(radioInterface ri, BYTE channel){
  ******************************************************************************/
 BYTE DoChannelScanning(radioInterface ri, BYTE *storeInfoHere){
     if (NodeStatus.flags.bits.NodeAsleep){
-        Printf("\rError: Trying to write a data byte but node is asleep.");
+        Printf("\r\nError: Trying to write a data byte but node is asleep.");
         return ASLEEP_NODE_ERROR;
     }
     BYTE opCh, tempCh, tempNoise, best_ri;
@@ -3057,7 +3057,7 @@ BYTE DoChannelScanning(radioInterface ri, BYTE *storeInfoHere){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 spi_prev_ec = GetSPIErrorCounter();
@@ -3074,7 +3074,7 @@ BYTE DoChannelScanning(radioInterface ri, BYTE *storeInfoHere){
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 spi_prev_ec = GetSPIErrorCounter();
@@ -3091,7 +3091,7 @@ BYTE DoChannelScanning(radioInterface ri, BYTE *storeInfoHere){
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 spi_prev_ec = GetSPIErrorCounter();
@@ -3108,7 +3108,7 @@ BYTE DoChannelScanning(radioInterface ri, BYTE *storeInfoHere){
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 //faltan cosas!
@@ -3177,11 +3177,11 @@ BYTE DoChannelScanning(radioInterface ri, BYTE *storeInfoHere){
             return opCh;
         case NONE:
             //NOP
-            Printf("\rError: NONE of Radio Interfaces were selected to do the "
+            Printf("\r\nError: NONE of Radio Interfaces were selected to do the "
                    "channel scanning.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
 }
@@ -3225,7 +3225,7 @@ BYTE SaveConnTable(BYTE *storeItFromHere){
         }
     }
     status = INTEnableInterrupts();     //Enable interrupts again.
-    Printf("\rValid connections stored: ");
+    Printf("\r\nValid connections stored: ");
     PrintDec(connStored);
     Printf("    Total bytes: ");
     PrintDec((connStored*MIWI_CONN_ENTRY_SIZE)/100);    //Thousands & Hundreds
@@ -3269,7 +3269,7 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
         ConnectionTable[i].status.bits.isValid = 0;
     }
     status = INTEnableInterrupts(); //Enable interrupts again.
-    Printf("\rValid connections restored: ");
+    Printf("\r\nValid connections restored: ");
     PrintDec(numConn);
     return NO_ERROR;
 }
@@ -3318,7 +3318,7 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
         switch (ri){
             case MIWI_0434:
                 #ifndef MIWI_0434_RI
-                    Printf("\rError: MiWi at 434 MHz is not available");
+                    Printf("\r\nError: MiWi at 434 MHz is not available");
                     return UNAVAILABLE_INTERFACE_ERROR;
                 #else
                     status = INTDisableInterrupts();
@@ -3331,7 +3331,7 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
                 #endif
             case MIWI_0868:
                 #ifndef MIWI_0868_RI
-                    Printf("\rError: MiWi at 868 MHz is not available");
+                    Printf("\r\nError: MiWi at 868 MHz is not available");
                     return UNAVAILABLE_INTERFACE_ERROR;
                 #else
                     status = INTDisableInterrupts();
@@ -3344,7 +3344,7 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
                 #endif
             case MIWI_2400:
                 #ifndef MIWI_2400_RI
-                    Printf("\rError: MiWi at 2,4 GHz is not available");
+                    Printf("\r\nError: MiWi at 2,4 GHz is not available");
                     return UNAVAILABLE_INTERFACE_ERROR;
                 #else
                     status = INTDisableInterrupts();
@@ -3386,10 +3386,10 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
             case WIFI_2400:
             case ALL:
             case NONE:
-                Printf("\rError: You must select a single MiWi radio interface.");
+                Printf("\r\nError: You must select a single MiWi radio interface.");
                 return INVALID_INTERFACE_ERROR;
             default:
-                Printf("\rError: Unknown Radio Interface.");
+                Printf("\r\nError: Unknown Radio Interface.");
                 return UNKNOWN_INTERFACE_ERROR;
         }
         INTEnableInterrupts();
@@ -3418,7 +3418,7 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
         switch (ri){
             case MIWI_0434:
                 #ifndef MIWI_0434_RI
-                    Printf("\rError: MiWi at 434 MHz is not available");
+                    Printf("\r\nError: MiWi at 434 MHz is not available");
                     return UNAVAILABLE_INTERFACE_ERROR;
                 #else
                     memcpy(&Routing0434Table, takeItFromHere, 8);
@@ -3430,7 +3430,7 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
                 #endif
             case MIWI_0868:
                 #ifndef MIWI_0868_RI
-                    Printf("\rError: MiWi at 868 MHz is not available");
+                    Printf("\r\nError: MiWi at 868 MHz is not available");
                     return UNAVAILABLE_INTERFACE_ERROR;
                 #else
                     memcpy(&Routing0868Table, takeItFromHere, 8);
@@ -3442,7 +3442,7 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
                 #endif
             case MIWI_2400:
                 #ifndef MIWI_2400_RI
-                    Printf("\rError: MiWi at 2,4 GHz is not available");
+                    Printf("\r\nError: MiWi at 2,4 GHz is not available");
                     return UNAVAILABLE_INTERFACE_ERROR;
                 #else
                     memcpy(&Routing2400Table, takeItFromHere, 8);
@@ -3480,10 +3480,10 @@ BYTE RestoreConnTable(BYTE *takeItFromHere, BYTE numConn){
             case ALL:
             case WIFI_2400:
             case NONE:
-                Printf("\rError: You must select a MiWi radio interface.");
+                Printf("\r\nError: You must select a MiWi radio interface.");
                 return INVALID_INTERFACE_ERROR;
             default:
-                Printf("\rError: Unknown Radio Interface.");
+                Printf("\r\nError: Unknown Radio Interface.");
                 return UNKNOWN_INTERFACE_ERROR;
         }
     }
@@ -3529,7 +3529,7 @@ BYTE DumpRXPckt(radioInterface ri){
     switch (ri){
         case MIWI_0434:
             #ifndef MIWI_0434_RI
-                Printf("\rError: MiWi at 434 MHz is not available");
+                Printf("\r\nError: MiWi at 434 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI0434_RXbuf_isEmpty){
@@ -3540,7 +3540,7 @@ BYTE DumpRXPckt(radioInterface ri){
             #endif
         case MIWI_0868:
             #ifndef MIWI_0868_RI
-                Printf("\rError: MiWi at 868 MHz is not available");
+                Printf("\r\nError: MiWi at 868 MHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI0868_RXbuf_isEmpty){
@@ -3551,7 +3551,7 @@ BYTE DumpRXPckt(radioInterface ri){
             #endif
         case MIWI_2400:
             #ifndef MIWI_2400_RI
-                Printf("\rError: MiWi at 2,4 GHz is not available");
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 if(NodeStatus.MIWI2400_RXbuf_isEmpty){
@@ -3562,7 +3562,7 @@ BYTE DumpRXPckt(radioInterface ri){
             #endif
         case WIFI_2400:
             #ifndef WIFI_2400_RI
-                Printf("\rError: WiFi is not available");
+                Printf("\r\nError: WiFi is not available");
                 return UNAVAILABLE_INTERFACE_ERROR;
             #else
                 //Faltan cosas!
@@ -3572,26 +3572,26 @@ BYTE DumpRXPckt(radioInterface ri){
         case ALL:
         case NONE:
             //NOP
-            Printf("\rError: Invalid radio interface for DumpRXPckt function.");
+            Printf("\r\nError: Invalid radio interface for DumpRXPckt function.");
             return INVALID_INTERFACE_ERROR;
         default:
-            Printf("\rError: Unknown Radio Interface.");
+            Printf("\r\nError: Unknown Radio Interface.");
             return UNKNOWN_INTERFACE_ERROR;
     }
-    Printf("\r\rVolcado por pantalla del paquete radio recibido.\r");
-    Printf("\rFlags: ");
+    Printf("\r\n\rVolcado por pantalla del paquete radio recibido.\r");
+    Printf("\r\nFlags: ");
     PrintChar(rxPckt->flags.Val);
-    Printf("\rRSSI: ");
+    Printf("\r\nRSSI: ");
     PrintChar(rxPckt->PacketRSSI);
-    Printf("\rLQI: ");
+    Printf("\r\nLQI: ");
     PrintChar(rxPckt->PacketLQI);
-    Printf("\rSourcePANID: ");
+    Printf("\r\nSourcePANID: ");
     PrintChar(rxPckt->SourcePANID.v[1]);
     PrintChar(rxPckt->SourcePANID.v[0]);
     if(rxPckt->flags.bits.srcPrsnt)
-        Printf("\rSource Address IS present. Value: ");
+        Printf("\r\nSource Address IS present. Value: ");
     else
-        Printf("\rSource Address IS NOT present. Value: ");
+        Printf("\r\nSource Address IS NOT present. Value: ");
     if(rxPckt->flags.bits.altSrcAddr){
         PrintChar(rxPckt->SourceAddress[1]);
         PrintChar(rxPckt->SourceAddress[0]);
@@ -3601,7 +3601,7 @@ BYTE DumpRXPckt(radioInterface ri){
             PrintChar(rxPckt->SourceAddress[MY_ADDRESS_LENGTH-1-i]);
         }
     }
-    Printf("\rPayload: ");
+    Printf("\r\nPayload: ");
     PrintDec(rxPckt->PayloadSize);
     Printf(" bytes: ");
     for (i=0; i<rxPckt->PayloadSize; i++){
@@ -3645,7 +3645,7 @@ BYTE DumpRXPckt(radioInterface ri){
                 //If RXbuf empty flag = 1 means: NEW PACKET TO BE PROCESSED.
                 MIWI0434_payloadToRead = MIWI0434_rxMessage.PayloadSize;
 
-                //Printf("\rNew MiWi at 434 MHz packet ready to be processed.");
+                //Printf("\r\nNew MiWi at 434 MHz packet ready to be processed.");
                 NodeStatus.MIWI0434_RXbuf_isEmpty = FALSE;      //Activate Flag!
 
                 #if defined PROTOCOL_MIWI && defined ENABLE_DUMMY_BYTE
@@ -3654,7 +3654,7 @@ BYTE DumpRXPckt(radioInterface ri){
                     // treated as stack packets instead of user data.
                     GetRXData(MIWI_0434, &dummy);
                     if(dummy != 0xFF){
-                        Printf("\rDummy byte unexpected value: ");
+                        Printf("\r\nDummy byte unexpected value: ");
                         PrintChar(dummy);
                     }
                 #endif
@@ -3671,7 +3671,7 @@ BYTE DumpRXPckt(radioInterface ri){
                 //If RXbuf empty flag = 1 means: NEW PACKET TO BE PROCESSED.
                 MIWI0868_payloadToRead = MIWI0868_rxMessage.PayloadSize;
 
-                //Printf("\rNew MiWi at 868 MHz packet ready to be processed.");
+                //Printf("\r\nNew MiWi at 868 MHz packet ready to be processed.");
                 NodeStatus.MIWI0868_RXbuf_isEmpty = FALSE;      //Activate Flag!
 
                 #if defined PROTOCOL_MIWI && defined ENABLE_DUMMY_BYTE
@@ -3680,7 +3680,7 @@ BYTE DumpRXPckt(radioInterface ri){
                     // treated as stack packets instead of user data.
                     GetRXData(MIWI_0868, &dummy);
                     if(dummy != 0xFF){
-                        Printf("\rDummy byte unexpected value: ");
+                        Printf("\r\nDummy byte unexpected value: ");
                         PrintChar(dummy);
                     }
                 #endif
@@ -3696,7 +3696,7 @@ BYTE DumpRXPckt(radioInterface ri){
                 //If RXbuf empty flag = 1 means: NEW PACKET TO BE PROCESSED.
                 MIWI2400_payloadToRead = MIWI2400_rxMessage.PayloadSize;
 
-                //Printf("\rNew MiWi at 2.4 GHz packet ready to be processed.");
+                //Printf("\r\nNew MiWi at 2.4 GHz packet ready to be processed.");
                 NodeStatus.MIWI2400_RXbuf_isEmpty = FALSE;      //Activate Flag!
 
                 #if defined PROTOCOL_MIWI && defined ENABLE_DUMMY_BYTE
@@ -3705,7 +3705,7 @@ BYTE DumpRXPckt(radioInterface ri){
                     // treated as stack packets instead of user data.
                     GetRXData(MIWI_2400, &dummy);
                     if(dummy != 0xFF){
-                        Printf("\rDummy byte unexpected value: ");
+                        Printf("\r\nDummy byte unexpected value: ");
                         PrintChar(dummy);
                     }
                 #endif
@@ -3722,7 +3722,7 @@ BYTE DumpRXPckt(radioInterface ri){
                 //If RXbuf empty flag = 1 means: NEW PACKET TO BE PROCESSED.
                 //WIFI_payloadToRead = XXXXXX;     //Data available
                 NodeStatus.WIFI2400_RXbuf_isEmpty = FALSE;      //Activate Flag!
-                Printf("\rNew WiFi packet ready to be processed.");
+                Printf("\r\nNew WiFi packet ready to be processed.");
             }
             else{
                 //If not empty means: STILL PROCESSING THE AVAILABLE PACKET. NOP
@@ -3841,10 +3841,10 @@ static void TimedPICSleep(){
             if(Last_SlpEvCnt == SleepEventCounter){
                 //Timer didn't wake up the node so it must have been another
                 //enabled interruption source => Break.
-                Printf("\rISR");
+                Printf("\r\nISR");
                 break;
             }
-            Printf("\rT1");
+            Printf("\r\nT1");
             //Else: The interruption was timer1 and SleepEventCounter has been
             //updated for checking if the node must keep on sleeping. If so,
             //timer will resume in the next iteration.
@@ -3852,14 +3852,14 @@ static void TimedPICSleep(){
             if((WDTCON & 0x8000) == 0){
                 WDTCONCLR = 0x8000;
                 //Disable WDT should be done by ISR but let's play it safe...
-                Printf("\rISR");
+                Printf("\r\nISR");
                 break;
             }
             else if(RCON & 0x0010){
                 //WDT generated an NMI during sleep mode and woke up the node.
                 WDTCONCLR = 0x8000;     //Disable WDT
                 RCONCLR = 0x0010;       //Clear WDT Timeout reset event.
-                Printf("\rWDT");
+                Printf("\r\nWDT");
                 SleepEventCounter--;   //Decrease count
                 WDTCONSET = 0x0001;     //Reset WDT count
             }            
@@ -3910,7 +3910,7 @@ static BYTE InitMIWI(){
         MiApp_ProtocolInit(TRUE);
         if (GetSPIErrorCounter() != spi_prev_ec){
             ResetSPIErrorCounter();
-            Printf("\rSPI errors occured during MiWi initialization.");
+            Printf("\r\nSPI errors occured during MiWi initialization.");
             return SPI_ERROR;
         }
         Printf("\r\nNetwork Freezer enabled. No hand-shake process.\r\n");
@@ -3921,7 +3921,7 @@ static BYTE InitMIWI(){
         MiApp_ProtocolInit(FALSE);      // Init all MiWi interfaces.
         if (GetSPIErrorCounter() != spi_prev_ec){
             ResetSPIErrorCounter();
-            Printf("\rSPI errors occured during protocol MiWi initialization.");
+            Printf("\r\nSPI errors occured during protocol MiWi initialization.");
             return SPI_ERROR;
         }
 
@@ -3932,15 +3932,15 @@ static BYTE InitMIWI(){
                 #if defined MIWI_0434_RI
                     next_mb = ISM_434;
                     ChannelOffset = MIWI0434ConfChannelOffset;
-                    Printf("\r\rInitialising MiWi at 434 MHz...\r");
+                    Printf("\r\n\nInitialising MiWi at 434 MHz...\r");
                 #elif defined MIWI_0868_RI
                     next_mb = ISM_868;
                     ChannelOffset = MIWI0868ConfChannelOffset;
-                    Printf("\r\rInitialising MiWi at 868 MHz...\r");
+                    Printf("\r\n\nInitialising MiWi at 868 MHz...\r");
                 #elif defined MIWI_2400_RI
                     next_mb = ISM_2G4;
                     ChannelOffset = MIWI2400ConfChannelOffset;
-                    Printf("\r\rInitialising MiWi at 2,4 GHz...\r");
+                    Printf("\r\n\nInitialising MiWi at 2,4 GHz...\r");
                 #else
                     #error "A Miwi Interface must be defined"
                 #endif
@@ -3949,11 +3949,11 @@ static BYTE InitMIWI(){
                 #if defined MIWI_0868_RI
                     next_mb = ISM_868;
                     ChannelOffset = MIWI0868ConfChannelOffset;
-                    Printf("\r\rInitialising MiWi at 868 MHz...\r");
+                    Printf("\r\n\nInitialising MiWi at 868 MHz...\r");
                 #elif defined MIWI_2400_RI
                     next_mb = ISM_2G4;
                     ChannelOffset = MIWI2400ConfChannelOffset;
-                    Printf("\r\rInitialising MiWi at 2,4 GHz...\r");
+                    Printf("\r\n\nInitialising MiWi at 2,4 GHz...\r");
                 #else
                     next_mb = NO_ISM;
                 #endif
@@ -3962,7 +3962,7 @@ static BYTE InitMIWI(){
                 #if defined MIWI_2400_RI
                     next_mb = ISM_2G4;
                     ChannelOffset = MIWI2400ConfChannelOffset;
-                    Printf("\r\rInitialising MiWi at 2,4 GHz...\r");
+                    Printf("\r\n\nInitialising MiWi at 2,4 GHz...\r");
                 #else
                     next_mb = NO_ISM;
                 #endif
@@ -3971,7 +3971,7 @@ static BYTE InitMIWI(){
                 next_mb = NO_ISM;
                 break;
             default:
-                Printf("\rMUY MAL ROLLO\r");
+                Printf("\r\nMUY MAL ROLLO\r");
                 return HAL_INTERNAL_ERROR;
         }
         if (next_mb == NO_ISM){
@@ -4005,7 +4005,7 @@ static BYTE InitMIWI(){
             i = MiApp_SearchConnection(9, 0xFFFFFFFF, mb);
             if (GetSPIErrorCounter() != spi_prev_ec){
                 ResetSPIErrorCounter();
-                Printf("\rSPI errors occured during MiWi initialization.");
+                Printf("\r\nSPI errors occured during MiWi initialization.");
                 return SPI_ERROR;
             }
 
@@ -4053,7 +4053,7 @@ static BYTE InitMIWI(){
             Miwi_Conn_Index = MiApp_EstablishConnection(0, CONN_MODE_DIRECT, mb);
             if (GetSPIErrorCounter() != spi_prev_ec){
                 ResetSPIErrorCounter();
-                Printf("\rSPI errors occured during MiWi initialization.");
+                Printf("\r\nSPI errors occured during MiWi initialization.");
                 return SPI_ERROR;
             }
             if (Miwi_Conn_Index == 0xFF){
@@ -4061,7 +4061,7 @@ static BYTE InitMIWI(){
             }
         }
         else{
-            Printf("\rNo PANs were found. Starting a network... ");
+            Printf("\r\nNo PANs were found. Starting a network... ");
             /******************************************************************/
             // Function MiApp_StartConnection tries to establish a valid
             // connection before returning the index of connection table for the
@@ -4091,7 +4091,7 @@ static BYTE InitMIWI(){
                 MiApp_StartConnection(START_CONN_ENERGY_SCN, 9, 0xFFFFFFFF, mb);
                 if (GetSPIErrorCounter() != spi_prev_ec){
                     ResetSPIErrorCounter();
-                    Printf("\rSPI errors occured during MiWi initialization.");
+                    Printf("\r\nSPI errors occured during MiWi initialization.");
                     return SPI_ERROR;
                 }
             #endif
@@ -4129,8 +4129,8 @@ static BYTE InitMIWI(){
     }
     #endif
 INIT_DONE:
-    Printf("\rAll MiWi interfaces have been initialised.\r\rMiWi connection "
-           "table is showed:\r");
+    Printf("\r\nAll MiWi interfaces have been initialised.\r\nMiWi connection "
+           "table is showed:");
     DumpConnection(0xFF);
     return NO_ERROR;
 }
@@ -4150,7 +4150,7 @@ static BYTE SendMIWI(miwi_band mb, BOOL isBroadcast, BYTE *Address, BOOL isLongA
     }
     else{
         if(isLongAddr){
-            //Printf("\rUnicast MiWi packet - long (EUI or permanent) address mode.");
+            //Printf("\r\nUnicast MiWi packet - long (EUI or permanent) address mode.");
             spi_prev_ec = GetSPIErrorCounter();
             aux = MiApp_UnicastAddress(Address, TRUE, SecEn, mb);
             if(GetSPIErrorCounter() != spi_prev_ec){
@@ -4164,7 +4164,7 @@ static BYTE SendMIWI(miwi_band mb, BOOL isBroadcast, BYTE *Address, BOOL isLongA
             #if defined PROTOCOL_P2P
                 return;
             #else
-                //Printf("\rUnicast MiWi packet - short (or alternative) address mode.");
+                //Printf("\r\nUnicast MiWi packet - short (or alternative) address mode.");
                 spi_prev_ec = GetSPIErrorCounter();
                 aux = MiApp_UnicastAddress(Address, FALSE, SecEn, mb);
                 if(GetSPIErrorCounter() != spi_prev_ec){
@@ -4209,13 +4209,13 @@ static BYTE SendMIWI(miwi_band mb, BOOL isBroadcast, BYTE *Address, BOOL isLongA
 //            Print32Dec(coreTMRvals[i]);
 //            ConsolePut('\r');
 //        }
-//        Printf("\rCom: ");
+//        Printf("\r\nCom: ");
 //        Print32Dec(coreTMRvals[1]+ coreTMRvals[4]-coreTMRvals[0]-coreTMRvals[3]);
 //        //Print32Dec(coreTMRvals[1]+ coreTMRvals[4]+coreTMRvals[7]+coreTMRvals[10]-coreTMRvals[0]-coreTMRvals[3]-coreTMRvals[6]-coreTMRvals[9]);
-//        Printf("\r434: ");
+//        Printf("\r\n434: ");
 //        Print32Dec(coreTMRvals[2]-coreTMRvals[1]);
 //        //Print32Dec(coreTMRvals[2]+ coreTMRvals[5]+coreTMRvals[8]-coreTMRvals[1]-coreTMRvals[4]-coreTMRvals[7]);
-//        Printf("\r2G4: ");
+//        Printf("\r\n2G4: ");
 //        Print32Dec(coreTMRvals[3]-coreTMRvals[2]);
 //        //Print32Dec(coreTMRvals[3]+ coreTMRvals[6]+coreTMRvals[9]-coreTMRvals[2]-coreTMRvals[5]-coreTMRvals[6]);
 //        ConsolePut('\r');
@@ -4245,16 +4245,16 @@ int main(void){
 //    //The following events try to display a message, as UART may be initialised.
 //    else if(RCON & 0x0002){
 //        //Brown-out Reset Handler
-//        Printf("\r\rBrown-out Reset Event. Check batteries (if included).\r\r");
+//        Printf("\r\n\nBrown-out Reset Event. Check batteries (if included).\r\r");
 //    }
 //    else if(RCON & 0x0010){
 //        //Watchdog Timeout Reset Handler.
-//        Printf("\r\rWatchdog Timeout Reset Event during run mode. Every ISR"
+//        Printf("\r\n\nWatchdog Timeout Reset Event during run mode. Every ISR"
 //                "must disbale WDT as a safety policy.\r\r");
 //    }
 //    else if (RCON & 0040){
 //        //Software Reset Handler.
-//        Printf("\r\rSoftware Reset Event.\r\r");
+//        Printf("\r\n\nSoftware Reset Event.\r\r");
 //    }
 //    else
     if (RCON & 0x0080){

@@ -83,6 +83,43 @@ ROM unsigned char CharacterArray[]={'0','1','2','3','4','5','6','7','8','9','A',
 #endif
 
 /******************************* FUNCTIONS ************************************/
+/******************************************************************************
+ * Function:        BYTE USB_Console_Tasks(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          1 si esta listo para procesar la I/O.
+ *
+ * Side Effects:    None
+ *
+ * Overview:        Hace efectivo el envío. Debe ejecutarse al menos una vez
+ *                  por bucle.
+ *
+ * Note:            None
+ *****************************************************************************/
+BYTE USB_Console_Tasks(void)
+{
+    CDCTxService();
+    #if defined(USB_POLLING)
+            // Check bus status and service USB interrupts.
+        USBDeviceTasks(); // Interrupt or polling method.  If using polling, must call
+                                          // this function periodically.  This function will take care
+                                          // of processing and responding to SETUP transactions
+                                          // (such as during the enumeration process when you first
+                                          // plug in).  USB hosts require that USB devices should accept
+                                          // and process SETUP packets in a timely fashion.  Therefore,
+                                          // when using polling, this function should be called
+                                          // regularly (such as once every 1.8ms or faster** [see
+                                          // inline code comments in usb_device.c for explanation when
+                                          // "or faster" applies])  In most cases, the USBDeviceTasks()
+                                          // function does not take very long to execute (ex: <100
+                                          // instruction cycles) before it returns.
+    #endif
+    if((USBDeviceState < CONFIGURED_STATE)||(USBSuspendControl==1)) return 0;
+    return 1;
+}
 
 /*******************************************************************************
 * Function:         void ConsoleInit(void)
@@ -195,6 +232,13 @@ void ConsoleInit(void){
                 USBDeviceAttach();
               #endif
 
+                //se termina de inicializar consola pulsando 's'
+                char tecla = ConsoleGet();
+                while(tecla!='s'){
+                    tecla = ConsoleGet();
+                }
+                //USB_Console_Tasks();
+
         #endif
     #else    
         #error Microcontroller not supported.
@@ -232,7 +276,8 @@ void ConsolePut(BYTE c){
         while(U6STAbits.TRMT == 0);
         U6TXREG = c;
     #elif defined DEBUG_USB
-        ConsolePutROMString(&c);
+        char cc[2] = {c,'\0'};
+        ConsolePutROMString(cc);
     #endif
 }
 
@@ -276,6 +321,7 @@ BYTE ConsoleGet(void){
         Temp = U6RXREG;
         IFS2bits.U6RXIF = 0;
     #elif defined DEBUG_USB
+        while(!USB_Console_Tasks());
         while(getsUSBUSART(USB_In_Buffer,sizeof(USB_In_Buffer))== 0); // PRUEBA
       //  if(getsUSBUSART(USB_In_Buffer,sizeof(USB_In_Buffer)) > 0)
         //{
@@ -305,20 +351,13 @@ void PrintChar(BYTE toPrint){
     BYTE PRINT_VAR;
     PRINT_VAR = toPrint;
     toPrint = (toPrint>>4)&0x0F;
-    
-    #if defined DEBUG_USB
-        ConsolePutROMString(&CharacterArray[toPrint]);
-    #else
-        ConsolePut(CharacterArray[toPrint]);
-    #endif
-    
+
+    ConsolePut(CharacterArray[toPrint]);
+
     toPrint = (PRINT_VAR)&0x0F;
 
-    #if defined DEBUG_USB
-        ConsolePutROMString(&CharacterArray[toPrint]);
-    #else
-        ConsolePut(CharacterArray[toPrint]);
-    #endif
+    ConsolePut(CharacterArray[toPrint]);
+
 }
 
 /*******************************************************************************
@@ -363,8 +402,11 @@ void ConsolePutROMString(ROM char* str){
 *                   corrupted.
 *******************************************************************************/
 void PrintDec(BYTE toPrint){
-    ConsolePut(CharacterArray[toPrint/10]);
-    ConsolePut(CharacterArray[toPrint%10]);
+    //int num = (int) toPrint;
+    char a = CharacterArray[toPrint/10];
+    char b = CharacterArray[toPrint%10];
+    char str[4] = {a,' ',b,'\0'};
+    ConsolePutROMString(str);
 }
 
 /******************************************************************************
@@ -544,43 +586,7 @@ if(tecla!=0)
 
 
 
-/******************************************************************************
- * Function:        BYTE USB_Console_Tasks(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          1 si esta listo para procesar la I/O.
- *
- * Side Effects:    None
- *
- * Overview:        Hace efectivo el envío. Debe ejecutarse al menos una vez
- *                  por bucle.
- *
- * Note:            None
- *****************************************************************************/
-BYTE USB_Console_Tasks(void)
-{
-    CDCTxService();
-    #if defined(USB_POLLING)
-            // Check bus status and service USB interrupts.
-        USBDeviceTasks(); // Interrupt or polling method.  If using polling, must call
-                                          // this function periodically.  This function will take care
-                                          // of processing and responding to SETUP transactions
-                                          // (such as during the enumeration process when you first
-                                          // plug in).  USB hosts require that USB devices should accept
-                                          // and process SETUP packets in a timely fashion.  Therefore,
-                                          // when using polling, this function should be called
-                                          // regularly (such as once every 1.8ms or faster** [see
-                                          // inline code comments in usb_device.c for explanation when
-                                          // "or faster" applies])  In most cases, the USBDeviceTasks()
-                                          // function does not take very long to execute (ex: <100
-                                          // instruction cycles) before it returns.
-    #endif
-    if((USBDeviceState < CONFIGURED_STATE)||(USBSuspendControl==1)) return 0;
-    return 1;
-} 
+
 
 /******************************************************************************
  * Function:        void main(void)
@@ -597,20 +603,37 @@ BYTE USB_Console_Tasks(void)
  *
  * Note:            None
  *****************************************************************************/
-int mainApp(void)
+int mainApppppp(void)
 {
+    int counter = 0;
     //USB_Console_Init();
     ConsoleInit();
     while(1)
     {
-        
+        //DelayMs(1000);
+        //Printf("\r\n Starting MiWi(TM) LSI-CWSN Stack ...");
+       // counter = counter + 1;
     	char tecla;
         tecla=ConsoleGet();
+        
+        char* str = "\r\ney! ";
+        char* str1 = "\r\noh!";
+        //char* both = malloc(strlen(str) + strlen(&counter) + 1);
+        //strcpy(both, str);
+        //strcat(both, &counter);
+        
         if(tecla!=0){
-            Printf("\r\n%c Starting MiWi(TM) LSI-CWSN Stack ...",tecla);
+            if(counter == 0){
+             Printf(str);
+             counter = 1;
+            }else{
+                Printf(str1);
+                counter = 0;}
+
         }
+        //USB_Console_Tasks();
         }
-    }
+    
             /*if(USB_Console_Tasks())
         {
             //ProcessIO();

@@ -493,7 +493,7 @@ void MiWiTasks(void){
             if(indirectMessages[i].flags.bits.isValid){
                 if(MiWi_TickGetDiff(t1, indirectMessages[i].TickStart) > INDIRECT_MESSAGE_TIMEOUT){
                     indirectMessages[i].flags.Val = 0x00;
-                    Printf("\rIndirect message expired.");   //Juan: Added.
+                    Printf("\r\nIndirect message expired.");   //Juan: Added.
                 }
             }
         }
@@ -504,7 +504,7 @@ void MiWiTasks(void){
             if(BroadcastRecords[i].RxCounter > 0){
                 if(MiWi_TickGetDiff(t1, BroadcastRecords[i].StartTick) > BROADCAST_RECORD_TIMEOUT){
                     BroadcastRecords[i].RxCounter = 0;
-                    Printf("\rBroadcast record expired.");   //Juan: Added.
+                    Printf("\r\nBroadcast record expired.");   //Juan: Added.
                 }
             }
         }
@@ -555,7 +555,7 @@ LOAD_RI_VARIABLES:
             next_mb = NO_ISM;
             break;
         default:
-            Printf("\rERROR IN MIWI_TASKS\r");
+            Printf("\r\nERROR IN MIWI_TASKS\r");
             return;
     }
     if (next_mb == NO_ISM){
@@ -812,7 +812,7 @@ static void Transceivers_Tasks(BYTE transceiver){
                 }
                 return;
             #else
-		Printf("\rInvalid call to MRF49XA_1 tasks. This transceiver is unavailable.");
+		Printf("\r\nInvalid call to MRF49XA_1 tasks. This transceiver is unavailable.");
 		return;
             #endif
         case 2:
@@ -872,7 +872,7 @@ static void Transceivers_Tasks(BYTE transceiver){
                 }
                 return;
             #else
-		Printf("\rInvalid call to MRF49XA_2 tasks. This transceiver is unavailable.");
+		Printf("\r\nInvalid call to MRF49XA_2 tasks. This transceiver is unavailable.");
 		return;
             #endif
         case 3:
@@ -912,11 +912,11 @@ static void Transceivers_Tasks(BYTE transceiver){
                 }
                 return;
             #else
-		Printf("\rInvalid call to MRF24J40 tasks. This transceiver is unavailable.");
+		Printf("\r\nInvalid call to MRF24J40 tasks. This transceiver is unavailable.");
 		return;
             #endif
         default:
-	    Printf("\rInvalid call to transceiver tasks. Unknown transceiver.");
+	    Printf("\r\nInvalid call to transceiver tasks. Unknown transceiver.");
 	    return;
     }
     BYTE i;
@@ -1370,12 +1370,12 @@ ThisPacketIsForMe:
                                         //MiWi interface, let's look it up for its long address, which is unique.
                                         OpenSocketInfo->socketHandle = SearchForLongAddress(mb);
                                         if(OpenSocketInfo->socketHandle == 0xFF){                       //Juan
-                                            Printf("\rLongAddr not found.");                            //Juan
+                                            Printf("\r\nLongAddr not found.");                            //Juan
                                             OpenSocketInfo->socketHandle = SearchForShortAddress(mb);   //Juan
                                         }
 
                                         if(OpenSocketInfo->socketHandle == 0xFF){
-                                            Printf("\rShortAddr not found.");                           //Juan
+                                            Printf("\r\nShortAddr not found.");                           //Juan
                                             //otherwise create it
                                             //Family, RxOnWHenIdle, Neighbor/Network, P2P, ShortVal, LongVal, Direct, Valid
                                             //Juan: original value for original struct: 0x8D
@@ -1502,12 +1502,12 @@ ThisPacketIsForMe:
                                 //MiWi interface, let's look it up for its long address, which is unique.
                                 OpenSocketInfo->socketHandle = SearchForLongAddress(mb);
                                 if(OpenSocketInfo->socketHandle == 0xFF){                       //Juan
-                                    Printf("\rLongAddr not found.");                            //Juan
+                                    Printf("\r\nLongAddr not found.");                            //Juan
                                     OpenSocketInfo->socketHandle = SearchForShortAddress(mb);   //Juan
                                 }
 
                                 if(OpenSocketInfo->socketHandle != 0xFF){
-                                    Printf("\rShortAddr found.");                           //Juan
+                                    Printf("\r\nShortAddr found.");                           //Juan
                                     //if it does then get the status of the node already in the table
 
                                     //JUAN: WE MUST UPDATE, not OVERWRITE, the connection status.
@@ -1870,7 +1870,7 @@ ThisPacketIsForMe:
                             #endif
                             break;
                         case ISM_2G4:
-                            Printf("\rJuan: This should not happen.\r");
+                            Printf("\r\nJuan: This should not happen.\r");
 //                            #if defined MIWI_2400_RI
 //                                ConnectionTable[entry].PAN2400ID.Val = TempNodeInfo->PANID.Val;
 //                                ConnectionTable[entry].MIWI2400AltAddress.Val = TempNodeInfo->shortAddr.Val;
@@ -3546,12 +3546,12 @@ NO_INDIRECT_MESSAGE:
         BYTE i, j;
 
         if(index == 0xFF){
-            Printf("\r\n\r\nLong Address: 0x");
+            Printf("\r\n\nLong Address: 0x");
             for(i=0; i<MY_ADDRESS_LENGTH; i++){
                 PrintChar(myLongAddress[MY_ADDRESS_LENGTH-1-i]);
             }
             #if defined MIWI_0434_RI
-                Printf("\rMiWi at 434 MHz.  Channel: ");
+                Printf("\r\nMiWi at 434 MHz.  Channel: ");
                 PrintDec(MIWI0434_currentChannel - MIWI0434ConfChannelOffset);
                 Printf("  Short Addr: ");
                 PrintChar(myShort0434Addr.v[1]);
@@ -3561,7 +3561,7 @@ NO_INDIRECT_MESSAGE:
                 PrintChar(myPAN0434ID.v[0]);
             #endif
             #if defined MIWI_0868_RI
-                Printf("\rMiWi at 868 MHz.  Channel: ");
+                Printf("\r\nMiWi at 868 MHz.  Channel: ");
                 PrintDec(MIWI0868_currentChannel - MIWI0868ConfChannelOffset);
                 Printf("  Short Addr: ");
                 PrintChar(myShort0868Addr.v[1]);
@@ -3571,7 +3571,7 @@ NO_INDIRECT_MESSAGE:
                 PrintChar(myPAN0868ID.v[0]);
             #endif
             #if defined MIWI_2400_RI
-                Printf("\rMiWi at 2,4 GHz.  Channel: ");
+                Printf("\r\nMiWi at 2,4 GHz.  Channel: ");
                 PrintDec(MIWI2400_currentChannel - MIWI2400ConfChannelOffset);
                 Printf("  Short Addr: ");
                 PrintChar(myShort2400Addr.v[1]);
