@@ -7126,7 +7126,7 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap, \
 
             BYTE minRSSI = 0xFF;
             DWORD channelMask = 0x00000001;   
-            ConsolePutROMString((ROM char*)"\r\nEnergy Scan Results:");
+            ConsolePutROMString("\r\nEnergy Scan Results:");
             i = 0;
             while(i<32){
                 if(ChannelMap & FullChannelMap & (channelMask << i)){

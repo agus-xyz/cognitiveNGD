@@ -65,6 +65,8 @@
 /******************************* VARIABLES ************************************/
 ROM unsigned char CharacterArray[]={'0','1','2','3','4','5','6','7','8','9','A',
                                     'B','C','D','E','F'};
+unsigned char TempCharacterArray[] = {'a','a','a'};
+
 #if defined DEBUG_USB
 
     char USB_Out_Buffer[CDC_DATA_OUT_EP_SIZE];
@@ -237,7 +239,10 @@ void ConsoleInit(void){
                 while(tecla!='s'){
                     tecla = ConsoleGet();
                 }
-                //USB_Console_Tasks();
+                BYTE lines = 20;
+                for(i=0;i<lines;i++){
+                    Printf("\n\r");
+                }
 
         #endif
     #else    
@@ -276,8 +281,9 @@ void ConsolePut(BYTE c){
         while(U6STAbits.TRMT == 0);
         U6TXREG = c;
     #elif defined DEBUG_USB
-        char cc[2] = {c,'\0'};
-        ConsolePutROMString(cc);
+        TempCharacterArray[0] = c;
+        TempCharacterArray[1] = '\0';
+        ConsolePutROMString(&TempCharacterArray[0]);
     #endif
 }
 
@@ -402,11 +408,20 @@ void ConsolePutROMString(ROM char* str){
 *                   corrupted.
 *******************************************************************************/
 void PrintDec(BYTE toPrint){
-    //int num = (int) toPrint;
-    char a = CharacterArray[toPrint/10];
-    char b = CharacterArray[toPrint%10];
-    char str[4] = {a,' ',b,'\0'};
-    ConsolePutROMString(str);
+    BYTE a = toPrint/10;
+    BYTE b = toPrint%10;
+    char aa;
+    if(toPrint>9){
+        aa = CharacterArray[a];
+        }else{
+        aa = '0';
+        }
+    char bb = CharacterArray[b];
+    TempCharacterArray[0]=aa;
+    TempCharacterArray[1]=bb;
+    TempCharacterArray[2]='\0';
+    //ROM unsigned char str[] = {aa,bb,'\0'};
+    ConsolePutROMString(&TempCharacterArray[0]);
 }
 
 /******************************************************************************

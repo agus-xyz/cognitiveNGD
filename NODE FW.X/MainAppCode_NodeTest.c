@@ -64,8 +64,8 @@ INIT_STAGE:
     InitAppVariables();
     InitNode();
   //  ConsoleInit();
-BYTE uno = 1;
-BYTE diez = 10;
+//BYTE uno = 1;
+//BYTE diez = 10;
 //    Printf("\n\r");
     //PrintDec(uno);
   //  Printf("\n\r");
