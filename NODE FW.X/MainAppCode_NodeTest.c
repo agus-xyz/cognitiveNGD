@@ -15,20 +15,27 @@
 
 
 #if defined MIWI_2400_RI
-    radioInterface ri = MIWI_2400;
-    BYTE NumChannels = MIWI2400NumChannels;
-    BYTE powerStep = 8;
-    BYTE ri_RI_MASK = MIWI_2400_RI_MASK;
-#elif defined MIWI_0868_RI
-    radioInterface ri = MIWI_0868;
-    BYTE NumChannels = MIWI0868NumChannels;
-    BYTE powerStep = 32;
-    BYTE ri_RI_MASK = MIWI_0868_RI_MASK;
-#elif defined MIWI_0434_RI
+    radioInterface ri3 = MIWI_2400;
+    BYTE NumChannels3 = MIWI2400NumChannels;
+    BYTE powerStep3 = 8;
+    BYTE ri_RI_MASK3 = MIWI_2400_RI_MASK;
+#endif
+#if defined MIWI_0868_RI
+    radioInterface ri2 = MIWI_0868;
+    BYTE NumChannels2 = MIWI0868NumChannels;
+    BYTE powerStep2 = 32;
+    BYTE ri_RI_MASK2 = MIWI_0868_RI_MASK;
+#endif
+#if defined MIWI_0434_RI
     radioInterface ri = MIWI_0434;
     BYTE NumChannels = MIWI0434NumChannels;
     BYTE powerStep = 32;
     BYTE ri_RI_MASK = MIWI_0434_RI_MASK;
+
+    radioInterface ri1 = MIWI_0434;
+    BYTE NumChannels1 = MIWI0434NumChannels;
+    BYTE powerStep1 = 32;
+    BYTE ri_RI_MASK1 = MIWI_0434_RI_MASK;
 #endif
 
 
@@ -63,58 +70,6 @@ int mainApp(void) {
 INIT_STAGE:
     InitAppVariables();
     InitNode();
-  //  ConsoleInit();
-//BYTE uno = 1;
-//BYTE diez = 10;
-//    Printf("\n\r");
-    //PrintDec(uno);
-  //  Printf("\n\r");
-   // Printf("\n\r");
-   // Printf("\n\r");
-    //PrintDec(diez);
-
-/*
-    BYTE a = 'a';
-    BYTE b = 'b';
-    BYTE c = 'c';
-
-    ConsoleInit();
-while(1){
-
-    DelayMs(500);
-    /*Printf("\r\n1 Starting MiWi(TM) LSI-CWSN Stack ...");
-    Printf("\r\n2 Starting MiWi(TM) LSI-CWSN Stack ...");
-    Printf("\r\n3 Starting MiWi(TM) LSI-CWSN Stack ...");
-    Printf("\r\n4 Starting MiWi(TM) LSI-CWSN Stack ...");
-    Printf("\r\n5 Starting MiWi(TM) LSI-CWSN Stack ...");
-    Printf("\r\n6 Starting MiWi(TM) LSI-CWSN Stack ...");
-    Printf("\r\n7 Starting MiWi(TM) LSI-CWSN Stack ...");
-    Printf("\r\n8 Starting MiWi(TM) LSI-CWSN Stack ...");
-
-    //ConsolePut('a');
-    //ConsolePut('a');
-    //ConsolePut('a');
-    //ConsolePut('b');
-    //ConsolePut('c');
-    Printf("\r\nesto va ");
-
-} */
-  // while(!USB_Console_Tasks());
-    
-   // Printf("\r\n PASO POR AQUI ...");
-   // Printf("\r\n PASO POR AQUI TB...");
-    //SWDelay(20000);
-
-//STAGE_TEMP:
-//    Printf("\r\nDurmiendo Nodo... ");
-//    //SleepNode(MIWI_0434, 5000);
-//    //SleepNode(NONE, 5000);
-//    SleepNode((MIWI_0434 | MIWI_2400), 5000);
-//    Printf("YA!");
-//    while(OSCCONbits.SLOCK == 0);
-//    //SWDelay(2000);
- //   goto STAGE07;
-
 
     #if defined NODE_NOP
         while (1){      //Bucle infinito. Mantiene las pilas y no hace nada mas.
@@ -123,7 +78,8 @@ while(1){
                 #if defined MIWI_0434_RI
                     Printf("\r\nSearching for PANs and establishing connections "
                            "in 434 MHZ.");
-                    if(MiApp_SearchConnection(9, 0xFFFFFFFF, MIWI_0434)){
+                    if(MiApp_SearchConne
+                    ction(9, 0xFFFFFFFF, MIWI_0434)){
                         MiApp_EstablishConnection(0, 0, MIWI_0434);
                     }
                     SWDelay(6000);
@@ -157,7 +113,7 @@ while(1){
         }
     #endif
 
-    BYTE SMS1[4] = "Hola";
+    BYTE SMS1[9] = "Ola k ase";
     BYTE SMS2[7] = "Que tal";
     BYTE SMS3[4] = "Bien";
     BYTE SMS4[7] = "Secreto";
@@ -173,8 +129,14 @@ while(1){
 
     BYTE TestAddress[8];
     BYTE memStoreTest[500];
+    BYTE memStoreByte;
+
+    BYTE ch434, ch868, ch2400;
+
+    BYTE i, j, k, r, data;
+    
     while(1){
-        BYTE i, j, k, data;
+        
         UINT16 delay;
 
     //------------------------------------------------------------------------//
@@ -184,7 +146,7 @@ while(1){
     //goto TX_RX_MAXRATE;
     //goto SAVE_RESTORE;
     //goto POWER_DISSIPATION_TEST;
-    goto DEMO_PFC;
+    goto DEMO_PFC_AGUS;
     //goto STAGE05;
 
 STAGE01:        //COMPROBACION DEL ESTADO INICIAL.
@@ -205,27 +167,96 @@ STAGE01:        //COMPROBACION DEL ESTADO INICIAL.
 STAGE02:        //DORMIR Y DESPERTAR INTERFACES Y NODO.
 
         Printf("\r\n\nPruebas de dormir y despertar interfaces o el nodo completo.\r");
-        Printf("\r\nDuerme, MiWi!");
+        Printf("\r\nDuerme, MiWi 434!");
         i = SleepRadioInterface(ri);
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetStatusFlags();
         Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
-        Printf("\r\nIntenta dormir MiWi cuando ya esta dormido.");
+        Printf("\r\nIntenta dormir MiWi 434 cuando ya esta dormido.");
         i = SleepRadioInterface(ri);
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetStatusFlags();
         Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
-        Printf("\r\nDespierta, MiWi!");
+
+        SWDelay(10000);
+        Printf("\r\n\n\n\n\n");
+
+        Printf("\r\nDespierta, MiWi 434!");
         i = WakeUpRadioInterface(ri);
         Printf(" Valor de retorno: ");
         PrintChar(i);
         i = GetStatusFlags();
         Printf("\r\n(Comprobacion) StatusFlags: ");
         PrintChar(i);
+
+        SWDelay(10000);
+        Printf("\r\n\n\n\n\n");
+
+
+      /*  Printf("\r\nDuerme, MiWi 868!");
+        i = SleepRadioInterface(ri2);
+        Printf(" Valor de retorno: ");
+        PrintChar(i);
+        i = GetStatusFlags();
+        Printf("\r\n(Comprobacion) StatusFlags: ");
+        PrintChar(i);
+        Printf("\r\nIntenta dormir MiWi 868 cuando ya esta dormido.");
+        i = SleepRadioInterface(ri2);
+        Printf(" Valor de retorno: ");
+        PrintChar(i);
+        i = GetStatusFlags();
+        Printf("\r\n(Comprobacion) StatusFlags: ");
+        PrintChar(i);
+
+
+        SWDelay(10000);
+        Printf("\r\n\n\n\n\n");
+
+        Printf("\r\nDespierta, MiWi 868!");
+        i = WakeUpRadioInterface(ri2);
+        Printf(" Valor de retorno: ");
+        PrintChar(i);
+        i = GetStatusFlags();
+        Printf("\r\n(Comprobacion) StatusFlags: ");
+        PrintChar(i);
+
+        SWDelay(10000);
+        Printf("\r\n\n\n\n\n");
+
+        Printf("\r\nDuerme, MiWi 2400!");
+        i = SleepRadioInterface(ri3);
+        Printf(" Valor de retorno: ");
+        PrintChar(i);
+        i = GetStatusFlags();
+        Printf("\r\n(Comprobacion) StatusFlags: ");
+        PrintChar(i);
+        Printf("\r\nIntenta dormir MiWi 2400 cuando ya esta dormido.");
+        i = SleepRadioInterface(ri3);
+        Printf(" Valor de retorno: ");
+        PrintChar(i);
+        i = GetStatusFlags();
+        Printf("\r\n(Comprobacion) StatusFlags: ");
+        PrintChar(i);
+
+        SWDelay(10000);
+        Printf("\r\n\n\n\n\n");
+
+        Printf("\r\nDespierta, MiWi 2400!");
+        i = WakeUpRadioInterface(ri3);
+        Printf(" Valor de retorno: ");
+        PrintChar(i);
+        i = GetStatusFlags();
+        Printf("\r\n(Comprobacion) StatusFlags: ");
+        PrintChar(i);
+
+        SWDelay(10000);
+        Printf("\r\n\n\n\n\n");
+*/
+
         Printf("\r\nDuerme, mi amado nodo cognitivo!");
         i = SleepNode(NONE, 16000);
         Printf(" Valor de retorno: ");
@@ -235,6 +266,7 @@ STAGE02:        //DORMIR Y DESPERTAR INTERFACES Y NODO.
         PrintChar(i);
 
         SWDelay(1000);
+        break;
 
 STAGE03:        //CAMBIOS DE CANAL Y GETTER DEL CANAL
 
@@ -258,12 +290,15 @@ STAGE03:        //CAMBIOS DE CANAL Y GETTER DEL CANAL
         PrintDec(i);
 
         SWDelay(1000);
-
-    //goto STAGE05;
+        break;
 
 STAGE04:        //REESCANEO DE CANALES.
 
-        Printf("\r\n\nPruebas de reescaneo de canales.\rValores guardados:");
+           Printf("\r\nCambio a un canal permitido (canal 1).");
+            i = SetChannel(ri, 1);       //Pone un canal permitido.
+         while(TRUE){
+             Printf("\r\n\nPruebas de reescaneo de canales.\rValores guardados:");
+             i = DoChannelScanning(ri, &k);
         for(i=0; i<NumChannels; i++){
             Printf("\r\nCanal: ");
             PrintDec(i);
@@ -271,6 +306,8 @@ STAGE04:        //REESCANEO DE CANALES.
             j= GetScanResult(ri, i, &k);
             (j) ? Printf("Error"): PrintChar(k);
         }
+        SWDelay(5000);
+    }
         //Reescaneo
         i = DoChannelScanning(ri, &k);
         Printf("\r\n\nCanal con menor ruido: ");
@@ -278,7 +315,7 @@ STAGE04:        //REESCANEO DE CANALES.
         Printf("   RSSI: ");
         PrintChar(k);
 
-        for(i=0; i<NumChannels; i++){         
+        for(i=0; i<NumChannels; i++){
             Printf("\r\nCanal: ");
             PrintDec(i);
             Printf("    RSSI: ");
@@ -356,6 +393,14 @@ STAGE05:    //BUFFERS DE TX Y RX. ENVIO, RECEPCION Y COMPROBACION DE UN PAQUETE 
             i = GetStatusFlags();
             Printf("\r\n(Comprobacion) StatusFlags: ");
             PrintChar(i);
+
+            Printf("\r\nCambio a un canal permitido (canal 1).");
+            i = SetChannel(ri, 1);       //Pone un canal permitido.
+            Printf(" Valor de retorno: ");
+            PrintChar(i);
+            i = GetOpChannel(ri);
+            Printf("\r\n(Comprobacion) Canal de MiWi: ");
+            PrintDec(i);
 
             Printf("\r\nEnvio broadcast de lo que se ha escrito.");
             while(TRUE){
@@ -636,6 +681,29 @@ STAGE08:
             TestAddress[5] = 0x55;
             TestAddress[6] = 0x66;
             TestAddress[7] = 0x22;   //Distintivo de la direcci?n del nodo 2.
+            
+
+        /*    Printf("\r\n");
+            Printf("\r\n");
+            Printf("\r\n");
+            Printf("\r\n");
+            Printf("\r\n");
+
+            Printf("\r\nCambio a un canal permitido (canal 1).");
+            i = SetChannel(ri, 1);       //Pone un canal permitido.
+            Printf(" Valor de retorno: ");
+            PrintChar(i);
+            i = GetOpChannel(ri);
+            Printf("\r\n(Comprobacion) Canal de MiWi: ");
+            PrintDec(i);
+
+            Printf("\r\n");
+            Printf("\r\n");
+            Printf("\r\n");
+            Printf("\r\n");
+            Printf("\r\n");
+
+            SWDelay(5000); */
 
             i=0;
             while(i < sizeof(SMS2)){
@@ -647,9 +715,14 @@ STAGE08:
                     i++;
                 }
             }
+          /*   while(GetFreeTXBufSpace(ri)){ //fill the whole payload with the same i.
+                    PutTXData(ri, i);
+                }
+
+            */
             Printf("\r\nSe escribieron en el buffer ");
             PrintDec(i);
-            Printf(" caracteres.\rMensaje: 'Que tal'\rDireccion destino: ");
+            Printf(" caracteres.\r\nMensaje: 'Que tal'\r\nDireccion destino: ");
             PrintTestAddress(LONG_MIWI_ADDRMODE, TestAddress);
 
             while(TRUE){
@@ -680,6 +753,11 @@ STAGE08:
             SWDelay(500);
 
         #elif defined NODE_2
+
+            i = SetChannel(ri, 1);       //Pone un canal permitido.
+            i = SetChannel(ri, 0);
+            i = SetChannel(ri, 1);
+
             Printf("\r\n\nRecepcion de un paquete unicast.\r");
             while (TRUE){
                 i = WhichRIHasData();
@@ -746,7 +824,7 @@ STAGE08:
                                 PrintChar(i);
                                 if (i==0){
                                     Printf(" => OK");
-                                    break;  //TRANSMISI?N CORRECTA, SALE DEL BUCLE
+                                    break;  //TRANSMISION CORRECTA, SALE DEL BUCLE
                                 }
                                 else{
                                     Printf(" => FALLO");
@@ -795,61 +873,79 @@ TX_RX_MAXRATE:
 //            TestAddress[0] = 0x00;
 //            TestAddress[1] = 0x00;
         while(1){
-            i = 255;
-            Printf("\r\nRafaga de paquetes...\rTiempo inicial y final:\r");
+       
+            i = 250;
+            Printf("\r\nRafaga de paquetes...\rTiempo inicial y final:\n\r");
             Print32Dec(ReadCoreTimer());
-            ConsolePut('\r');
-            while(i-- > 1){
-                while(GetFreeTXBufSpace(ri)){
+            Printf("\n\r");
+            while(i-- > 0){
+                while(GetFreeTXBufSpace(ri)){ //fill the whole payload with the same i.
                     PutTXData(ri, i);
                 }
-                //SendPckt(ri, BROADCAST_ADDRMODE, NULL);
-                SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
+                SendPckt(ri, BROADCAST_ADDRMODE, NULL); //once the packet is ready, send it.
+                //SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
                 //SendPckt(ri, SHORT_MIWI_ADDRMODE, TestAddress);
             }
             Print32Dec(ReadCoreTimer());
             Printf("\r\nPaquetes exitosos: ");
             Print32Dec(GetSentPckts(ri));
-            SWDelay(5000);
-        }
+         /*   while(1){ //end
+                while(GetFreeTXBufSpace(ri)){ //fill the whole payload with 0.
+                    PutTXData(ri, 0);
+                }
+                SendPckt(ri, BROADCAST_ADDRMODE, NULL); */
+           
+            SWDelay(10000);
+         }
         #elif defined NODE_2
         i = 0;
-        Printf("\r\nRafaga de paquetes...\rTiempo inicial y final:\r");
+        for(i = 0;i<255;i++){
+            memStoreTest[i] = 0;
+        }
+        i=0;
+        Printf("\r\nRafaga de paquetes recibidos...:\n\r");
         while(1){
             if (WhichRIHasData() & ri_RI_MASK){
                 while(GetPayloadToRead(ri) > 0){
-                    GetRXData(ri, &(memStoreTest[i]));
+                    GetRXData(ri, &(memStoreByte)); //read all the payload and put a byte into the correspondent location
+                    if((memStoreTest[i] != 0) &
+                            (memStoreByte != memStoreTest[i])){
+                        i++; //save in new slot
+                    }
+                    memStoreTest[i] = memStoreByte;
+                    if(i>=249){break;}
                 }
-                i++;
+                    if(i>=249){break;}
             }
-               
-            if (i >= 254){
-                Printf("\r\nFoo!\r");
-                break;
-            }
-               
         }
 
+        Printf("\n\rRecibi un 0\n\r");
+ while(GetPayloadToRead(ri) > 0){
+     GetRXData(ri, &(memStoreByte));
+     if(memStoreByte!=0){
+         Printf("\n\rTengo datos que no son 0\n\r");
+     }
+ }
         for(i=0; i < 255; i++){
-            PrintChar(memStoreTest[i]);
             PrintChar(i);
-            ConsolePut('\r');
-        }
-        Printf("\r\nCOJONES YA!");
-        while(1){
-            while(GetPayloadToRead(ri) > 0){
-                GetRXData(ri, &(memStoreTest[i]));
+            Printf(" - ");
+            PrintChar(memStoreTest[i]);
+            if((memStoreTest[i]-memStoreTest[i+1])>1){
+                Printf("**");
             }
+            Printf("\n\r");
         }
+
+        
         #endif
         break;
 
 RF_FUNCTIONS_MAXRATE:
                         
         i = 200;
-        Printf("\r\nCambio de canal. Tiempo inicial y final:\r");
+        Printf("\r\nCambio de canal. Tiempo inicial y final: \r\n");
         Print32Dec(ReadCoreTimer());
-        ConsolePut('\r');
+        Printf("\r\n");
         while(i-- > 0){
             SetChannel(ri, 1);
         }
@@ -857,9 +953,9 @@ RF_FUNCTIONS_MAXRATE:
         SWDelay(2000);
 
         i = 200;
-        Printf("\r\nCambio de potencia de transmision. Tiempo inicial y final:\r");
+        Printf("\r\nCambio de potencia de transmision. Tiempo inicial y final:\r\n");
         Print32Dec(ReadCoreTimer());
-        ConsolePut('\r');
+        Printf("\r\n");
         while(i-- > 0){
             SetTXPower(ri, i);
         }
@@ -867,9 +963,9 @@ RF_FUNCTIONS_MAXRATE:
         SWDelay(2000);
 
         i = 200;
-        Printf("\r\nDormir/Despertar interfaz. Tiempo inicial y final:\r");
+        Printf("\r\nDormir/Despertar interfaz. Tiempo inicial y final:\r\n");
         Print32Dec(ReadCoreTimer());
-        ConsolePut('\r');
+        Printf("\r\n");
         while(i-- > 0){
             SleepRadioInterface(ri);
             WakeUpRadioInterface(ri);
@@ -957,7 +1053,7 @@ DEMO_PFC:
             TestAddress[4] = 0x44;
             TestAddress[5] = 0x55;
             TestAddress[6] = 0x66;
-            TestAddress[7] = 0x22;   //Distintivo de la direcci?n del nodo 2.
+            TestAddress[7] = 0x22;   //Distintivo de la direccion del nodo 2.
             j = 0;
             i = 0;
             DiscardTXData(ri);
@@ -1000,7 +1096,251 @@ DEMO_PFC:
             }
         #endif
 
-    }
+
+
+  DEMO_PFC_AGUS:
+      #if defined NODE_1
+            TestAddress[0] = 0x00;
+            TestAddress[1] = 0x11;
+            TestAddress[2] = 0x22;
+            TestAddress[3] = 0x33;
+            TestAddress[4] = 0x44;
+            TestAddress[5] = 0x55;
+            TestAddress[6] = 0x66;
+            TestAddress[7] = 0x22;   //Distintivo de la direcci?n del nodo 2.
+            
+            ch434 = GetOpChannel(MIWI_0434);
+            ch868 = GetOpChannel(MIWI_0868);
+            ch2400 = GetOpChannel(MIWI_2400);
+
+            j = 0;
+            i = 0;
+            r = 0; //error counter
+            
+            LED1 = 1;
+            LED2 = 0;
+            LED3 = 0;
+           while(r<5){
+            while(i < sizeof(SMS1)){
+                j = PutTXData(ri, SMS1[i]);
+                if (j){
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
+                    PrintChar(j);
+                }else{
+                    i++;
+                }
+            }
+
+            i = SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
+                Printf("\r\nPaquete enviado en 434 MHz: ");
+                if (i==0){
+                    Printf(" => OK");
+                    r = 0;
+                }
+                else{
+                    Printf(" => FALLO");
+                    r++;
+                    }
+
+                SWDelay(2000);
+            }
+
+            DoChannelScanning(MIWI_0434, memStoreTest);
+            i = DoChannelScanning(MIWI_0868, memStoreTest);
+
+            
+
+            Printf("\r\n Canal menos ruidoso a 868 MHz es: ");
+            PrintChar(i);
+
+            ri = MIWI_0868;
+            LED1 = 0;
+            LED2 = 1;
+            SetChannel(ri, ch868);
+            Printf("\r\n Tramitamos con RX el cambio en 868 MHZ al canal ");
+            PrintChar(i);
+
+            j= 1;
+            while(j){
+            j = PutTXData(ri, 'c'); //comando para cambiar de canal
+                if (j){
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
+                    PrintChar(j);
+                }
+
+            j = PutTXData(ri, i);
+                if (j){
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
+                    PrintChar(j);
+                }
+
+
+            j = SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
+                Printf("\r\nRX contesta: ");
+                if (j==0){
+                    Printf(" => OK");
+                }
+                else{
+                    Printf(" => FALLO");
+                    }
+                SWDelay(2000);
+            }
+
+            SetChannel(ri, i);  //cambiamos al nuevo canal
+
+            r = 0; //error counter
+            while(r<6){
+            while(i < sizeof(SMS1)){
+                j = PutTXData(ri, SMS1[i]);
+                if (j){
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
+                    PrintChar(j);
+                }else{
+                    i++;
+                }
+            }
+
+            i = SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
+                Printf("\r\nPaquete enviado en 868 MHz:: ");
+                if (i==0){
+                    Printf(" => OK");
+                    r = 0;
+                }
+                else{
+                    Printf(" => FALLO");
+                    r++;
+                    }
+
+                SWDelay(2000);
+            }
+
+            DoChannelScanning(MIWI_0434, memStoreTest);
+            DoChannelScanning(MIWI_0868, memStoreTest);
+            i = DoChannelScanning(MIWI_2400, memStoreTest);
+
+            Printf("\r\n Canal menos ruidoso a 2.4 GHz es: ");
+            PrintChar(i);
+
+            ri = MIWI_2400;
+            LED2 = 0;
+            LED3 = 1;
+            SetChannel(ri, ch2400);
+            Printf("\r\n Tramitamos con RX el cambio en 2.4 GHz al canal ");
+            PrintDec(i);
+
+            j=1;
+            while(j){
+            j = PutTXData(ri, 'c'); //comando para cambiar de canal
+                if (j){
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
+                    PrintDec(j);
+                }
+
+            j = PutTXData(ri, i);
+                if (j){
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
+                    PrintDec(j);
+                }
+
+
+            j = SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
+                Printf("\r\nRX contesta: ");
+                if (j==0){
+                    Printf(" => OK");
+                }
+                else{
+                    Printf(" => FALLO");
+                     }
+
+                SWDelay(2000);
+            }
+
+            SetChannel(ri, i);  //cambiamos al nuevo canal
+
+            for(r=0;r<5;r++){
+              while(i < sizeof(SMS1)){
+                j = PutTXData(ri, SMS1[i]);
+                if (j){
+                    Printf("\r\nFallo al escribir en el buffer. Codigo de error: ");
+                    PrintChar(j);
+                }else{
+                    i++;
+                }
+            }
+
+            i = SendPckt(ri, LONG_MIWI_ADDRMODE, TestAddress);
+                Printf("\r\nPaquete enviado en 2.4 GHz:: ");
+                if (i==0){
+                    Printf(" => OK");
+                }
+                else{
+                    Printf(" => FALLO");
+                    }
+
+                SWDelay(2000);
+             }
+            
+            Printf("\r\nFIN DE LA DEMO :)");
+
+            SWDelay(15000);
+            
+           
+        #elif defined NODE_2
+
+            while (TRUE){
+                i = WhichRIHasData();
+                switch(i){
+                    case MIWI_0434_RI_MASK:
+                        Printf("\r\nMensaje recibido en RI 434: ");
+                        while(GetPayloadToRead(MIWI_0434) > 0){
+                        GetRXData(MIWI_0434, &data);
+                        ConsolePut(data);
+                        if(data=='c'){
+                            GetRXData(MIWI_0434, &data);
+                            PrintDec(data);
+                            Printf("\r\nRI en 434 MHz cambia a canal ");
+                            PrintDec(data);
+                            SetChannel(MIWI_0434, data);
+                        }
+                        }
+                        break;
+
+                    case MIWI_0868_RI_MASK:
+                        Printf("\r\nMensaje recibido en RI 868: ");
+                        while(GetPayloadToRead(MIWI_0868) > 0){
+                        GetRXData(MIWI_0868, &data);
+                        ConsolePut(data);
+                        if(data=='c'){
+                            GetRXData(MIWI_0868, &data);
+                            PrintDec(data);
+                            Printf("\r\nRI en 868 MHz cambia a canal ");
+                            PrintDec(data);
+                            SetChannel(MIWI_0868, data);
+                        }
+                        }
+                        break;
+                    case MIWI_2400_RI_MASK:
+                        Printf("\r\nMensaje recibido en RI 2400: ");
+                        while(GetPayloadToRead(MIWI_2400) > 0){
+                        GetRXData(MIWI_2400, &data);
+                        ConsolePut(data);
+                        if(data=='c'){
+                            GetRXData(MIWI_2400, &data);
+                            PrintDec(data);
+                            Printf("\r\nRI en 2.4 GHz cambia a canal ");
+                            PrintDec(data);
+                            SetChannel(MIWI_2400, data);
+                        }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                }
+
+        #endif
+}
     return 0;
 }
 

@@ -61,15 +61,10 @@ int mainApp(void) {
 
 INIT_STAGE:
     InitAppVariables();
-    //InitNode();
+    InitNode();
 
     //SWDelay(20000);
-ConsoleInit();
-BYTE uno = 1;
-BYTE diez = 10;
-    PrintDec(uno);
-    Printf("\n\r");
-    PrintDec(diez);
+
 //STAGE_TEMP:
 //    Printf("\rDurmiendo Nodo... ");
 //    //SleepNode(MIWI_0434, 5000);

@@ -1414,7 +1414,18 @@ TX_END_HERE:
                     else if(AssessmentMode == CHANNEL_ASSESSMENT_ENERGY_DETECT){
                         count += MRF49XA_Status->bits.RSSI_ATS;
                     }
-                    MRF49XA_1_PHY_CS = 1; ////// AGUS CAMBIADO - BUG
+
+                    if(MRF49XAnum == 1) {
+                        #if defined MRF49XA_1
+                            MRF49XA_1_PHY_CS = 1; ////// AGUS CAMBIADO
+                        #endif
+                    }else if (MRF49XAnum == 2){
+                        #if defined MRF49XA_2
+                            MRF49XA_2_PHY_CS = 1; 
+                        #endif
+                    }
+
+
                     for(k = 0; k < 0x1F; k++) {}
                 }
 

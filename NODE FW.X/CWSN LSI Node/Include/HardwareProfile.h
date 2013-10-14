@@ -35,7 +35,7 @@
 
 #include "Compiler.h"
 #include "GenericTypeDefs.h"
-#include "HW_BasicConfig.h"
+#include "HardwareConfig.h"
 #include "WirelessProtocols/ConfigApp.h"
 #include "Transceivers/ConfigTransceivers.h"
 
@@ -316,6 +316,73 @@
     #define BUTTON_1_PORT_MASK  0x00100000  //esto esta bien? ********* PREGUNTAR
     #define BUTTON_2_PORT_MASK  0x10000000  //esto esta bien?
 
+    //leds
+    #define LED1               PORTAbits.RA6
+    #define LED1_TRIS          TRISAbits.TRISA6
+    #define LED2               PORTAbits.RA5
+    #define LED2_TRIS          TRISAbits.TRISA5
+    #define LED3               PORTAbits.RA4
+    #define LED3_TRIS          TRISAbits.TRISA4
+
+    //header pins
+    #define HEADER_00           PORTEbits.RE9
+    #define HEADER_00_TRIS      TRISEbits.TRISE9
+    #define HEADER_01           PORTBbits.RB5
+    #define HEADER_01_TRIS      TRISBbits.TRISB5
+    #define HEADER_02           PORTBbits.RB3
+    #define HEADER_02_TRIS      TRISBbits.TRISB3
+    #define HEADER_03           PORTBbits.RB11
+    #define HEADER_03_TRIS      TRISBbits.TRISB11
+    #define HEADER_04           PORTBbits.RB12
+    #define HEADER_04_TRIS      TRISBbits.TRISB12
+    #define HEADER_05           PORTBbits.RB13
+    #define HEADER_05_TRIS      TRISBbits.TRISB13
+    #define HEADER_06           PORTFbits.RF3
+    #define HEADER_06_TRIS      TRISFbits.TRISF3
+    #define HEADER_09           PORTDbits.RD8
+    #define HEADER_09_TRIS      TRISDbits.TRISD8
+    #define HEADER_10           PORTAbits.RA3
+    #define HEADER_11_TRIS      TRISAbits.TRISA3
+    #define HEADER_12           PORTGbits.RG2
+    #define HEADER_12_TRIS      TRISGbits.TRISG2
+    #define HEADER_13           PORTGbits.RG3
+    #define HEADER_13_TRIS      TRISGbits.TRISG3
+    #define HEADER_16           PORTBbits.RB15
+    #define HEADER_16_TRIS      TRISBbits.TRISB15
+    #define HEADER_17           PORTBbits.RB14
+    #define HEADER_17_TRIS      TRISBbits.TRISB14
+    #define HEADER_18           PORTAbits.RA9
+    #define HEADER_18_TRIS      TRISAbits.TRISA9
+    #define HEADER_19           PORTAbits.RA10
+    #define HEADER_19_TRIS      TRISAbits.TRISA10
+    #define HEADER_20           PORTGbits.RG9
+    #define HEADER_20_TRIS      TRISGbits.TRISG9
+    #define HEADER_21           PORTGbits.RG7
+    #define HEADER_21_TRIS      TRISGbits.TRISG7
+    #define HEADER_22           PORTEbits.RE7
+    #define HEADER_22_TRIS      TRISEbits.TRISE7
+    #define HEADER_23           PORTEbits.RE5
+    #define HEADER_23_TRIS      TRISEbits.TRISE5
+    #define HEADER_25           PORTFbits.RF1
+    #define HEADER_25_TRIS      TRISFbits.TRISF1
+    #define HEADER_26           PORTFbits.RF0
+    #define HEADER_26_TRIS      TRISFbits.TRISF0
+    #define HEADER_27           PORTDbits.RD11
+    #define HEADER_27_TRIS      TRISDbits.TRISD11
+    #define HEADER_32           PORTDbits.RD9
+    #define HEADER_32_TRIS      TRISDbits.TRISD9
+    #define HEADER_33           PORTDbits.RD6
+    #define HEADER_33_TRIS      TRISDbits.TRISD6
+    #define HEADER_35           PORTEbits.RE6
+    #define HEADER_35_TRIS      TRISEbits.TRISE6
+    #define HEADER_36           PORTCbits.RC1
+    #define HEADER_36_TRIS      TRISCbits.TRISC1
+    #define HEADER_37           PORTGbits.RG6
+    #define HEADER_37_TRIS      TRISGbits.TRISG6
+    #define HEADER_38           PORTGbits.RG8
+    #define HEADER_38_TRIS      TRISGbits.TRISG8
+    #define HEADER_39           PORTBbits.RB4
+    #define HEADER_39_TRIS      TRISBbits.TRISB4
 #endif
 
 
@@ -435,28 +502,20 @@
         #define MRF49XA_1_IE        IEC0bits.INT4IE
     #endif
 
- // DEBUGGING PINS
- #if defined cNGD_PLATFORM
+ // OTHER PINS
+    #if defined cNGD_PLATFORM
 
-   /*     #define MRF49XA_1_PHY_CS            LATBbits.LATB10
+        #define MRF49XA_1_PHY_CS            LATBbits.LATB10
         #define MRF49XA_1_PHY_CS_TRIS       TRISBbits.TRISB10
         #define MRF49XA_1_PHY_RESETn        LATBbits.LATB7
         #define MRF49XA_1_PHY_RESETn_TRIS   TRISBbits.TRISB7
         #define MRF49XA_1_nFSEL             LATGbits.LATG14
         #define MRF49XA_1_nFSEL_TRIS        TRISGbits.TRISG14
         #define MRF49XA_1_FINT              PORTGbits.RG13
-        #define MRF49XA_1_FINT_TRIS         TRISGbits.TRISG13 */
+        #define MRF49XA_1_FINT_TRIS         TRISGbits.TRISG13 
 
-// PARA PRUEBA Y TEMPORALMENTE
-
-    #define MRF49XA_1_PHY_CS            LATDbits.LATD4
-    #define MRF49XA_1_PHY_CS_TRIS       TRISDbits.TRISD4
-    #define MRF49XA_1_PHY_RESETn        LATDbits.LATD1
-    #define MRF49XA_1_PHY_RESETn_TRIS   TRISDbits.TRISD1
-    #define MRF49XA_1_nFSEL             LATDbits.LATD14
-    #define MRF49XA_1_nFSEL_TRIS        TRISDbits.TRISD14
-    #define MRF49XA_1_FINT              PORTFbits.RF12
-    #define MRF49XA_1_FINT_TRIS         TRISFbits.TRISF12
+        #define MRF49XA_1_PWR               PORTBbits.RB9
+        #define MRF49XA_1_PWR_TRIS          TRISBbits.TRISB9
 
  #elif defined FCD_Exp_PLATFORM
 
@@ -517,7 +576,7 @@
         #define MRF49XA_2_SPICONCLR   SPI4CONCLR
     #endif
 
-// DEBUGGING PINS
+// OTHER PINS
  #if defined cNGD_PLATFORM
 
     #define MRF49XA_2_PHY_CS            LATDbits.LATD4
@@ -528,6 +587,9 @@
     #define MRF49XA_2_nFSEL_TRIS        TRISDbits.TRISD14
     #define MRF49XA_2_FINT              PORTFbits.RF12
     #define MRF49XA_2_FINT_TRIS         TRISFbits.TRISF12
+
+    #define MRF49XA_2_PWR               PORTDbits.RD2
+    #define MRF49XA_2_PWR_TRIS          TRISDbits.TRISD2
 
 #elif defined FCD_Exp_PLATFORM
 
@@ -701,6 +763,8 @@
         #define PHY_WAKE            LATEbits.LATE1
         #define PHY_WAKE_TRIS       TRISEbits.TRISE1
 
+        #define MRF24J40_PWR       PORTEbits.RE2
+        #define MRF24J40_PWR_TRIS  TRISEbits.TRISE2
 #endif
 
     #if defined MRF24J40_USES_INT0

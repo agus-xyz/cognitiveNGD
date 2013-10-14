@@ -1901,6 +1901,157 @@ BYTE GetTXPower(radioInterface ri, BYTE *storeItHere){
     }
 }
 
+
+BYTE SwitchOnRI(radioInterface ri){
+     switch (ri){
+        case MIWI_0434:
+            #ifndef MIWI_0434_RI
+                Printf("\r\nError: MiWi at 434 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+//                MRF49XA_1_PWR = 1;
+                return NO_ERROR;
+            #endif
+        case MIWI_0868:
+            #ifndef MIWI_0868_RI
+                Printf("\r\nError: MiWi at 868 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+                //MRF49XA_2_PWR = 1;
+                return NO_ERROR;
+            #endif
+        case MIWI_2400:
+            #ifndef MIWI_2400_RI
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+                MRF24J40_PWR = 1;
+                return NO_ERROR;
+            #endif
+        case NONE:
+            //NOP
+            Printf("\r\nError: NONE of the Radio Interfaces were selected to "
+                    "switch its power on.");
+            return INVALID_INTERFACE_ERROR;
+        case ALL_MIWI:
+        case ALL:
+            #ifndef MIWI_0434_RI
+                Printf("\r\nError: MiWi at 434 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+       //         MRF49XA_1_PWR = 1;
+            #endif
+            #ifndef MIWI_0868_RI
+                Printf("\r\nError: MiWi at 868 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+             //   MRF49XA_2_PWR = 1;
+            #endif
+            #ifndef MIWI_2400_RI
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+                MRF24J40_PWR = 1;
+            #endif
+                return NO_ERROR;
+        default:
+            Printf("\r\nError: Unknown Radio Interface.");
+            return UNKNOWN_INTERFACE_ERROR;
+    }
+}
+
+BYTE SwitchOffRI(radioInterface ri){
+        switch (ri){
+        case MIWI_0434:
+            #ifndef MIWI_0434_RI
+                Printf("\r\nError: MiWi at 434 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+         //       MRF49XA_1_PWR = 0;
+                return NO_ERROR;
+            #endif
+        case MIWI_0868:
+            #ifndef MIWI_0868_RI
+                Printf("\r\nError: MiWi at 868 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+            //    MRF49XA_2_PWR = 0;
+                return NO_ERROR;
+            #endif
+        case MIWI_2400:
+            #ifndef MIWI_2400_RI
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+                MRF24J40_PWR = 0;
+                return NO_ERROR;
+            #endif
+        case NONE:
+            //NOP
+            Printf("\r\nError: NONE of the Radio Interfaces were selected to "
+                    "switch its power on.");
+            return INVALID_INTERFACE_ERROR;
+        case ALL_MIWI:
+        case ALL:
+            #ifndef MIWI_0434_RI
+                Printf("\r\nError: MiWi at 434 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+        //        MRF49XA_1_PWR = 0;
+            #endif
+            #ifndef MIWI_0868_RI
+                Printf("\r\nError: MiWi at 868 MHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+             //   MRF49XA_2_PWR = 0;
+            #endif
+            #ifndef MIWI_2400_RI
+                Printf("\r\nError: MiWi at 2,4 GHz is not available");
+                return UNAVAILABLE_INTERFACE_ERROR;
+            #else
+                MRF24J40_PWR = 0;
+            #endif
+                return NO_ERROR;
+        default:
+            Printf("\r\nError: Unknown Radio Interface.");
+            return UNKNOWN_INTERFACE_ERROR;
+    }
+}
+
+BYTE SwitchOnLed(BYTE led){
+   switch(led){
+       case 1:
+           LED1 = 1;
+           break;
+       case 2:
+           LED2 = 1;
+           break;
+       case 3:
+           LED3 = 1;
+           break;
+       default:
+           return INVALID_INPUT_ERROR;
+           }
+
+       return NO_ERROR;
+}
+BYTE SwitchOffLed(BYTE led){
+    switch(led){
+       case 1:
+           LED1 = 0;
+           break;
+       case 2:
+           LED2 = 0;
+           break;
+       case 3:
+           LED3 = 0;
+           break;
+       default:
+           return INVALID_INPUT_ERROR;
+           }
+       return NO_ERROR;
+}
+
 /*******************************************************************************
  * Function: PutTXData(radioInterface ri, BYTE data)
  * Input:    radioInterface ri - Radio Interface chosen (MIWI_0434, MIWI_0868,
@@ -3638,6 +3789,7 @@ BYTE DumpRXPckt(radioInterface ri){
 {
     BYTE MiWiWithUserData = 0;
     MiWiWithUserData = MiApp_MessageAvailable(ALL_ISM);
+    //coreTMRvals[1] = ReadCoreTimer();
     #ifdef MIWI_0434_RI
         if (MiWiWithUserData & MIWI_0434_RI_MASK){
             //There is a packet...
@@ -3663,7 +3815,7 @@ BYTE DumpRXPckt(radioInterface ri){
         }
         //No packets from MIWI radio interface...
     #endif
-
+    //coreTMRvals[2] = ReadCoreTimer();
     #ifdef MIWI_0868_RI
         if (MiWiWithUserData & MIWI_0868_RI_MASK){
             //There is a packet...
@@ -3689,6 +3841,7 @@ BYTE DumpRXPckt(radioInterface ri){
         }
         //No packets from MIWI radio interface...
     #endif
+    //coreTMRvals[3] = ReadCoreTimer();
     #ifdef MIWI_2400_RI
         if (MiWiWithUserData & MIWI_2400_RI_MASK){
             //There is a packet...
@@ -3714,6 +3867,7 @@ BYTE DumpRXPckt(radioInterface ri){
         }
         //No packets from MIWI radio interface...
     #endif
+    coreTMRvals[4] = ReadCoreTimer();
 
     #ifdef WIFI_2400_RI
         if (WIFIPcktAvailable){
@@ -4202,23 +4356,28 @@ static BYTE SendMIWI(miwi_band mb, BOOL isBroadcast, BYTE *Address, BOOL isLongA
             #if defined NODE_DOES_MAINTENANCE_TASKS
                 AllStacksTasks();
             #endif
+            }
+  /*      BYTE i;
+        for(i = 0; i< 5; i++){
+            Print32Dec(coreTMRvals[i]);
+            Printf("\r\n");
         }
-        //coreTMRvals[4] = ReadCoreTimer();
-//        BYTE i;
-//        for(i = 0; i< 5; i++){
-//            Print32Dec(coreTMRvals[i]);
-//            ConsolePut('\r');
-//        }
-//        Printf("\r\nCom: ");
-//        Print32Dec(coreTMRvals[1]+ coreTMRvals[4]-coreTMRvals[0]-coreTMRvals[3]);
-//        //Print32Dec(coreTMRvals[1]+ coreTMRvals[4]+coreTMRvals[7]+coreTMRvals[10]-coreTMRvals[0]-coreTMRvals[3]-coreTMRvals[6]-coreTMRvals[9]);
-//        Printf("\r\n434: ");
-//        Print32Dec(coreTMRvals[2]-coreTMRvals[1]);
-//        //Print32Dec(coreTMRvals[2]+ coreTMRvals[5]+coreTMRvals[8]-coreTMRvals[1]-coreTMRvals[4]-coreTMRvals[7]);
-//        Printf("\r\n2G4: ");
-//        Print32Dec(coreTMRvals[3]-coreTMRvals[2]);
-//        //Print32Dec(coreTMRvals[3]+ coreTMRvals[6]+coreTMRvals[9]-coreTMRvals[2]-coreTMRvals[5]-coreTMRvals[6]);
-//        ConsolePut('\r');
+        Printf("\r\nCom: ");
+        Print32Dec(coreTMRvals[1] - coreTMRvals[0]);
+        //Print32Dec(coreTMRvals[1]+ coreTMRvals[4]+coreTMRvals[7]+coreTMRvals[10]-coreTMRvals[0]-coreTMRvals[3]-coreTMRvals[6]-coreTMRvals[9]);
+        Printf("\r\n434: ");
+        Print32Dec(coreTMRvals[2]-coreTMRvals[1]);
+        //Print32Dec(coreTMRvals[2]+ coreTMRvals[5]+coreTMRvals[8]-coreTMRvals[1]-coreTMRvals[4]-coreTMRvals[7]);
+        Printf("\r\n868: ");
+        Print32Dec(coreTMRvals[3]-coreTMRvals[2]);
+        //Print32Dec(coreTMRvals[3]+ coreTMRvals[6]+coreTMRvals[9]-coreTMRvals[2]-coreTMRvals[5]-coreTMRvals[6]);
+        ConsolePut('\r');
+        Printf("\r\n2G4: ");
+        Print32Dec(coreTMRvals[4]-coreTMRvals[3]);
+        //Print32Dec(coreTMRvals[3]+ coreTMRvals[6]+coreTMRvals[9]-coreTMRvals[2]-coreTMRvals[5]-coreTMRvals[6]);
+        ConsolePut('\r');
+
+        SWDelay(7000); */
     }
 
     void __ISR(_CHANGE_NOTICE_VECTOR, ipl6) _CN_Interrupt_ISR(void){

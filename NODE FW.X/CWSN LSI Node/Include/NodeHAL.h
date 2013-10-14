@@ -268,6 +268,11 @@ BYTE SleepRadioInterface(radioInterface ri);
 BYTE WakeUpRadioInterface(radioInterface ri);
 BYTE SetTXPower(radioInterface ri, BYTE powerOutput);
 BYTE GetTXPower(radioInterface ri, BYTE *storeItHere);
+BYTE SwitchOnRI(radioInterface ri);
+BYTE SwitchOffRI(radioInterface ri);
+
+BYTE SwitchOnLed(BYTE led);
+BYTE SwitchOffLed(BYTE led);
 
 //Send & Receive - Radio Communication300
 BYTE PutTXData(radioInterface ri, BYTE data);

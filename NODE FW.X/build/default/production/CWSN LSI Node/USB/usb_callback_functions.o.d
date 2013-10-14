@@ -1,15 +1,16 @@
-build/default/production/_ext/967747917/usb_device.o:  \
- ../libs/Microchip/USB/usb_device.c  \
- /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/./USB/usb.h  \
+build/default/production/CWSN\ LSI\ Node/USB/usb_callback_functions.o:  \
+ CWSN\ LSI\ Node/USB/usb_callback_functions.c  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/GenericTypeDefs.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Compiler.h  \
- /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/./USB/usb_config.h  \
+ /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/./USB/usb_function_cdc.h  \
+ /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb.h  \
+ /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_config.h  \
  /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_common.h  \
  /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_ch9.h  \
  /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_device.h  \
  /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_hal.h  \
  /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_hal_pic32.h  \
- /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/USB/usb_config.h  \
+ /home/agus/pfc/code/cognitiveNGD/libs/Microchip/Include/./USB/usb_config.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/HardwareProfile.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Compiler.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/GenericTypeDefs.h  \
@@ -18,6 +19,4 @@ build/default/production/_ext/967747917/usb_device.o:  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/HardwareConfig.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Transceivers/ConfigTransceivers.h  \
  /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/WirelessProtocols/ConfigApp.h  \
- /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Transceivers/Security.h  \
- ../libs/Microchip/USB/../USB/usb_device_local.h  \
- /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/USB/usb_config.h 
+ /home/agus/pfc/code/cognitiveNGD/NODE\ FW.X/CWSN\ LSI\ Node/Include/Transceivers/Security.h 

@@ -8,7 +8,7 @@
 #ifndef HW_VALIDATIONS_H
 #define	HW_VALIDATIONS_H
 
-#include "HW_BasicConfig.h"
+#include "HardwareConfig.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /* VALIDATIONS ****************************************************************/

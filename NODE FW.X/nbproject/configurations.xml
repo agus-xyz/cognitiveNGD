@@ -17,8 +17,6 @@
         </logicalFolder>
         <logicalFolder name="Helpers" displayName="Helpers" projectFiles="true">
         </logicalFolder>
-        <logicalFolder name="TCPIP Stack" displayName="TCPIP Stack" projectFiles="true">
-        </logicalFolder>
         <logicalFolder name="Transceivers"
                        displayName="Transceivers"
                        projectFiles="true">
@@ -30,7 +28,6 @@
         </logicalFolder>
         <logicalFolder name="USB" displayName="USB" projectFiles="true">
           <itemPath>CWSN LSI Node/Include/USB/usb_config.h</itemPath>
-          <itemPath>CWSN LSI Node/Include/USB/usb_console.h</itemPath>
         </logicalFolder>
         <logicalFolder name="WirelessProtocols"
                        displayName="WirelessProtocols"
@@ -56,13 +53,13 @@
           <itemPath>CWSN LSI Node/Include/WirelessProtocols/SymbolTime.h</itemPath>
           <itemPath>CWSN LSI Node/Include/WirelessProtocols/NVM.h</itemPath>
         </logicalFolder>
-        <itemPath>CWSN LSI Node/Include/HW_Validations.h</itemPath>
         <itemPath>CWSN LSI Node/Include/struct_queue.h</itemPath>
         <itemPath>CWSN LSI Node/Include/HardwareProfile.h</itemPath>
         <itemPath>CWSN LSI Node/Include/NodeHAL.h</itemPath>
         <itemPath>CWSN LSI Node/Include/GenericTypeDefs.h</itemPath>
         <itemPath>CWSN LSI Node/Include/Compiler.h</itemPath>
-        <itemPath>CWSN LSI Node/Include/HW_BasicConfig.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/HardwareConfig.h</itemPath>
+        <itemPath>CWSN LSI Node/Include/HardwareConfigValidation.h</itemPath>
       </logicalFolder>
       <logicalFolder name="TCPIP Stack" displayName="TCPIP Stack" projectFiles="true">
       </logicalFolder>

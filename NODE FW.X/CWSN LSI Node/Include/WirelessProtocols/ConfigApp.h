@@ -27,7 +27,7 @@
 #define __CONFIG_APP_H_
 
 
-#include "HW_BasicConfig.h"
+#include "HardwareConfig.h"
 ////////////////////////////////////////////////////////////////////////////////
 /*LSI-CWSN - IMPORTANT:
 * The following code defines the platform as well as the hardware configuration.
@@ -39,8 +39,8 @@
 //------------- CONFIGURATION FOR LSI-CWSN NodeTest APP. CODE ----------------//
 //----------------------------------------------------------------------------//
 //Select only one of these...
-//#define NODE_1      //TX role in App. code - node 1. Sets EUI_testA address.
-#define NODE_2      //RX role in App. code - node 2. Sets EUI_testB address.
+#define NODE_1      //TX role in App. code - node 1. Sets EUI_testA address.
+//#define NODE_2      //RX role in App. code - node 2. Sets EUI_testB address.
 //#define NODE_NOP    //Dummy role - It only joins the network at the beginning
                     //and does stacks maintenance tasks. Sets EUI_testC address.
     //#define NOP_JOINS_AND_LEAVES_LOOP     //Provisional, debugging!
@@ -57,14 +57,14 @@
         // PROTOCOL_P2P enables the application to use MiWi P2P stack. This
         // definition cannot be defined with PROTOCOL_MIWI.
         /**********************************************************************/
-        //#define PROTOCOL_P2P
+        #define PROTOCOL_P2P
 
         /**********************************************************************/
         // PROTOCOL_MIWI enables the application to use MiWi mesh networking
         // stack. This definition cannot be defined with PROTOCOL_P2P or
         // PROTOCOL_MIWI_PRO
         /**********************************************************************/
-        #define PROTOCOL_MIWI
+        //#define PROTOCOL_MIWI
 
         /**********************************************************************/
         // PROTOCOL_MIWI_PRO enables the application to use MiWi PRO networking
@@ -78,7 +78,7 @@
             // specifies that the node has the capability to be an end device.
             // This definition cannot be defined with NWK_ROLE_COORDINATOR.
             /******************************************************************/
-            ///#define NWK_ROLE_END_DEVICE
+            //#define NWK_ROLE_END_DEVICE
 
             /******************************************************************/
             // NWK_ROLE_COORDINATOR is not valid if PROTOCOL_P2P is defined. It
@@ -183,8 +183,8 @@
         /**********************************************************************/
         //Transceivers buffer size
         #if defined MRF24J40
-            #define MRF24J40_TX_BUF_SIZE 79
-            #define MRF24J40_RX_BUF_SIZE 79
+            #define MRF24J40_TX_BUF_SIZE 90
+            #define MRF24J40_RX_BUF_SIZE 90
             //Max size with MIC_SIZE 4, ADDR_SIZE 8:   P2P:<=90  MIWI: SIZE<=79
             //BUFFER SIZES VALIDATION.
                 #if (MRF24J40_RX_BUF_SIZE > 127) || (MRF24J40_RX_BUF_SIZE < 10)
@@ -195,8 +195,8 @@
                 #endif
         #endif
         #if defined(MRF49XA_1) || defined(MRF49XA_2)
-            #define MRF49XA_TX_BUF_SIZE 79
-            #define MRF49XA_RX_BUF_SIZE 79
+            #define MRF49XA_TX_BUF_SIZE 90
+            #define MRF49XA_RX_BUF_SIZE 90
             //Max size with MIC_SIZE 4, ADDR_SIZE 4:   P2P:<105  MIWI: SIZE<
             //Max size with MIC_SIZE 4, ADDR_SIZE 8:   P2P:<97   MIWI: SIZE<
             //BUFFER SIZES VALIDATION.

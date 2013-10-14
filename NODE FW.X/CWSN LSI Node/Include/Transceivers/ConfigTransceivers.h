@@ -51,7 +51,7 @@
 #if !defined __CONFIG_TRANSCEIVERS_H
     #define __CONFIG_TRANSCEIVERS_H
 
-#include "HW_BasicConfig.h"
+#include "HardwareConfig.h"
 #include "WirelessProtocols/ConfigApp.h"
 #include "Transceivers/Security.h"
 
@@ -98,7 +98,7 @@
 // BANK_SIZE defines the number of packet can be received and stored to wait for
 // handling in MiMAC layer.
 /******************************************************************************/
-#define BANK_SIZE   1
+#define BANK_SIZE   10
 
 //----------------------------------------------------------------------------//
 //------------------------------ MRF49XA_1 -----------------------------------//
@@ -123,10 +123,10 @@
     /**************************************************************************/
     //#define MRF49XA_1_RATE_1200       //Juan: ¿Needs ACK timeout readjusting?
     //#define MRF49XA_1_RATE_9600
-    //#define MRF49XA_1_RATE_19200
-    //#define MRF49XA_1_RATE_38400
+    #define MRF49XA_1_RATE_19200
+    // #define MRF49XA_1_RATE_38400
     //#define MRF49XA_1_RATE_57600
-    #define MRF49XA_1_RATE_115200
+    //#define MRF49XA_1_RATE_115200
         //DATA RATE VALIDATION
         #if !defined(MRF49XA_1_RATE_1200) && !defined(MRF49XA_1_RATE_9600) \
          && !defined(MRF49XA_1_RATE_19200)&& !defined(MRF49XA_1_RATE_38400)\
@@ -198,11 +198,11 @@
     // of them must be defined.
     /**************************************************************************/
     //#define MRF49XA_2_RATE_1200
-    #define MRF49XA_2_RATE_9600
+    //#define MRF49XA_2_RATE_9600
     //#define MRF49XA_2_RATE_19200
     //#define MRF49XA_2_RATE_38400
     //#define MRF49XA_2_RATE_57600
-    //#define MRF49XA_2_RATE_115200
+    #define MRF49XA_2_RATE_115200
         //DATA RATE VALIDATION
         #if !defined(MRF49XA_2_RATE_1200) && !defined(MRF49XA_2_RATE_9600) \
          && !defined(MRF49XA_2_RATE_19200)&& !defined(MRF49XA_2_RATE_38400)\

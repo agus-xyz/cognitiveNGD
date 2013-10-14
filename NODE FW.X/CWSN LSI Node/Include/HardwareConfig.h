@@ -25,40 +25,40 @@
 
 //*********** CONSOLE INTERFACE *****************************************************
 #if defined ENABLE_CONSOLE
-//#define DEBUG_UART3
-    #define DEBUG_USB
+#define DEBUG_UART6
+//#define DEBUG_USB
 #endif
 
 //*********** INTERFACE N1 *****************************************************
 #define MRF49XA_1
-#define MRF49XA_1_IN_434
-//#define MRF49XA_1_IN_868 //para prototipo fallido
 
-//#define MRF49XA_1_IN_SPI1
-//#define MRF49XA_1_USES_INT1
-#define MRF49XA_1_IN_SPI3 //prototipo fallido
-#define MRF49XA_1_USES_INT3 //prototipo fallido
+#define MRF49XA_1_IN_434
+//#define MRF49XA_1_IN_868
+
+#define MRF49XA_1_IN_SPI1
+#define MRF49XA_1_USES_INT1
 
 #define MIWI_0434_RI
-//#define MIWI_0868_RI //para prototipo fallido
 
 //*********** INTERFACE N2 *****************************************************
-//#define MRF49XA_2
-//#define MRF49XA_2_IN_868
-//#define MRF49XA_2_IN_434 //para prototipo fallido
+#define MRF49XA_2
 
-//#define MRF49XA_2_IN_SPI3
-//#define MRF49XA_2_USES_INT3
+#define MRF49XA_2_IN_868
 
-//#define MIWI_0868_RI
-//#define MIWI_0434_RI //para prototipo fallido
+//#define MRF49XA_2_IN_434
+
+
+#define MRF49XA_2_IN_SPI3
+#define MRF49XA_2_USES_INT3
+
+#define MIWI_0868_RI
 //*********** INTERFACE N3 *****************************************************
-/*#define MRF24J40
+#define MRF24J40
 
 #define MRF24J40_IN_SPI4
 #define MRF24J40_USES_INT4
 
-#define MIWI_2400_RI*/
+#define MIWI_2400_RI
 
 #elif defined FCD_Exp_PLATFORM
 
@@ -103,12 +103,11 @@
 //#define DEBUG_UART1       //IMPORTANT: Do not define if SPI3 is in use.
 //#define DEBUG_UART2       //IMPORTANT: Do not define if SPI4 is in use.
 //#define DEBUG_UART3       //IMPORTANT: Do not define if SPI2 is in use.
-#define DEBUG_UART4         //IMPORTANT: Do not define if SPI3 is in use.
+//#define DEBUG_UART4         //IMPORTANT: Do not define if SPI3 is in use.
 //Use UART4 for debugging with the old node.
 //#define DEBUG_UART5       //IMPORTANT: Do not define if SPI4 is in use.
 //#define DEBUG_UART6       //IMPORTANT: Do not define if SPI2 is in use.
-#elif defined ENABLE_USB_DEBUG
-//IMPLEMENTAR VOLCAR TRAZAS VÍA USB.
+//#define DEBUG_USB
 #endif
 
 //--------------------------------------------------------------------------
@@ -274,7 +273,7 @@
     defined MRF89XA_IN_SPI1   || defined MRF24J40_IN_SPI1  || \
     defined MRF24WB0M_IN_SPI1
 
-    #define SPI1_IS_USED
+    #define SPI1_IN_USE
 
 #endif
 
@@ -282,7 +281,7 @@
     defined MRF89XA_IN_SPI2   || defined MRF24J40_IN_SPI2  || \
     defined MRF24WB0M_IN_SPI2
 
-    #define SPI2_IS_USED
+    #define SPI2_IN_USE
 
 #endif
 
@@ -290,7 +289,7 @@
     defined MRF89XA_IN_SPI3   || defined MRF24J40_IN_SPI3  || \
     defined MRF24WB0M_IN_SPI3
 
-    #define SPI3_IS_USED
+    #define SPI3_IN_USE
 
 #endif
 
@@ -298,7 +297,7 @@
     defined MRF89XA_IN_SPI4   || defined MRF24J40_IN_SPI4  || \
     defined MRF24WB0M_IN_SPI4
 
-    #define SPI4_IS_USED
+    #define SPI4_IN_USE
 
 #endif
 
@@ -306,7 +305,7 @@
     defined MRF89XA_USES_INT1   || defined MRF24J40_USES_INT1  || \
     defined MRF24WB0M_USES_INT1
 
-    #define INT1_IS_USED
+    #define INT1_IN_USE
 
 #endif
 
@@ -314,7 +313,7 @@
     defined MRF89XA_USES_INT2   || defined MRF24J40_USES_INT2  || \
     defined MRF24WB0M_USES_INT2
 
-    #define INT2_IS_USED
+    #define INT2_IN_USE
 
 #endif
 
@@ -322,7 +321,7 @@
     defined MRF89XA_USES_INT3   || defined MRF24J40_USES_INT3  || \
     defined MRF24WB0M_USES_INT3
 
-    #define INT3_IS_USED
+    #define INT3_IN_USE
 
 #endif
 
@@ -330,7 +329,7 @@
     defined MRF89XA_USES_INT4   || defined MRF24J40_USES_INT4  || \
     defined MRF24WB0M_USES_INT4
 
-    #define INT4_IS_USED
+    #define INT4_IN_USE
 
 #endif
 

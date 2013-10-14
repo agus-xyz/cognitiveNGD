@@ -52,6 +52,7 @@
 #include "Compiler.h"
 #include "GenericTypeDefs.h"
 #include "HardwareProfile.h"
+#include "NodeHAL.h"
 
 #include "USB/usb_config.h"
 #include "./USB/usb.h"
@@ -134,7 +135,7 @@ BYTE USB_Console_Tasks(void)
 * Note:		    None
 *******************************************************************************/
 void ConsoleInit(void){
-#if defined __32MX795F512H__ || defined __32MX795F512L__ || defined __32MX675F256L__ //Agus
+#if defined __32MX795F512H__ || defined __32MX795F512L__ || defined __32MX675F256L__
         #if defined DEBUG_UART1
             U1BRG = ((CLOCK_FREQ/(1<<mOSCGetPBDIV()))/(UBRGH_DIV*BAUD_RATE))-1;
             U1STA = 0;
@@ -234,7 +235,7 @@ void ConsoleInit(void){
                 USBDeviceAttach();
               #endif
 
-                //se termina de inicializar consola pulsando 's'
+           /*     //se termina de inicializar consola pulsando 's'
                 char tecla = ConsoleGet();
                 while(tecla!='s'){
                     tecla = ConsoleGet();
@@ -242,7 +243,9 @@ void ConsoleInit(void){
                 BYTE lines = 20;
                 for(i=0;i<lines;i++){
                     Printf("\n\r");
-                }
+                } */
+
+                SWDelay(5000);
 
         #endif
     #else    
@@ -420,141 +423,8 @@ void PrintDec(BYTE toPrint){
     TempCharacterArray[0]=aa;
     TempCharacterArray[1]=bb;
     TempCharacterArray[2]='\0';
-    //ROM unsigned char str[] = {aa,bb,'\0'};
     ConsolePutROMString(&TempCharacterArray[0]);
 }
-
-/******************************************************************************
- * Function:        void USB_Console_Init(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        Para inicializar el USB.
- *
- * Note:            None
- *****************************************************************************/
-/*void USB_Console_Init(void)
-{
-    if(!USB_Console_Initialized)
-    {
-        InitializeSystem();
-        #if defined(USB_INTERRUPT)
-            USBDeviceAttach();
-        #endif
-        USB_Console_Initialized=TRUE;
-    }
-}*/
-
-/********************************************************************
- * Function:        static void InitializeSystem(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        InitializeSystem is a centralize initialization
- *                  routine. All required USB initialization routines
- *                  are called from here.
- *
- *                  User application initialization routine should
- *                  also be called from here.
- *
- * Note:            None
- *******************************************************************/
-/*static void InitializeSystem(void)
-{
-        AD1PCFG = 0xFFFF;
-
-
-//	The USB specifications require that USB peripheral devices must never source
-//	current onto the Vbus pin.  Additionally, USB peripherals should not source
-//	current on D+ or D- when the host/hub is not actively powering the Vbus line.
-//	When designing a self powered (as opposed to bus powered) USB peripheral
-//	device, the firmware should make sure not to turn on the USB module and D+
-//	or D- pull up resistor unless Vbus is actively powered.  Therefore, the
-//	firmware needs some means to detect when Vbus is being powered by the host.
-//	A 5V tolerant I/O pin can be connected to Vbus (through a resistor), and
-// 	can be used to detect when Vbus is high (host actively powering), or low
-//	(host is shut down or otherwise not supplying power).  The USB firmware
-// 	can then periodically poll this I/O pin to know when it is okay to turn on
-//	the USB module/D+/D- pull up resistor.  When designing a purely bus powered
-//	peripheral device, it is not possible to source current on D+ or D- when the
-//	host is not actively providing power on Vbus. Therefore, implementing this
-//	bus sense feature is optional.  This firmware can be made to use this bus
-//	sense feature by making sure "USE_USB_BUS_SENSE_IO" has been defined in the
-//	HardwareProfile.h file.
-    #if defined(USE_USB_BUS_SENSE_IO)
-        tris_usb_bus_sense = INPUT_PIN; // See HardwareProfile.h
-    #endif
-
-//	If the host PC sends a GetStatus (device) request, the firmware must respond
-//	and let the host know if the USB peripheral device is currently bus powered
-//	or self powered.  See chapter 9 in the official USB specifications for details
-//	regarding this request.  If the peripheral device is capable of being both
-//	self and bus powered, it should not return a hard coded value for this request.
-//	Instead, firmware should check if it is currently self or bus powered, and
-//	respond accordingly.  If the hardware has been configured like demonstrated
-//	on the PICDEM FS USB Demo Board, an I/O pin can be polled to determine the
-//	currently selected power source.  On the PICDEM FS USB Demo Board, "RA2"
-//	is used for	this purpose.  If using this feature, make sure "USE_SELF_POWER_SENSE_IO"
-//	has been defined in HardwareProfile.h, and that an appropriate I/O pin has been mapped
-//	to it in HardwareProfile.h.
-    #if defined(USE_SELF_POWER_SENSE_IO)
-    tris_self_power = INPUT_PIN;	// See HardwareProfile.h
-    #endif
-
-    UserInit();
-
-    USBDeviceInit();	//usb_device.c.  Initializes USB module SFRs and firmware
-    					//variables to known states.
-}//end InitializeSystem*/
-
-/******************************************************************************
- * Function:        void UserInit(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        This routine should take care of all of the demo code
- *                  initialization that is required.
- *
- * Note:
- *
- *****************************************************************************/
-/*void UserInit(void)
-{
-    unsigned char i;
-    ConsoleInit();//XXX-Willy.
-
-// 	 Initialize the arrays
-	for (i=0; i<sizeof(USB_Out_Buffer); i++)
-    {
-		USB_Out_Buffer[i] = 0;
-    }
-
-	NextUSBOut = 0;
-	LastRS232Out = 0;
-	lastTransmission = 0;
-
-	//mInitAllLEDs();
-}//end UserInit
-*/
-
 
 /********************************************************************
  * Function:        void ProcessIO(void)
@@ -604,19 +474,7 @@ if(tecla!=0)
 
 
 /******************************************************************************
- * Function:        void main(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        Main program entry point.
- *
- * Note:            None
+ pruebecita para probar funcionalidad
  *****************************************************************************/
 int mainApppppp(void)
 {

@@ -87,21 +87,24 @@ void BoardInit(void){
         #endif
 
         #if defined MRF24J40
-            PHY_CS_TRIS = 0;
+            PHY_CS_TRIS = OUTPUT_PIN;
             PHY_CS = 1;
-            PHY_RESETn_TRIS = 0;
+            PHY_RESETn_TRIS = OUTPUT_PIN;
             PHY_RESETn = 1;
 
-            MRF24J40_INT_TRIS = 1;
+            MRF24J40_INT_TRIS = INPUT_PIN;
 
-            SDI_TRIS = 1;
-            SDO_TRIS = 0;
-            SCK_TRIS = 0;
+            SDI_TRIS = INPUT_PIN;
+            SDO_TRIS = OUTPUT_PIN;
+            SCK_TRIS = OUTPUT_PIN;
             SPI_SDO = 0;
             SPI_SCK = 0;
 
-            PHY_WAKE_TRIS = 0;
+            PHY_WAKE_TRIS = OUTPUT_PIN;
             PHY_WAKE = 1;
+
+            MRF24J40_PWR_TRIS = OUTPUT_PIN;
+            MRF24J40_PWR = 1;
 
             SPICONCLR = 0xFFFFFFFF;             // Clear SPIxCON register
 
@@ -148,11 +151,40 @@ void BoardInit(void){
             #endif
         #endif
         #if defined(MRF49XA_1)
+            // pruebas de funcionamiento
+   /*        MRF49XA_1_PHY_CS_TRIS    = OUTPUT_PIN;
+             MRF49XA_1_PHY_CS = 0;
+             MRF49XA_1_PHY_CS = 1;
 
+             MRF49XA_1_PHY_RESETn_TRIS  = OUTPUT_PIN;
+             MRF49XA_1_PHY_RESETn = 0;
+             MRF49XA_1_PHY_RESETn = 1;
+
+             MRF49XA_1_INT_TRIS = OUTPUT_PIN;
+             MRF49XA_1_INT_PIN = 0;
+             MRF49XA_1_INT_PIN = 1;
+
+             MRF49XA_1_SDI_TRIS = OUTPUT_PIN;
+             MRF49XA_1_SPI_SDI = 0;
+             MRF49XA_1_SPI_SDI = 1;
+
+             MRF49XA_1_SDO_TRIS = OUTPUT_PIN;
+             MRF49XA_1_SPI_SDO = 0;
+             MRF49XA_1_SPI_SDO = 1;
+
+             MRF49XA_1_SCK_TRIS = OUTPUT_PIN;
+             MRF49XA_1_SPI_SCK = 0;
+             MRF49XA_1_SPI_SCK = 1;
+
+             MRF49XA_1_nFSEL_TRIS = OUTPUT_PIN;
+             MRF49XA_1_nFSEL = 0;
+             MRF49XA_1_nFSEL = 1;
+
+             MRF49XA_1_FINT_TRIS = OUTPUT_PIN;
+             MRF49XA_1_FINT = 0;
+             MRF49XA_1_FINT = 1;
+*/
             // configuration.   Juan: Added; Agus: Modified to a standard way
-           // MRF49XA_1_PHY_CS_TRIS = 0;    //DIGITAL OUT
-           // MRF49XA_1_FINT_TRIS = 1;      //DIGITAL IN
-
             MRF49XA_1_PHY_CS_TRIS = OUTPUT_PIN;
             MRF49XA_1_PHY_CS = 1;
             MRF49XA_1_PHY_RESETn_TRIS = OUTPUT_PIN;
@@ -169,6 +201,15 @@ void BoardInit(void){
             MRF49XA_1_nFSEL_TRIS = OUTPUT_PIN;
             MRF49XA_1_FINT_TRIS = INPUT_PIN;
             MRF49XA_1_nFSEL = 1;          // nFSEL inactive
+
+
+
+
+
+            #ifdef cNGD_PLATFORM
+//                MRF49XA_1_PWR_TRIS = OUTPUT_PIN;
+//                MRF49XA_1_PWR = 1;
+            #endif
 
             MRF49XA_1_SPICONCLR = 0xFFFFFFFF;       //Clear SPIxCON register
 
@@ -228,6 +269,11 @@ void BoardInit(void){
             MRF49XA_2_FINT_TRIS = INPUT_PIN;
             MRF49XA_2_nFSEL = 1;          // nFSEL inactive
 
+            #ifdef cNGD_PLATFORM
+                MRF49XA_2_PWR_TRIS = OUTPUT_PIN;
+                MRF49XA_2_PWR = 1;
+            #endif
+
             MRF49XA_2_SPICONCLR = 0xFFFFFFFF;       // Clear SPIxCON register
 
             #ifdef HARDWARE_SPI
@@ -279,7 +325,7 @@ void BoardInit(void){
 
     // SPI & EXTERNAL INTERRUPTS PINS AND CONFIGURATION ----------------------//
         /* Set the SPI Port Directions (SDO, SDI, SCK) for every SPI module.*/
-            #if defined SPI1_IS_USED
+            #if defined SPI1_IN_USE
   
                 SDI1_TRIS = INPUT_PIN;   //DIGITAL IN
                 SDO1_TRIS = OUTPUT_PIN;  //DIGITAL OUT
@@ -287,7 +333,7 @@ void BoardInit(void){
 
             #endif
 
-            #if defined SPI2_IS_USED
+            #if defined SPI2_IN_USE
 
                 SDI2_TRIS = INPUT_PIN;   //DIGITAL IN
                 SDO2_TRIS = OUTPUT_PIN;  //DIGITAL OUT
@@ -295,7 +341,7 @@ void BoardInit(void){
 
             #endif
 
-            #if defined SPI3_IS_USED
+            #if defined SPI3_IN_USE
 
                 SDI3_TRIS = INPUT_PIN;   //DIGITAL IN
                 SDO3_TRIS = OUTPUT_PIN;  //DIGITAL OUT
@@ -303,7 +349,7 @@ void BoardInit(void){
 
             #endif
 
-            #if defined SPI4_IS_USED
+            #if defined SPI4_IN_USE
 
                 SDI4_TRIS = INPUT_PIN;   //DIGITAL IN
                 SDO4_TRIS = OUTPUT_PIN;  //DIGITAL OUT
@@ -312,7 +358,7 @@ void BoardInit(void){
             #endif
 
         /* Set the external interrups Pin Directions and Priority*/
-            #if defined INT1_IS_USED
+            #if defined INT1_IN_USE
 
                 INT1_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT1SetIntPriority(4);
@@ -321,7 +367,7 @@ void BoardInit(void){
                 // Enable INT1
                 mINT1IntEnable(1); 
             #endif
-            #if defined INT2_IS_USED
+            #if defined INT2_IN_USE
                 
                 INT2_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT2SetIntPriority(4);
@@ -330,7 +376,7 @@ void BoardInit(void){
                 /* Enable INT2 */
                 mINT2IntEnable(1);
             #endif
-            #if defined INT3_IS_USED
+            #if defined INT3_IN_USE
                 
                 INT3_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT3SetIntPriority(4);
@@ -339,7 +385,7 @@ void BoardInit(void){
                 /* Enable INT3 */
                 mINT3IntEnable(1);
             #endif
-            #if defined INT4_IS_USED
+            #if defined INT4_IN_USE
                
                 INT4_TRIS = INPUT_PIN; // DIGITAL IN
                 mINT4SetIntPriority(4);
@@ -348,6 +394,19 @@ void BoardInit(void){
                 /* Enable INT4 */
                 mINT4IntEnable(1);
             #endif
+
+     // LEDs
+        #ifdef cNGD_PLATFORM
+               mJTAGPortEnable(0); //Needed due to multiplexed pins
+            
+               LED1_TRIS = OUTPUT_PIN;
+               LED2_TRIS = OUTPUT_PIN;
+               LED3_TRIS = OUTPUT_PIN;
+               LED1 = 0;
+               LED2 = 0;
+               LED3 = 0;
+                              
+        #endif
 
 
     // TIMER 1 FOR TIME_SYNC -------------------------------------------------//
@@ -383,7 +442,7 @@ void BoardInit(void){
         CNCON = 0x8000;         //Module enabled.
         CNEN = 0x00004000;      //Enable CN14
         CNPUE = 0x00004000;     //Enable CN14 weak pull-up.
-        ReadBUTTONS();          //Clear PORT mismatch condition.
+        ReadBUTUSBTONS();          //Clear PORT mismatch condition.
         IFS1CLR = 0x00000001;   //Clear the CN interrupt flag status bit
         IPC6SET = 0x00180000;   //Set CN priority 6, subpriority 0.
         //It will be enabled only during sleep mode time interval
