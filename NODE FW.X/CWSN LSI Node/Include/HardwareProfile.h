@@ -313,8 +313,8 @@
     #define BUTTON_1            PORTDbits.RD5   //CN14
     #define BUTTON_2            PORTDbits.RD7   //CN16
     #define ReadBUTTONS()       PORTD
-    #define BUTTON_1_PORT_MASK  0x00100000  //esto esta bien? ********* PREGUNTAR
-    #define BUTTON_2_PORT_MASK  0x10000000  //esto esta bien?
+    #define BUTTON_1_PORT_MASK  0x00100020  
+    #define BUTTON_2_PORT_MASK  0x00000080
 
     //leds
     #define LED1               PORTAbits.RA6

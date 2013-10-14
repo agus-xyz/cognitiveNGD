@@ -442,7 +442,7 @@ void BoardInit(void){
         CNCON = 0x8000;         //Module enabled.
         CNEN = 0x00004000;      //Enable CN14
         CNPUE = 0x00004000;     //Enable CN14 weak pull-up.
-        ReadBUTUSBTONS();          //Clear PORT mismatch condition.
+        ReadBUTTONS();          //Clear PORT mismatch condition.
         IFS1CLR = 0x00000001;   //Clear the CN interrupt flag status bit
         IPC6SET = 0x00180000;   //Set CN priority 6, subpriority 0.
         //It will be enabled only during sleep mode time interval
